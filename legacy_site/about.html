@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Sri Jothi Traders</title>
+<meta name="description" content="Founded in 2015 in Dindigul, Tamil Nadu, Sri Jothi Traders grew through word of mouth into a trusted export partner for UK and Gulf grocery businesses.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===== About page only ===== */
+.story { max-width: 760px; }
+.story p { font-size: 15px; line-height: 1.78; color: var(--ink-soft); max-width: 62ch; }
+.story p + p { margin-top: 22px; }
+.facts { margin-top: 8px; }
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--lime-deep);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.fact {
+  background: var(--paper);
+  padding: 28px 24px;
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.fact:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(23, 70, 53, .08); }
+.fact b { display: block; font-family: var(--serif); font-size: 20px; margin-bottom: 6px; }
+.fact span { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+.mission {
+  background: var(--lime);
+  position: relative;
+  overflow: hidden;
+}
+.mission:after {
+  content: "";
+  position: absolute;
+  width: 360px; height: 360px;
+  border: 1px solid rgba(219, 233, 210, .09);
+  border-radius: 50%;
+  right: -160px; top: -180px;
+  pointer-events: none;
+}
+.mission h2 { font-size: clamp(24px, 2.8vw, 34px); max-width: 18ch; }
+.mission p { margin-top: 14px; font-size: 15px; line-height: 1.78; color: var(--ink-soft); max-width: 58ch; }
+@media (max-width: 760px) { .facts-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .fact:hover { transform: none; } }
+</style>
+</head>
+<body data-page="about">
+
+<div id="scroll-progress"></div>
+<nav class="nav">
+<a class="logo" href="index.html">SRI JOTHI</a>
+<div class="navlinks"><a href="index.html" data-page="home">Home</a><a href="about.html" data-page="about">About</a><a href="products.html" data-page="products">Products</a><a href="customization.html" data-page="customization">Customization</a><a href="certifications.html" data-page="certifications">Certifications</a></div>
+<a class="navcta" href="contact.html">Enquire Now</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<a href="contact.html" class="float-enquire" aria-label="Enquire Now">Enquire Now <span aria-hidden="true">↗</span></a>
+
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="index.html" data-page="home">Home</a><a href="about.html" data-page="about">About</a><a href="products.html" data-page="products">Products</a><a href="customization.html" data-page="customization">Customization</a><a href="certifications.html" data-page="certifications">Certifications</a>
+<a href="contact.html" class="mob-cta">Enquire Now</a>
+</div>
+
+<main>
+<section class="page-hero">
+  <div class="wrap" data-stagger>
+    <p class="eyebrow reveal">About us</p>
+    <h1 class="text-reveal reveal"><span>A decade of trusted trade, built one order at a time.</span></h1>
+    <p class="reveal">No investors, no shortcuts — just a family-run export business that grew because buyers kept coming back.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap story">
+    <p class="reveal">Sri Jothi Traders was founded in 2015 in Dindigul, Tamil Nadu. There was no marketing budget and no international sales team — the business grew because early clients in the UK and Gulf told other buyers, and those buyers placed repeat orders.</p>
+    <p class="reveal">What kept them coming back wasn't just the products, it was customization. While most exporters ship bulk goods and leave the rest to the buyer, we built private labeling, repackaging, and destination-compliant packaging directly into our process. A client can order rice in bulk and receive it ready for their own shelves, under their own brand.</p>
+    <p class="reveal">Today we operate from a 10,000 sq ft warehouse in Dindigul, hold the major certifications overseas buyers look for, and are working toward the same trusted relationships in the USA, Canada, and Australia that we've built in the UK and Gulf.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap facts">
+    <p class="eyebrow reveal">At a glance</p>
+    <div class="facts-grid reveal-stagger">
+      <div class="fact reveal"><b>2015</b><span>Founded in Dindigul, Tamil Nadu</span></div>
+      <div class="fact reveal"><b>10,000 sq ft</b><span>Warehouse and preparation facility</span></div>
+      <div class="fact reveal"><b>UK &amp; Gulf</b><span>Current export markets, expanding further</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="mission">
+  <div class="wrap">
+    <h2 class="reveal">Where we're headed</h2>
+    <p class="reveal">Our goal over the next phase is straightforward: extend the same trust we've built with UK and Gulf buyers into the USA, Canada, and Australia, and become the export partner Indian grocery businesses turn to first — wherever in the world they're trading.</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap footer-inner">
+<span>&copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu</span>
+<div class="footer-links"><a href="about.html">About</a><a href="products.html">Products</a><a href="customization.html">Customization</a><a href="certifications.html">Certifications</a><a href="contact.html">Contact</a></div>
+</div></footer>
+
+<script src="main.js"></script>
+</body>
+</html>

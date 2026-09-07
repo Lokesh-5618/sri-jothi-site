@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certifications | Sri Jothi Traders</title>
+<meta name="description" content="Sri Jothi Traders holds FSSAI, APEDA, RCMC, Spice Board, MSME, FIEO, ISO/FSSC 22000, Organic and Coconut Export certifications for compliant, trusted export.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===== Certifications page only ===== */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.cert-card {
+  background: var(--paper);
+  border: 1px solid var(--lime-deep);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .4s;
+}
+.cert-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(23, 70, 53, .08); }
+.cert-badge {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--lime);
+  border: 1.5px solid var(--brown);
+  margin-bottom: 16px;
+  transition: transform .5s var(--ease), background .4s;
+}
+.cert-card:hover .cert-badge { transform: rotate(8deg) scale(1.06); }
+.cert-card h3 { font-size: 20px; line-height: 1.15; }
+.cert-card p { margin-top: 8px; font-size: 15px; line-height: 1.78; color: var(--ink-soft); }
+.cert-num { margin-top: 14px; font-size: 12px; color: var(--brown-light); }
+@media (max-width: 900px) { .cert-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .cert-grid { grid-template-columns: 1fr; } .cert-card { padding: 26px; } }
+@media (prefers-reduced-motion: reduce) { .cert-card:hover { transform: none; } .cert-badge { transition: none; } }
+</style>
+</head>
+<body data-page="certifications">
+
+<div id="scroll-progress"></div>
+<nav class="nav">
+<a class="logo" href="index.html">SRI JOTHI</a>
+<div class="navlinks"><a href="index.html" data-page="home">Home</a><a href="about.html" data-page="about">About</a><a href="products.html" data-page="products">Products</a><a href="customization.html" data-page="customization">Customization</a><a href="certifications.html" data-page="certifications">Certifications</a></div>
+<a class="navcta" href="contact.html">Enquire Now</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<a href="contact.html" class="float-enquire" aria-label="Enquire Now">Enquire Now <span aria-hidden="true">↗</span></a>
+
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="index.html" data-page="home">Home</a><a href="about.html" data-page="about">About</a><a href="products.html" data-page="products">Products</a><a href="customization.html" data-page="customization">Customization</a><a href="certifications.html" data-page="certifications">Certifications</a>
+<a href="contact.html" class="mob-cta">Enquire Now</a>
+</div>
+
+<main>
+<section class="page-hero">
+  <div class="wrap" data-stagger>
+    <p class="eyebrow reveal">Certifications</p>
+    <h1 class="text-reveal reveal"><span>Compliance you can verify, explained in plain terms.</span></h1>
+    <p class="reveal">Overseas buyers don't always recognize Indian certification names, so here's what each one actually means for your order.</p>
+  </div>
+</section>
+
+<section aria-label="Certification details">
+  <div class="wrap">
+    <h2 class="eyebrow reveal" style="margin-bottom: 28px;">Our certifications</h2>
+    <div class="cert-grid reveal-stagger">
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>FSSAI</h3>
+        <p>India's Food Safety and Standards Authority license — confirms food products meet national safety standards.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>APEDA</h3>
+        <p>Agricultural &amp; Processed Food Products Export Development Authority registration — required for exporting scheduled agricultural products from India.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>RCMC</h3>
+        <p>Registration-Cum-Membership Certificate — confirms registration with the relevant export promotion council.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>Spice Board registration</h3>
+        <p>Registration with India's Spices Board, required for exporting spice products internationally.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>MSME</h3>
+        <p>Registration as a Micro, Small &amp; Medium Enterprise under the Government of India.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>FIEO membership</h3>
+        <p>Membership with the Federation of Indian Export Organisations, India's apex export promotion body.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>ISO / FSSC 22000</h3>
+        <p>International quality and food safety management system certification.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>Organic certification</h3>
+        <p>Confirms eligible products meet recognized organic farming and processing standards.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-badge"></div>
+        <h3>Coconut export registration</h3>
+        <p>Registration specific to exporting coconut-derived products from India.</p>
+        <div class="cert-num">Certificate no. — to be added</div>
+      </div>
+    </div>
+    <p class="placeholder-note reveal" style="margin-top:32px;">Badge artwork and certificate numbers are placeholders — swap in the real certificate files and numbers once shared.</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap footer-inner">
+<span>&copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu</span>
+<div class="footer-links"><a href="about.html">About</a><a href="products.html">Products</a><a href="customization.html">Customization</a><a href="certifications.html">Certifications</a><a href="contact.html">Contact</a></div>
+</div></footer>
+
+<script src="main.js"></script>
+</body>
+</html>

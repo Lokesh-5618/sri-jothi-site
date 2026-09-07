@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Jothi Traders — Indian Products, Moving Worldwide</title>
+<meta name="description" content="Sri Jothi Traders is a B2B Indian export partner for sourcing, private label, packaging and destination-ready products.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===== Homepage-only styles ===== */
+
+/* hero */
+.hero {
+  min-height: 100svh;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(130px, 11vw, 160px) 0 72px;
+  display: flex;
+  align-items: center;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(400px, .85fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 86px);
+  position: relative;
+  z-index: 3;
+}
+.hero-copy { position: relative; z-index: 5; max-width: 700px; }
+.hero-visual { position: relative; min-height: 600px; z-index: 2; }
+.hero h1 { font-size: clamp(62px, 7.5vw, 118px); line-height: .9; max-width: 780px; }
+.hero h1 em { font-style: normal; }
+.hero-intro { max-width: 560px; margin-top: 34px; font-size: 15px; line-height: 1.8; color: var(--muted); }
+.hero-actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-eyebrow { display: flex; align-items: center; gap: 8px; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brown); }
+.scroll-cue { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: .14em; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.scroll-cue i { display: block; width: 1px; height: 28px; background: var(--brown); opacity: .5; animation: scrollCue 1.5s ease-in-out infinite; }
+@keyframes scrollCue { 0%, 100% { transform: scaleY(1); opacity: .5; } 50% { transform: scaleY(1.5); opacity: 1; } }
+
+/* hero transport orbit */
+.hero-transport { position: absolute; width: min(44vw, 590px); aspect-ratio: 1; right: -5%; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: .9; }
+.hero-orbit { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+.hero-orbit-a { width: 100%; height: 100%; border: 1px solid rgba(23, 70, 53, .10); }
+.hero-orbit-b { width: 78%; height: 78%; border: 1px dashed rgba(23, 70, 53, .075); }
+.hero-orbit-c { width: 56%; height: 56%; border: 1px solid rgba(137, 107, 75, .08); }
+.hero-transport-glow { position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(219, 233, 210, .32); filter: blur(1px); }
+.hero-transport-center { position: absolute; left: 50%; top: 50%; width: 82px; height: 82px; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(251, 250, 246, .25); border: 1px solid rgba(23, 70, 53, .06); display: grid; place-items: center; color: rgba(137, 107, 75, .65); font-size: 8px; letter-spacing: .18em; }
+.hero-transport-center:after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--brown); opacity: .72; box-shadow: 0 0 0 8px rgba(137, 107, 75, .07); }
+.hero-vehicle { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; will-change: transform; filter: drop-shadow(0 5px 7px rgba(23, 70, 53, .10)); }
+.hero-vehicle svg { width: 100%; height: 100%; overflow: visible; }
+.hero-truck { width: 52px; height: 30px; }
+.hero-truck svg { fill: var(--brown); }
+.hero-plane { width: 48px; height: 29px; }
+.hero-plane svg { fill: var(--green); }
+.hero-ship { width: 58px; height: 30px; }
+.hero-ship svg { fill: var(--green-mid); }
+
+/* intro */
+.intro { background: var(--paper); }
+.intro-grid { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: clamp(40px, 8vw, 110px); align-items: start; }
+
+/* marquee */
+.marquee { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 18px 0; white-space: nowrap; }
+.marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee span { font: 28px var(--serif); color: var(--brown); padding: 0 30px; }
+.marquee span:after { content: "\00b7"; margin-left: 60px; color: var(--green); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* dark section (capabilities) */
+.dark-section { background: var(--green); color: #fff; padding-bottom: calc(var(--space-section) + 10px); }
+.dark-section .eyebrow { color: var(--lime); }
+.dark-section .display { color: #fff; }
+.cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255, 255, 255, .14); border-bottom: 1px solid rgba(255, 255, 255, .14); position: relative; }
+/* connecting progress line across caps */
+.cap-grid:after { content: ""; position: absolute; top: 78px; left: 13%; right: 13%; height: 1px; background: linear-gradient(90deg, rgba(219,233,210,.06), rgba(219,233,210,.22) 30%, rgba(219,233,210,.22) 70%, rgba(219,233,210,.06)); pointer-events: none; z-index: 1; }
+.cap { min-height: 340px; padding: 30px 28px; border-right: 1px solid rgba(255, 255, 255, .18); position: relative; transition: background .4s var(--ease), box-shadow .4s var(--ease); overflow: hidden; }
+.cap:first-child { border-left: 1px solid rgba(255, 255, 255, .18); }
+.cap:hover { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 40px rgba(219, 233, 210, .04); }
+/* icon container */
+.cap-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(219, 233, 210, .10); border: 1px solid rgba(219, 233, 210, .15); display: grid; place-items: center; margin-top: 10px; transition: transform .5s var(--ease), background .4s, border-color .4s; position: relative; z-index: 2; }
+.cap-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--lime); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.cap:hover .cap-icon { transform: scale(1.08) translateY(-2px); background: rgba(219, 233, 210, .16); border-color: rgba(219, 233, 210, .28); }
+.cap-num { font-size: 9px; color: var(--lime); letter-spacing: .16em; display: flex; align-items: center; gap: 10px; }
+.cap-num:after { content: ""; flex: 1; height: 1px; background: rgba(219, 233, 210, .15); }
+.cap h3 { font: 32px var(--serif); margin: 22px 0 12px; color: #fff; transition: transform .35s var(--ease); }
+.cap p { font-size: 13px; line-height: 1.75; color: rgba(255, 255, 255, .58); max-width: 230px; }
+.cap:hover h3 { transform: translateX(5px); }
+/* bottom arrow indicator */
+.cap-arrow { position: absolute; bottom: 24px; right: 24px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .15); display: grid; place-items: center; opacity: 0; transform: translateY(6px); transition: opacity .35s var(--ease), transform .35s var(--ease), border-color .35s; }
+.cap-arrow svg { width: 12px; height: 12px; fill: none; stroke: var(--lime); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cap:hover .cap-arrow { opacity: 1; transform: translateY(0); border-color: rgba(219, 233, 210, .3); }
+
+/* products section */
+.products-section { background: var(--paper); }
+.products-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 12px; }
+.product { position: relative; overflow: hidden; min-height: 500px; padding: 32px; background: var(--lime); border-radius: 12px; transition: transform .45s var(--ease); }
+.product:hover { transform: translateY(-7px); }
+.product:nth-child(2) { background: #e9dfd2; }
+.product:nth-child(3) { background: #d9e1d8; }
+.product:nth-child(4) { background: #eee9df; }
+.product.small { min-height: 330px; }
+.product h3 { font: clamp(36px, 3.4vw, 52px)/.92 var(--serif); letter-spacing: -.03em; color: var(--green); margin: 0; position: relative; z-index: 2; }
+.product p { position: absolute; left: 32px; bottom: 30px; max-width: 270px; margin: 0; font-size: 12px; line-height: 1.7; color: #5f615b; z-index: 2; }
+.product-art { position: absolute; width: 205px; aspect-ratio: 1; border-radius: 50%; right: 55px; top: 90px; background: var(--green); transition: transform .55s var(--ease); }
+.product:hover .product-art { transform: rotate(8deg) scale(1.05); }
+.product-art:before { content: ""; position: absolute; width: 110px; height: 145px; left: 48px; top: 28px; background: var(--brown); border-radius: 5px; transform: rotate(8deg); }
+.product-art:after { content: "INDIAN\APRODUCT"; white-space: pre; position: absolute; left: 63px; top: 72px; color: var(--lime); font: 20px/1 var(--serif); }
+.product.small .product-art { width: 135px; right: 45px; top: 72px; }
+.product.small .product-art:before { width: 74px; height: 106px; left: 30px; top: 14px; }
+.product.small .product-art:after { font-size: 13px; left: 43px; top: 49px; }
+
+/* statement */
+.statement { background: var(--cream); padding-top: clamp(110px, 13vw, 180px); padding-bottom: clamp(110px, 13vw, 180px); }
+.statement-inner { width: min(1120px, 100%); margin: auto; }
+.statement h2 { font: 400 clamp(56px, 8vw, 112px)/.9 var(--serif); letter-spacing: -.05em; color: var(--green); margin: 0; }
+.statement h2 .accent { color: var(--brown); }
+.statement p { margin: 40px 0 0 auto; max-width: 500px; font-size: 15px; line-height: 1.8; color: #686860; }
+
+/* journey */
+.journey { background: var(--paper); padding-bottom: 0; }
+.journey-copy { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 28px; }
+.journey-copy .display { max-width: 760px; }
+.journey-note { max-width: 300px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.journey-scroll { position: relative; height: 270vh; }
+.journey-pin { position: sticky; top: 88px; padding-top: 16px; }
+.journey-visual { height: min(62vh, 540px); background: var(--green); position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 30px 60px rgba(16, 56, 42, .18); }
+.journey-visual:before { content: ""; position: absolute; inset: -30%; background: radial-gradient(circle at 70% 30%, rgba(219, 233, 210, .13), transparent 28%), radial-gradient(circle at 30% 70%, rgba(137, 107, 75, .13), transparent 25%); animation: journeyGlow 9s ease-in-out infinite alternate; }
+.journey-visual:after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .035) 50%, transparent 65%); transform: translateX(-100%); animation: journeySweep 7s ease-in-out infinite; pointer-events: none; }
+.journey-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.jline { fill: none; stroke: var(--lime); stroke-width: 2; stroke-dasharray: 8 9; opacity: .6; }
+.jline-glow { fill: none; stroke: var(--lime); stroke-width: 7; opacity: .13; filter: blur(3px); }
+.jdot { fill: var(--lime); }
+.jtruck { fill: var(--brown); }
+.jship { fill: var(--lime); }
+#jtruck, #jship { filter: drop-shadow(0 7px 9px rgba(0, 0, 0, .25)); }
+.jlabel { fill: white; font: 600 9px Inter, sans-serif; letter-spacing: 2px; opacity: .72; }
+.jstatus { position: absolute; left: 30px; top: 27px; color: var(--lime); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; z-index: 3; }
+.jstatus b { display: block; font: 20px var(--serif); color: #fff; letter-spacing: 0; text-transform: none; margin-top: 4px; }
+.journey-stage { position: absolute; bottom: 26px; right: 28px; color: rgba(255, 255, 255, .55); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+.journey-progress-track { position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: rgba(255, 255, 255, .14); }
+.journey-progress-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--lime); }
+.journey-words { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 12px 12px; overflow: hidden; margin-top: 0; }
+.journey-word { padding: 20px 22px; font: 20px var(--serif); color: var(--green); opacity: .32; transition: opacity .4s var(--ease), transform .4s var(--ease); }
+.journey-word.active { opacity: 1; transform: translateY(-3px); }
+@keyframes journeyGlow { to { transform: translate(3%, -2%) scale(1.05); } }
+@keyframes journeySweep { 0%, 35% { transform: translateX(-100%); } 65%, 100% { transform: translateX(100%); } }
+
+/* markets */
+.markets { background: #e9dfd2; padding-top: clamp(90px, 10vw, 140px); }
+.market-list { border-top: 1px solid var(--line); margin-top: 55px; }
+.market { display: grid; grid-template-columns: 70px 1fr auto; gap: 25px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); transition: padding-left .35s var(--ease); }
+.market:hover { padding-left: 10px; }
+.market-num { font-size: 10px; color: var(--brown); }
+.market h3 { font: clamp(34px, 4vw, 54px)/1 var(--serif); color: var(--green); margin: 0; transition: transform .35s var(--ease); }
+.market:hover h3 { transform: translateX(12px); }
+.market b { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .12em; color: var(--brown); }
+
+/* contact section */
+.contact-section { background: var(--green); color: #fff; min-height: 82svh; display: flex; align-items: center; }
+.contact-section .eyebrow { color: var(--lime); }
+.contact-section h2 { font: 400 clamp(58px, 9vw, 128px)/.85 var(--serif); letter-spacing: -.05em; margin: 25px 0 0; color: #fff; max-width: 1100px; }
+.contact-section h2 em { font-style: normal; color: var(--lime); }
+.contact-row { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-top: 80px; flex-wrap: wrap; }
+.contact-row p { max-width: 390px; margin: 0; color: rgba(255, 255, 255, .58); font-size: 13px; line-height: 1.75; }
+
+/* ===== Homepage responsive ===== */
+@media (max-width: 1050px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 140px; align-items: start; }
+  .hero-copy { max-width: 720px; }
+  .hero-visual { min-height: 470px; margin-top: -10px; }
+  .hero-transport { width: 560px; right: -110px; top: 48%; }
+  .intro-grid { grid-template-columns: 110px 1fr; gap: 50px; }
+  .cap-grid { grid-template-columns: 1fr 1fr; }
+  .cap-grid:after { top: 78px; }
+  .cap:nth-child(1), .cap:nth-child(2) { border-bottom: 1px solid rgba(255, 255, 255, .18); }
+  .cap:nth-child(3) { border-left: 1px solid rgba(255, 255, 255, .18); }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  .product:first-child { grid-column: 1/-1; }
+  .journey-scroll { height: 230vh; }
+  .journey-copy { display: block; }
+  .journey-note { margin-top: 25px; }
+  .statement p { margin-left: 0; max-width: 100%; }
+}
+@media (max-width: 768px) {
+  .hero { padding: 120px 0 40px; min-height: auto; }
+  .hero-grid { gap: 0; }
+  .hero h1 { font-size: clamp(48px, 13vw, 88px); }
+  .hero-intro { font-size: 14px; margin-top: 24px; }
+  .hero-actions { flex-wrap: wrap; gap: 10px; }
+  .hero-visual { min-height: 400px; margin-top: 10px; }
+  .hero-transport { width: 480px; right: -200px; top: 48%; opacity: .7; }
+  .hero-transport-center { width: 68px; height: 68px; }
+  .hero-truck { width: 44px; height: 27px; }
+  .hero-plane { width: 42px; height: 26px; }
+  .hero-ship { width: 50px; height: 27px; }
+  .scroll-cue { display: none; }
+  .intro-grid { grid-template-columns: 1fr; gap: 24px; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .cap-grid:after { display: none; }
+  .cap { min-height: auto; padding: 26px 24px 28px; border-left: 1px solid rgba(255, 255, 255, .18) !important; border-right: 1px solid rgba(255, 255, 255, .18); display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 18px; row-gap: 4px; align-items: start; }
+  .cap:not(:last-child) { border-bottom: 1px solid rgba(255, 255, 255, .18); }
+  .cap-icon { grid-row: 1 / 3; margin-top: 2px; }
+  .cap-num { grid-column: 2; }
+  .cap h3 { grid-column: 2; margin: 4px 0 6px; font-size: 26px; }
+  .cap p { grid-column: 1 / -1; margin-top: 8px; max-width: none; }
+  .cap-arrow { bottom: 18px; right: 18px; }
+  .products-grid { grid-template-columns: 1fr; }
+  .product:first-child { grid-column: auto; }
+  .product, .product.small { min-height: 300px; }
+  .product h3 { font-size: clamp(32px, 9vw, 42px); }
+  .product-art { right: -20px; top: 80px; opacity: .85; width: 160px; }
+  .product.small .product-art { width: 110px; }
+  .product p { left: 22px; bottom: 22px; max-width: 200px; font-size: 11.5px; }
+  .statement { padding-top: 80px; padding-bottom: 80px; }
+  .statement h2 { font-size: clamp(42px, 12vw, 80px); }
+  .statement p { margin-left: 0; margin-top: 28px; font-size: 14px; }
+  .journey-scroll { height: 190vh; }
+  .journey-pin { top: 60px; }
+  .journey-svg { min-width: 640px; left: -120px; }
+  .journey-visual { height: min(55vh, 420px); }
+  .journey-words { grid-template-columns: 1fr 1fr; }
+  .journey-word { font-size: 16px; padding: 14px; }
+  .market-list { margin-top: 40px; }
+  .market { grid-template-columns: 38px 1fr; gap: 10px; padding: 22px 0; }
+  .market b { display: none; }
+  .market h3 { font-size: clamp(28px, 8vw, 36px); }
+  .contact-section { min-height: auto; padding: 80px 0; }
+  .contact-section h2 { font-size: clamp(42px, 12vw, 72px); margin-top: 18px; }
+  .contact-row { margin-top: 40px; align-items: start; flex-direction: column; gap: 20px; }
+  .contact-row p { font-size: 13px; }
+  .marquee span { font-size: 22px; padding: 0 20px; }
+  .marquee span:after { margin-left: 40px; }
+}
+@media (max-width: 390px) {
+  .hero h1 { font-size: clamp(42px, 12vw, 56px); }
+  .hero-visual { min-height: 340px; }
+  .hero-transport { width: 400px; right: -220px; }
+  .product h3 { font-size: 30px; }
+  .product, .product.small { min-height: 260px; }
+  .contact-section h2 { font-size: clamp(38px, 11vw, 52px); }
+  .cap h3 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track, .scroll-cue i { animation: none; }
+  .hero h1 .word, .hero-intro, .hero-actions { opacity: 1; transform: none; }
+  .hero-vehicle { transform: none !important; }
+  .cap-icon { transition: none; }
+  .cap-arrow { display: none; }
+}
+</style>
+</head>
+<body data-page="home">
+
+<div id="scroll-progress"></div>
+<nav class="nav">
+<a class="logo" href="index.html">SRI JOTHI</a>
+<div class="navlinks"><a href="index.html" data-page="home">Home</a><a href="about.html" data-page="about">About</a><a href="products.html" data-page="products">Products</a><a href="customization.html" data-page="customization">Customization</a><a href="certifications.html" data-page="certifications">Certifications</a></div>
+<a class="navcta" href="contact.html">Enquire Now</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<a href="contact.html" class="float-enquire" aria-label="Enquire Now">Enquire Now <span aria-hidden="true">↗</span></a>
+
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="index.html" data-page="home">Home</a><a href="about.html" data-page="about">About</a><a href="products.html" data-page="products">Products</a><a href="customization.html" data-page="customization">Customization</a><a href="certifications.html" data-page="certifications">Certifications</a>
+<a href="contact.html" class="mob-cta">Enquire Now</a>
+</div>
+<main id="top">
+<section class="hero">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="eyebrow hero-eyebrow"><span class="live-dot"></span>Indian export partner &middot; Est. 2015</div>
+<h1><span class="line"><span class="word">Your</span> <span class="word">gateway</span></span><span class="line"><span class="word">to</span> <span class="word"><em>India.</em></span></span></h1>
+<p class="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
+<div class="hero-actions"><a class="btn dark" href="contact.html">Start an enquiry</a><a class="btn light" href="#products">Explore products</a></div>
+</div>
+<div class="hero-visual" aria-hidden="true">
+<div class="hero-transport" id="heroTransport">
+<div class="hero-orbit hero-orbit-a"></div><div class="hero-orbit hero-orbit-b"></div><div class="hero-orbit hero-orbit-c"></div>
+<div class="hero-transport-glow"></div>
+<div class="hero-vehicle hero-truck" id="heroTruck"><svg viewBox="-32 -18 72 38"><rect x="-29" y="-14" width="39" height="20" rx="3"/><path d="M10 -9h14l9 9v6H10z"/><circle cx="-18" cy="9" r="4"/><circle cx="20" cy="9" r="4"/></svg></div>
+<div class="hero-vehicle hero-plane" id="heroPlane"><svg viewBox="-28 -18 58 36"><path d="M-25 2L24 -6L2 2L24 10L-25 4L-12 2Z"/><path d="M-3 1L-12 -14L-8 1Z"/></svg></div>
+<div class="hero-vehicle hero-ship" id="heroShip"><svg viewBox="-46 -22 92 44"><path d="M-40 4h76L24 17h-50z"/><rect x="-23" y="-11" width="17" height="14" rx="1"/><rect x="-3" y="-11" width="17" height="14" rx="1"/><rect x="17" y="-11" width="10" height="14" rx="1"/></svg></div>
+<div class="hero-transport-center"></div>
+</div>
+</div>
+</div>
+<div class="scroll-cue">Scroll<i></i></div>
+</section>
+
+<section class="section intro" id="about">
+<div class="wrap intro-grid">
+<div class="index-num reveal">01</div>
+<div>
+<div class="eyebrow kicker reveal">Who we are</div>
+<h2 class="display text-reveal reveal" data-stagger><span>More than a supplier.</span><span>A route into India.</span></h2>
+<p class="body-copy reveal">Sri Jothi Traders connects international wholesalers, distributors and private-label buyers with Indian products. We handle sourcing, customization, packaging and export preparation from one place.</p>
+<a class="btn light reveal" style="margin-top:30px" href="about.html">Our story &rarr;</a>
+</div>
+</div>
+</section>
+
+<div class="marquee"><div class="marquee-track"><span>RICE</span><span>SPICES</span><span>MASALAS</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span><span>RICE</span><span>SPICES</span><span>MASALAS</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span></div></div>
+
+<section class="section dark-section" id="export">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow reveal">What we do</div><h2 class="display text-reveal reveal" data-stagger><span>From the first product brief</span><span>to the final shipment.</span></h2></div>
+<div class="cap-grid" data-stagger>
+<article class="cap reveal">
+  <span class="cap-num">01</span>
+  <div class="cap-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+  <h3>Source</h3>
+  <p>Find the right Indian products and trusted suppliers for your requirement.</p>
+  <div class="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+</article>
+<article class="cap reveal">
+  <span class="cap-num">02</span>
+  <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9"/></svg></div>
+  <h3>Customize</h3>
+  <p>Private label, pack size and market-specific product preparation.</p>
+  <div class="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+</article>
+<article class="cap reveal">
+  <span class="cap-num">03</span>
+  <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+  <h3>Prepare</h3>
+  <p>Quality checks, documentation, packaging and destination compliance.</p>
+  <div class="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+</article>
+<article class="cap reveal">
+  <span class="cap-num">04</span>
+  <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  <h3>Export</h3>
+  <p>Coordinated handover to logistics and shipment tracking to your market.</p>
+  <div class="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section products-section" id="products">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow reveal">Our range</div><h2 class="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
+<div class="products-grid" data-stagger>
+<article class="product reveal"><div class="product-art"></div><h3>Grains<br>&amp; Staples</h3><p>Rice, wheat, sugar and everyday staples for wholesale and retail supply.</p></article>
+<article class="product small reveal"><div class="product-art"></div><h3>Spices<br>&amp; Masalas</h3><p>Whole spices and blends.</p></article>
+<article class="product small reveal"><div class="product-art"></div><h3>Oils &amp;<br>Coconut</h3><p>Bulk and retail-ready formats.</p></article>
+<article class="product small reveal"><div class="product-art"></div><h3>Snacks<br>&amp; FMCG</h3><p>Demand-led products for your market.</p></article>
+</div>
+<a class="btn dark reveal" style="margin-top:28px" href="products.html">See all seven categories &rarr;</a>
+</div>
+</section>
+
+<section class="section statement">
+<div class="wrap statement-inner">
+<div class="eyebrow reveal">Private label</div>
+<h2 class="text-reveal reveal" data-stagger><span>Your brand.</span><span class="accent">Our sourcing.</span></h2>
+<p class="reveal">Build a product around your brand, pack size and destination requirements without managing multiple suppliers in India.</p>
+<a class="btn light reveal" style="margin-top:30px" href="customization.html">How customization works &rarr;</a>
+</div>
+</section>
+
+<section class="section journey" id="journey">
+<div class="wrap journey-copy">
+<div><div class="eyebrow reveal">Export in motion</div><h2 class="display text-reveal reveal" data-stagger><span>Watch the shipment</span><span>move to your market.</span></h2></div>
+<p class="journey-note reveal">Keep scrolling. The route builds from sourcing to preparation, port and final delivery.</p>
+</div>
+<div class="journey-scroll">
+<div class="journey-pin">
+<div class="wrap">
+<div class="journey-visual">
+<div class="jstatus" id="jstatus">Dindigul<b>Ready to dispatch</b></div>
+<svg class="journey-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet">
+<path class="jline-glow" d="M100 330 C300 190 420 370 610 260 S900 110 1090 220"/>
+<path id="jpath" class="jline" d="M100 330 C300 190 420 370 610 260 S900 110 1090 220"/>
+<circle class="jdot" cx="100" cy="330" r="7"/><circle class="jdot" cx="610" cy="260" r="6"/><circle class="jdot" cx="1090" cy="220" r="6"/>
+<g id="jtruck"><rect class="jtruck" x="-28" y="-14" width="38" height="20" rx="3"/><path class="jtruck" d="M10 -8h14l9 9v5H10z"/><circle cx="-17" cy="8" r="4" fill="#171a18"/><circle cx="20" cy="8" r="4" fill="#171a18"/></g>
+<g id="jship" opacity="0"><path class="jship" d="M-55 5h100l-12 18h-72z"/><rect class="jtruck" x="-35" y="-15" width="22" height="18"/><rect class="jtruck" x="-9" y="-15" width="22" height="18"/><rect class="jtruck" x="17" y="-15" width="22" height="18"/></g>
+<text class="jlabel" x="85" y="365">DINDIGUL</text><text class="jlabel" x="580" y="295">PORT</text><text class="jlabel" x="1040" y="185">YOUR MARKET</text>
+</svg>
+<div class="journey-stage" id="journeyStage">01 · Source</div>
+<div class="journey-progress-track"><div class="journey-progress-fill" id="journeyProgressFill"></div></div>
+</div>
+<div class="journey-words"><div class="journey-word active">Source</div><div class="journey-word">Prepare</div><div class="journey-word">Ship</div><div class="journey-word">Deliver</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section markets" id="markets">
+<div class="wrap">
+<div class="section-head"><div class="eyebrow reveal">Where we go</div><h2 class="display text-reveal reveal" data-stagger><span>India to wherever</span><span>you need it.</span></h2></div>
+<div class="market-list" data-stagger>
+<div class="market reveal"><span class="market-num">01</span><h3>United Kingdom</h3><b>Established</b></div>
+<div class="market reveal"><span class="market-num">02</span><h3>Gulf</h3><b>Established</b></div>
+<div class="market reveal"><span class="market-num">03</span><h3>United States</h3><b>Priority</b></div>
+<div class="market reveal"><span class="market-num">04</span><h3>Canada</h3><b>Expansion</b></div>
+<div class="market reveal"><span class="market-num">05</span><h3>Australia</h3><b>Expansion</b></div>
+</div>
+</div>
+</section>
+
+<section class="section contact-section" id="contact">
+<div class="wrap">
+<div class="eyebrow">Let's move something</div>
+<h2 class="text-reveal reveal" data-stagger><span>Tell us what you need.</span><span><em>We'll take it from India.</em></span></h2>
+<div class="contact-row">
+<p class="reveal">For B2B supply, private label or a custom sourcing requirement, start a conversation with the Sri Jothi team.</p>
+<a class="btn cta reveal" href="contact.html">Start an enquiry &rarr;</a>
+</div>
+</div>
+</section>
+
+</main>
+<footer><div class="wrap footer-inner">
+<span>&copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu</span>
+<div class="footer-links"><a href="about.html">About</a><a href="products.html">Products</a><a href="customization.html">Customization</a><a href="certifications.html">Certifications</a><a href="contact.html">Contact</a></div>
+</div></footer>
+
+<script src="main.js"></script>
+<script>
+/* ===== Homepage-only scripts ===== */
+(function(){
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* hero transport orbit */
+  const hero=document.querySelector('.hero'),heroTransport=document.getElementById('heroTransport'),heroTruck=document.getElementById('heroTruck'),heroPlane=document.getElementById('heroPlane'),heroShip=document.getElementById('heroShip');
+  if(hero&&heroTransport&&!reduceMotion){
+   let heroTick=false;
+   function updateHeroTransport(){
+    const range=Math.max(hero.offsetHeight,1);
+    const p=Math.min(Math.max(scrollY/range,0),1);
+    const base=-35+p*270, r=heroTransport.clientWidth*.43;
+    const place=(el,offset,radius)=>{const a=(base+offset)*Math.PI/180;const x=Math.cos(a)*radius,y=Math.sin(a)*radius;el.style.transform=`translate(calc(-50% + ${x}px),calc(-50% + ${y}px)) rotate(${a*180/Math.PI+90}deg)`};
+    place(heroTruck,0,r);place(heroPlane,120,r*.82);place(heroShip,240,r*.66);heroTick=false;
+   }
+   addEventListener('scroll',()=>{if(!heroTick){requestAnimationFrame(updateHeroTransport);heroTick=true}},{passive:true});
+   addEventListener('resize',updateHeroTransport);updateHeroTransport();
+  }
+
+  /* journey scroll animation */
+  const jpath=document.getElementById('jpath'),journeyScroll=document.querySelector('.journey-scroll'),journeyPin=document.querySelector('.journey-pin'),jtruck=document.getElementById('jtruck'),jship=document.getElementById('jship'),jfill=document.getElementById('journeyProgressFill'),jstage=document.getElementById('journeyStage'),jstatus=document.getElementById('jstatus'),jwords=[...document.querySelectorAll('.journey-word')];
+  if(jpath&&journeyScroll&&!reduceMotion){
+   const len=jpath.getTotalLength(); jpath.style.strokeDasharray=len; let tick=false,pinTop=88;
+   function updateJourney(){
+    const rect=journeyScroll.getBoundingClientRect(); const range=Math.max(journeyScroll.offsetHeight-journeyPin.offsetHeight,1); const p=Math.min(Math.max((pinTop-rect.top)/range,0),1);
+    jpath.style.strokeDashoffset=len*(1-p); jfill.style.width=(p*100)+'%';
+    const truckP=Math.min(p/.55,1), shipP=Math.min(Math.max((p-.44)/.56,0),1);
+    const a=jpath.getPointAtLength(len*truckP), b=jpath.getPointAtLength(Math.min(len,len*truckP+.8));
+    const ang=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI; jtruck.setAttribute('transform',`translate(${a.x} ${a.y}) rotate(${ang})`); jtruck.style.opacity=1-shipP;
+    const sh=jpath.getPointAtLength(len*(.44+shipP*.56)); jship.setAttribute('transform',`translate(${sh.x} ${sh.y})`); jship.style.opacity=shipP;
+    const idx=p<.42?0:p<.48?1:p<.9?2:3; jwords.forEach((w,i)=>w.classList.toggle('active',i===idx));
+    jstage.textContent=['01 · Source','02 · Prepare','03 · Ship','04 · Deliver'][idx]; jstatus.innerHTML=['Dindigul<b>Ready to dispatch</b>','Dindigul<b>Packed &amp; quality checked</b>','At sea<b>Crossing to your market</b>','Arriving<b>Ready for handover</b>'][idx]; tick=false;
+   }
+   function schedule(){if(!tick){requestAnimationFrame(updateJourney);tick=true}}
+   addEventListener('scroll',schedule,{passive:true}); addEventListener('resize',()=>{pinTop=parseFloat(getComputedStyle(journeyPin).top)||88;updateJourney()}); updateJourney();
+  }else if(jpath){jpath.style.strokeDashoffset=0;if(jship){jship.style.opacity=1;jship.setAttribute('transform','translate(1090 220)')}if(jtruck)jtruck.style.opacity=0}
+})();
+</script>
+</body></html>
