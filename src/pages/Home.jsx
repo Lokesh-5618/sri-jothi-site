@@ -71,32 +71,45 @@ export default function Home() {
     const jship = document.getElementById('jship');
     const jfill = document.getElementById('journeyProgressFill');
     const jstage = document.getElementById('journeyStage');
+    const jstatus = document.getElementById('jstatus');
     const jwords = [...document.querySelectorAll('.journey-word')];
 
-    let journeyWheelListener;
+    let journeyTick = false;
+    let journeyListener;
     let journeyResizeListener;
-    let journeyProgress = 0;
-    let journeyLocked = false;
-    let journeyLockY = 0;
-    let journeyCompleted = false;
 
     if (jpath && journeyScroll && !reduceMotion) {
       const len = jpath.getTotalLength();
       jpath.style.strokeDasharray = len;
 
-      // The Journey itself occupies only one viewport, so there is no dead
-      // 250vh/350vh tail after the animation. Wheel input supplies the
-      // animation's own virtual distance while the page stays pinned.
-      journeyScroll.style.height = '100vh';
-      journeyScroll.style.minHeight = '100vh';
+      function updateJourney() {
+        if (!journeyScroll || !jpath) return;
+        const rect = journeyScroll.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        // journeyScroll is a tall track; journeyPin sticks inside it.
+        // total = how much extra scroll distance exists while the pin is stuck.
+        const total = journeyScroll.offsetHeight - viewportHeight;
 
-      function renderJourney(p) {
-        p = Math.min(Math.max(p, 0), 1);
+        let p;
+        if (total > 40) {
+          // Pinned mode (desktop): the section holds in place while scrolling
+          // through it, and the story completes exactly as the track ends.
+          p = Math.min(Math.max(-rect.top / total, 0), 1);
+        } else {
+          // Fallback for short/unpinned layouts (e.g. small screens where
+          // the pin is disabled): animate as the section passes the viewport.
+          const start = viewportHeight * 0.85;
+          const end = viewportHeight * 0.15;
+          const range = start - end + rect.height;
+          p = Math.min(Math.max((start - rect.top) / range, 0), 1);
+        }
+
         jpath.style.strokeDashoffset = len * (1 - p);
         if (jfill) jfill.style.width = (p * 100) + '%';
 
         const truckP = Math.min(p / 0.55, 1);
         const shipP = Math.min(Math.max((p - 0.44) / 0.56, 0), 1);
+
         const a = jpath.getPointAtLength(len * truckP);
         const b = jpath.getPointAtLength(Math.min(len, len * truckP + 0.8));
         const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
@@ -114,93 +127,28 @@ export default function Home() {
 
         const idx = p < 0.42 ? 0 : p < 0.48 ? 1 : p < 0.9 ? 2 : 3;
         jwords.forEach((w, i) => w.classList.toggle('active', i === idx));
+
         if (jstage) jstage.textContent = ['01 · Source', '02 · Prepare', '03 · Ship', '04 · Deliver'][idx];
-        if (jstatus) jstatus.innerHTML = ['Dindigul<b>Ready to dispatch</b>', 'Dindigul<b>Packed &amp; quality checked</b>', 'At sea<b>Crossing to your market</b>', 'Arriving<b>Ready for handover</b>'][idx];
-      }
-
-      function getJourneyStartY() {
-        return window.scrollY + journeyScroll.getBoundingClientRect().top;
-      }
-
-      function getAnimationDistance() {
-        return Math.max(window.innerHeight * 1.35, 900);
-      }
-
-      function lockJourney(progress) {
-        journeyLockY = getJourneyStartY();
-        journeyLocked = true;
-        journeyCompleted = false;
-        journeyProgress = Math.min(Math.max(progress, 0), 1);
-        window.scrollTo(0, journeyLockY);
-        renderJourney(journeyProgress);
-      }
-
-      function finishJourney(direction, leftover) {
-        journeyLocked = false;
-        journeyCompleted = direction > 0;
-        renderJourney(direction > 0 ? 1 : 0);
-        if (Math.abs(leftover) > 0.5) {
-          window.scrollTo(0, Math.max(0, journeyLockY + leftover));
+        if (jstatus) {
+          jstatus.innerHTML = ['Dindigul<b>Ready to dispatch</b>', 'Dindigul<b>Packed &amp; quality checked</b>', 'At sea<b>Crossing to your market</b>', 'Arriving<b>Ready for handover</b>'][idx];
         }
+        journeyTick = false;
       }
 
-      journeyWheelListener = (event) => {
-        const delta = event.deltaY;
-        if (!delta) return;
-
-        const startY = getJourneyStartY();
-        const distance = getAnimationDistance();
-        const currentY = window.scrollY;
-
-        if (!journeyLocked) {
-          if (delta > 0 && currentY < startY && currentY + delta >= startY) {
-            event.preventDefault();
-            const consumed = startY - currentY;
-            lockJourney(Math.min((delta - consumed) / distance, 1));
-            return;
-          }
-
-          if (delta > 0 && Math.abs(currentY - startY) <= 2 && !journeyCompleted) {
-            event.preventDefault();
-            lockJourney(Math.min(delta / distance, 1));
-            return;
-          }
-
-          return;
-        }
-
-        event.preventDefault();
-        const previous = journeyProgress;
-        const next = Math.min(Math.max(previous + delta / distance, 0), 1);
-
-        if (next >= 1) {
-          const consumed = (1 - previous) * distance;
-          finishJourney(1, delta - consumed);
-        } else if (next <= 0) {
-          const consumed = previous * distance;
-          finishJourney(-1, delta + consumed);
-        } else {
-          journeyProgress = next;
-          renderJourney(journeyProgress);
-          window.scrollTo(0, journeyLockY);
+      journeyListener = () => {
+        if (!journeyTick) {
+          requestAnimationFrame(updateJourney);
+          journeyTick = true;
         }
       };
 
       journeyResizeListener = () => {
-        journeyScroll.style.height = '100vh';
-        journeyScroll.style.minHeight = '100vh';
-        if (journeyLocked) {
-          journeyLockY = getJourneyStartY();
-          window.scrollTo({ top: journeyLockY, behavior: 'instant' });
-        }
-        renderJourney(journeyProgress);
+        updateJourney();
       };
 
-      // One initial render only; do not attach a scroll handler that fights the
-      // browser while the user is wheel-scrolling.
-      renderJourney(0);
-      window.addEventListener('wheel', journeyWheelListener, { passive: false });
+      window.addEventListener('scroll', journeyListener, { passive: true });
       window.addEventListener('resize', journeyResizeListener);
+      updateJourney();
 
     } else if (jpath) {
       jpath.style.strokeDashoffset = 0;
@@ -215,7 +163,6 @@ export default function Home() {
       if (heroListener) window.removeEventListener('scroll', heroListener);
       if (resizeListener) window.removeEventListener('resize', resizeListener);
       if (journeyListener) window.removeEventListener('scroll', journeyListener);
-      if (journeyWheelListener) window.removeEventListener('wheel', journeyWheelListener);
       if (journeyResizeListener) window.removeEventListener('resize', journeyResizeListener);
     };
   }, []);
