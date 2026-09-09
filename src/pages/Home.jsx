@@ -71,31 +71,34 @@ export default function Home() {
     const jship = document.getElementById('jship');
     const jfill = document.getElementById('journeyProgressFill');
     const jstage = document.getElementById('journeyStage');
-    const jstatus = document.getElementById('jstatus');
     const jwords = [...document.querySelectorAll('.journey-word')];
 
-    let journeyTick = false;
-    let journeyListener;
-    let journeyResizeListener;
     let journeyWheelListener;
+    let journeyResizeListener;
     let journeyProgress = 0;
+    let journeyTarget = 0;
     let journeyLocked = false;
     let journeyLockY = 0;
     let journeyCompleted = false;
+    let journeyRaf = 0;
 
     if (jpath && journeyScroll && !reduceMotion) {
       const len = jpath.getTotalLength();
       jpath.style.strokeDasharray = len;
 
+      // The Journey itself occupies only one viewport, so there is no dead
+      // 250vh/350vh tail after the animation. Wheel input supplies the
+      // animation's own virtual distance while the page stays pinned.
+      journeyScroll.style.height = '100vh';
+      journeyScroll.style.minHeight = '100vh';
+
       function renderJourney(p) {
         p = Math.min(Math.max(p, 0), 1);
-
         jpath.style.strokeDashoffset = len * (1 - p);
         if (jfill) jfill.style.width = (p * 100) + '%';
 
         const truckP = Math.min(p / 0.55, 1);
         const shipP = Math.min(Math.max((p - 0.44) / 0.56, 0), 1);
-
         const a = jpath.getPointAtLength(len * truckP);
         const b = jpath.getPointAtLength(Math.min(len, len * truckP + 0.8));
         const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
@@ -113,159 +116,136 @@ export default function Home() {
 
         const idx = p < 0.42 ? 0 : p < 0.48 ? 1 : p < 0.9 ? 2 : 3;
         jwords.forEach((w, i) => w.classList.toggle('active', i === idx));
-
         if (jstage) jstage.textContent = ['01 · Source', '02 · Prepare', '03 · Ship', '04 · Deliver'][idx];
-        if (jstatus) {
-          jstatus.innerHTML = ['Dindigul<b>Ready to dispatch</b>', 'Dindigul<b>Packed &amp; quality checked</b>', 'At sea<b>Crossing to your market</b>', 'Arriving<b>Ready for handover</b>'][idx];
-        }
+        if (jstatus) jstatus.innerHTML = ['Dindigul<b>Ready to dispatch</b>', 'Dindigul<b>Packed &amp; quality checked</b>', 'At sea<b>Crossing to your market</b>', 'Arriving<b>Ready for handover</b>'][idx];
       }
 
       function getJourneyStartY() {
         return window.scrollY + journeyScroll.getBoundingClientRect().top;
       }
 
-      function getJourneyDistance() {
-        return Math.max(journeyScroll.offsetHeight - window.innerHeight, 1);
+      function getAnimationDistance() {
+        return Math.max(window.innerHeight * 1.35, 900);
       }
 
-      function updateJourney() {
-        if (!journeyScroll || !jpath || journeyLocked) return;
-
-        const total = getJourneyDistance();
-        const rect = journeyScroll.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        let p;
-
-        if (total > 40) {
-          p = Math.min(Math.max(-rect.top / total, 0), 1);
+      function animateJourney() {
+        journeyRaf = 0;
+        const diff = journeyTarget - journeyProgress;
+        if (Math.abs(diff) < 0.001) {
+          journeyProgress = journeyTarget;
         } else {
-          const start = viewportHeight * 0.85;
-          const end = viewportHeight * 0.15;
-          const range = start - end + rect.height;
-          p = Math.min(Math.max((start - rect.top) / range, 0), 1);
+          journeyProgress += diff * 0.28;
         }
-
-        journeyProgress = p;
-        renderJourney(p);
-        journeyTick = false;
+        renderJourney(journeyProgress);
+        if (journeyLocked && Math.abs(journeyTarget - journeyProgress) >= 0.001) {
+          journeyRaf = requestAnimationFrame(animateJourney);
+        }
       }
 
-      function requestJourneyUpdate() {
-        if (!journeyTick) {
-          requestAnimationFrame(updateJourney);
-          journeyTick = true;
-        }
+      function setJourneyTarget(value) {
+        journeyTarget = Math.min(Math.max(value, 0), 1);
+        if (!journeyRaf) journeyRaf = requestAnimationFrame(animateJourney);
       }
 
       function lockJourney(progress) {
         journeyLockY = getJourneyStartY();
-        journeyProgress = Math.min(Math.max(progress, 0), 1);
         journeyLocked = true;
-        window.scrollTo(0, journeyLockY);
+        journeyTarget = Math.min(Math.max(progress, 0), 1);
+        journeyProgress = journeyTarget;
+        window.scrollTo({ top: journeyLockY, behavior: 'instant' });
         renderJourney(journeyProgress);
       }
 
-      function unlockJourney(direction) {
-        const total = getJourneyDistance();
+      function unlockJourney(direction, leftover) {
         journeyLocked = false;
         journeyCompleted = direction > 0;
+        if (journeyRaf) cancelAnimationFrame(journeyRaf);
+        journeyRaf = 0;
+        journeyProgress = direction > 0 ? 1 : 0;
+        journeyTarget = journeyProgress;
+        renderJourney(journeyProgress);
 
-        // Release exactly where the existing sticky Journey would have ended.
-        window.scrollTo(0, direction > 0 ? journeyLockY + total : journeyLockY);
-        requestJourneyUpdate();
+        // Continue the same wheel gesture naturally instead of jumping to the
+        // top of the page. This is what prevents the fast "teleport upward".
+        const nextY = Math.max(0, journeyLockY + (direction > 0 ? leftover : leftover));
+        window.scrollTo({ top: nextY, behavior: 'instant' });
       }
 
-      journeyListener = () => {
-        // While Journey is locked, do not allow the browser's scroll position
-        // to move. Wheel input is used only to advance the animation.
-        if (journeyLocked) {
-          if (window.scrollY !== journeyLockY) window.scrollTo(0, journeyLockY);
-          return;
-        }
-
-        requestJourneyUpdate();
-      };
+      function isAtJourneyStart() {
+        return Math.abs(window.scrollY - getJourneyStartY()) <= 2;
+      }
 
       journeyWheelListener = (event) => {
         const delta = event.deltaY;
         if (!delta) return;
 
         const startY = getJourneyStartY();
-        const total = getJourneyDistance();
+        const animationDistance = getAnimationDistance();
         const currentY = window.scrollY;
-        const endY = startY + total;
 
         if (!journeyLocked) {
-          // Catch the moment the user reaches Journey. The browser never gets
-          // to scroll past it; that wheel movement starts the animation.
+          // Enter Journey only when the user's wheel actually crosses its top.
           if (delta > 0 && currentY < startY && currentY + delta >= startY) {
             event.preventDefault();
             const consumed = startY - currentY;
             journeyCompleted = false;
-            lockJourney(Math.min(Math.max((delta - consumed) / total, 0), 1));
-            if (journeyProgress >= 1) unlockJourney(1);
+            lockJourney((delta - consumed) / animationDistance);
             return;
           }
 
-          // Also catch a wheel event when the user is already exactly at the
-          // Journey start (the common case after normal scrolling).
-          if (delta > 0 && currentY >= startY - 1 && currentY <= startY + 1) {
+          if (delta > 0 && isAtJourneyStart() && !journeyCompleted) {
             event.preventDefault();
-            journeyCompleted = false;
-            lockJourney(Math.min(Math.max(delta / total, 0), 1));
-            if (journeyProgress >= 1) unlockJourney(1);
+            lockJourney(delta / animationDistance);
             return;
           }
 
-          // Only re-enter Journey when the user is actually coming back up
-          // from its completed end. Do not intercept upward scrolling while
-          // the page is above/below Journey, otherwise normal page scrolling
-          // can get trapped.
-          if (journeyCompleted && delta < 0 && currentY >= endY - 1) {
+          // Re-enter only from the bottom edge after the animation has been
+          // completed. Normal upward scrolling elsewhere stays untouched.
+          const sectionBottom = startY + journeyScroll.offsetHeight - 2;
+          if (delta < 0 && journeyCompleted && currentY >= sectionBottom) {
             event.preventDefault();
             lockJourney(1);
-            journeyProgress = Math.min(Math.max(1 + delta / total, 0), 1);
-            renderJourney(journeyProgress);
-            if (journeyProgress <= 0) unlockJourney(-1);
+            const next = Math.max(0, 1 + delta / animationDistance);
+            setJourneyTarget(next);
+            if (next <= 0) unlockJourney(-1, delta);
             return;
           }
-
           return;
         }
 
-        // Journey is pinned: every wheel event advances/reverses only the
-        // animation. The document itself stays at the Journey start.
         event.preventDefault();
-        journeyProgress += delta / total;
 
-        if (journeyProgress >= 1) {
-          journeyProgress = 1;
-          renderJourney(1);
-          unlockJourney(1);
-        } else if (journeyProgress <= 0) {
-          journeyProgress = 0;
-          renderJourney(0);
-          unlockJourney(-1);
+        const previous = journeyTarget;
+        const rawNext = previous + delta / animationDistance;
+
+        // Consume only the amount needed to finish the animation. Any extra
+        // wheel delta is passed straight back to normal page scrolling.
+        if (rawNext >= 1) {
+          const consumed = (1 - previous) * animationDistance;
+          unlockJourney(1, delta - consumed);
+        } else if (rawNext <= 0) {
+          const consumed = previous * animationDistance;
+          unlockJourney(-1, delta + consumed);
         } else {
-          renderJourney(journeyProgress);
-          if (window.scrollY !== journeyLockY) window.scrollTo(0, journeyLockY);
+          setJourneyTarget(rawNext);
         }
       };
 
       journeyResizeListener = () => {
+        journeyScroll.style.height = '100vh';
+        journeyScroll.style.minHeight = '100vh';
         if (journeyLocked) {
           journeyLockY = getJourneyStartY();
-          window.scrollTo(0, journeyLockY);
-          renderJourney(journeyProgress);
-        } else {
-          updateJourney();
+          window.scrollTo({ top: journeyLockY, behavior: 'instant' });
         }
+        renderJourney(journeyProgress);
       };
 
-      window.addEventListener('scroll', journeyListener, { passive: true });
+      // One initial render only; do not attach a scroll handler that fights the
+      // browser while the user is wheel-scrolling.
+      renderJourney(0);
       window.addEventListener('wheel', journeyWheelListener, { passive: false });
       window.addEventListener('resize', journeyResizeListener);
-      updateJourney();
 
     } else if (jpath) {
       jpath.style.strokeDashoffset = 0;
