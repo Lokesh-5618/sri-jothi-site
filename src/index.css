@@ -751,8 +751,18 @@ body:before {
 .journey-copy { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 28px; }
 .journey-copy .display { max-width: 760px; }
 .journey-note { max-width: 300px; font-size: 12px; line-height: 1.7; color: var(--muted); }
-.journey-scroll { position: relative; }
-.journey-pin { position: relative; padding-top: 16px; }
+/* tall scroll track: the extra height (300vh - 100vh) is the scroll
+   distance the user travels while the section stays pinned in place */
+.journey-scroll { position: relative; height: 300vh; }
+.journey-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 16px;
+}
 .journey-visual { height: min(62vh, 540px); background: var(--green); position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 30px 60px rgba(16, 56, 42, .18); }
 .journey-visual:before { content: ""; position: absolute; inset: -30%; background: radial-gradient(circle at 70% 30%, rgba(219, 233, 210, .13), transparent 28%), radial-gradient(circle at 30% 70%, rgba(137, 107, 75, .13), transparent 25%); animation: journeyGlow 9s ease-in-out infinite alternate; }
 .journey-visual:after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .035) 50%, transparent 65%); transform: translateX(-100%); animation: journeySweep 7s ease-in-out infinite; pointer-events: none; }
@@ -808,6 +818,7 @@ body:before {
   .products-grid { grid-template-columns: 1fr 1fr; }
   .product:first-child { grid-column: 1/-1; }
   .journey-scroll { height: auto; }
+  .journey-pin { position: static; height: auto; padding-top: 16px; }
   .journey-copy { display: block; }
   .journey-note { margin-top: 25px; }
   .statement p { margin-left: 0; max-width: 100%; }
@@ -846,7 +857,7 @@ body:before {
   .statement h2 { font-size: clamp(42px, 12vw, 80px); }
   .statement p { margin-left: 0; margin-top: 28px; font-size: 14px; }
   .journey-scroll { height: auto; }
-  .journey-pin { top: auto; }
+  .journey-pin { position: static; top: auto; height: auto; }
   .journey-svg { min-width: 640px; left: -120px; }
   .journey-visual { height: min(55vh, 420px); }
   .journey-words { grid-template-columns: 1fr 1fr; }
@@ -877,6 +888,8 @@ body:before {
   .hero-vehicle { transform: none !important; }
   .cap-icon { transition: none; }
   .cap-arrow { display: none; }
+  .journey-scroll { height: auto; }
+  .journey-pin { position: static; height: auto; }
 }
 
 
