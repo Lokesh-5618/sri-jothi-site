@@ -130,8 +130,9 @@ export default function Home() {
         journeyLockY = getJourneyStartY();
         journeyLocked = true;
         journeyCompleted = false;
+        journeyProgress = Math.min(Math.max(progress, 0), 1);
         window.scrollTo(0, journeyLockY);
-        renderJourney(progress);
+        renderJourney(journeyProgress);
       }
 
       function finishJourney(direction, leftover) {
@@ -170,7 +171,7 @@ export default function Home() {
 
         event.preventDefault();
         const previous = journeyProgress;
-        const next = previous + delta / distance;
+        const next = Math.min(Math.max(previous + delta / distance, 0), 1);
 
         if (next >= 1) {
           const consumed = (1 - previous) * distance;
@@ -179,7 +180,8 @@ export default function Home() {
           const consumed = previous * distance;
           finishJourney(-1, delta + consumed);
         } else {
-          renderJourney(next);
+          journeyProgress = next;
+          renderJourney(journeyProgress);
           window.scrollTo(0, journeyLockY);
         }
       };
