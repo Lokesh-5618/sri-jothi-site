@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import HeroBgSlider from '../components/HeroBgSlider';
 
 export default function About() {
   useScrollReveal();
@@ -9,6 +10,7 @@ export default function About() {
     <>
 
 <section className="page-hero">
+  <HeroBgSlider />
   <div className="wrap" data-stagger>
     <p className="eyebrow reveal">About us</p>
     <h1 className="text-reveal reveal"><span>A decade of trusted trade, built one order at a time.</span></h1>
@@ -32,6 +34,31 @@ export default function About() {
       <div className="fact reveal"><b>10,000 sq ft</b><span>Warehouse and preparation facility</span></div>
       <div className="fact reveal"><b>UK &amp; Gulf</b><span>Current export markets, expanding further</span></div>
     </div>
+  </div>
+</section>
+
+<section className="team">
+  <div className="wrap">
+    <p className="eyebrow reveal">Our team</p>
+    <h2 className="reveal" style={{ marginBottom: '36px', maxWidth: '22ch' }}>The people behind every shipment.</h2>
+    <div className="team-grid reveal-stagger">
+      <div className="team-card reveal">
+        <div className="team-avatar" aria-hidden="true"></div>
+        <h3>Name Placeholder</h3>
+        <span>Role / Title</span>
+      </div>
+      <div className="team-card reveal">
+        <div className="team-avatar" aria-hidden="true"></div>
+        <h3>Name Placeholder</h3>
+        <span>Role / Title</span>
+      </div>
+      <div className="team-card reveal">
+        <div className="team-avatar" aria-hidden="true"></div>
+        <h3>Name Placeholder</h3>
+        <span>Role / Title</span>
+      </div>
+    </div>
+    <p className="placeholder-note reveal" style={{ marginTop: '28px' }}>Team photos, names and roles are placeholders — swap in real headshots and bios.</p>
   </div>
 </section>
 
