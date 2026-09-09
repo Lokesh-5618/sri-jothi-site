@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import HeroBgSlider from '../components/HeroBgSlider';
 
 export default function Products() {
   useScrollReveal();
@@ -9,6 +10,7 @@ export default function Products() {
     <>
 
 <section className="page-hero">
+  <HeroBgSlider />
   <div className="wrap" data-stagger>
     <p className="eyebrow reveal">Products</p>
     <h1 className="text-reveal reveal"><span>Seven categories, sourced and prepared to order.</span></h1>
