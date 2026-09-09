@@ -753,7 +753,7 @@ body:before {
 .journey-note { max-width: 300px; font-size: 12px; line-height: 1.7; color: var(--muted); }
 /* tall scroll track: the extra height (300vh - 100vh) is the scroll
    distance the user travels while the section stays pinned in place */
-.journey-scroll { position: relative; height: 300vh; }
+.journey-scroll { position: relative; height: 500vh; }
 .journey-pin {
   position: sticky;
   top: 0;
