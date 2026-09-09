@@ -76,11 +76,9 @@ export default function Home() {
     let journeyWheelListener;
     let journeyResizeListener;
     let journeyProgress = 0;
-    let journeyTarget = 0;
     let journeyLocked = false;
     let journeyLockY = 0;
     let journeyCompleted = false;
-    let journeyRaf = 0;
 
     if (jpath && journeyScroll && !reduceMotion) {
       const len = jpath.getTotalLength();
@@ -128,51 +126,21 @@ export default function Home() {
         return Math.max(window.innerHeight * 1.35, 900);
       }
 
-      function animateJourney() {
-        journeyRaf = 0;
-        const diff = journeyTarget - journeyProgress;
-        if (Math.abs(diff) < 0.001) {
-          journeyProgress = journeyTarget;
-        } else {
-          journeyProgress += diff * 0.28;
-        }
-        renderJourney(journeyProgress);
-        if (journeyLocked && Math.abs(journeyTarget - journeyProgress) >= 0.001) {
-          journeyRaf = requestAnimationFrame(animateJourney);
-        }
-      }
-
-      function setJourneyTarget(value) {
-        journeyTarget = Math.min(Math.max(value, 0), 1);
-        if (!journeyRaf) journeyRaf = requestAnimationFrame(animateJourney);
-      }
-
       function lockJourney(progress) {
         journeyLockY = getJourneyStartY();
         journeyLocked = true;
-        journeyTarget = Math.min(Math.max(progress, 0), 1);
-        journeyProgress = journeyTarget;
-        window.scrollTo({ top: journeyLockY, behavior: 'instant' });
-        renderJourney(journeyProgress);
+        journeyCompleted = false;
+        window.scrollTo(0, journeyLockY);
+        renderJourney(progress);
       }
 
-      function unlockJourney(direction, leftover) {
+      function finishJourney(direction, leftover) {
         journeyLocked = false;
         journeyCompleted = direction > 0;
-        if (journeyRaf) cancelAnimationFrame(journeyRaf);
-        journeyRaf = 0;
-        journeyProgress = direction > 0 ? 1 : 0;
-        journeyTarget = journeyProgress;
-        renderJourney(journeyProgress);
-
-        // Continue the same wheel gesture naturally instead of jumping to the
-        // top of the page. This is what prevents the fast "teleport upward".
-        const nextY = Math.max(0, journeyLockY + (direction > 0 ? leftover : leftover));
-        window.scrollTo({ top: nextY, behavior: 'instant' });
-      }
-
-      function isAtJourneyStart() {
-        return Math.abs(window.scrollY - getJourneyStartY()) <= 2;
+        renderJourney(direction > 0 ? 1 : 0);
+        if (Math.abs(leftover) > 0.5) {
+          window.scrollTo(0, Math.max(0, journeyLockY + leftover));
+        }
       }
 
       journeyWheelListener = (event) => {
@@ -180,54 +148,39 @@ export default function Home() {
         if (!delta) return;
 
         const startY = getJourneyStartY();
-        const animationDistance = getAnimationDistance();
+        const distance = getAnimationDistance();
         const currentY = window.scrollY;
 
         if (!journeyLocked) {
-          // Enter Journey only when the user's wheel actually crosses its top.
           if (delta > 0 && currentY < startY && currentY + delta >= startY) {
             event.preventDefault();
             const consumed = startY - currentY;
-            journeyCompleted = false;
-            lockJourney((delta - consumed) / animationDistance);
+            lockJourney(Math.min((delta - consumed) / distance, 1));
             return;
           }
 
-          if (delta > 0 && isAtJourneyStart() && !journeyCompleted) {
+          if (delta > 0 && Math.abs(currentY - startY) <= 2 && !journeyCompleted) {
             event.preventDefault();
-            lockJourney(delta / animationDistance);
+            lockJourney(Math.min(delta / distance, 1));
             return;
           }
 
-          // Re-enter only from the bottom edge after the animation has been
-          // completed. Normal upward scrolling elsewhere stays untouched.
-          const sectionBottom = startY + journeyScroll.offsetHeight - 2;
-          if (delta < 0 && journeyCompleted && currentY >= sectionBottom) {
-            event.preventDefault();
-            lockJourney(1);
-            const next = Math.max(0, 1 + delta / animationDistance);
-            setJourneyTarget(next);
-            if (next <= 0) unlockJourney(-1, delta);
-            return;
-          }
           return;
         }
 
         event.preventDefault();
+        const previous = journeyProgress;
+        const next = previous + delta / distance;
 
-        const previous = journeyTarget;
-        const rawNext = previous + delta / animationDistance;
-
-        // Consume only the amount needed to finish the animation. Any extra
-        // wheel delta is passed straight back to normal page scrolling.
-        if (rawNext >= 1) {
-          const consumed = (1 - previous) * animationDistance;
-          unlockJourney(1, delta - consumed);
-        } else if (rawNext <= 0) {
-          const consumed = previous * animationDistance;
-          unlockJourney(-1, delta + consumed);
+        if (next >= 1) {
+          const consumed = (1 - previous) * distance;
+          finishJourney(1, delta - consumed);
+        } else if (next <= 0) {
+          const consumed = previous * distance;
+          finishJourney(-1, delta + consumed);
         } else {
-          setJourneyTarget(rawNext);
+          renderJourney(next);
+          window.scrollTo(0, journeyLockY);
         }
       };
 
