@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import HeroBgSlider from '../components/HeroBgSlider';
 
 export default function Certifications() {
   useScrollReveal();
@@ -9,6 +10,7 @@ export default function Certifications() {
     <>
 
 <section className="page-hero">
+  <HeroBgSlider />
   <div className="wrap" data-stagger>
     <p className="eyebrow reveal">Certifications</p>
     <h1 className="text-reveal reveal"><span>Compliance you can verify, explained in plain terms.</span></h1>
