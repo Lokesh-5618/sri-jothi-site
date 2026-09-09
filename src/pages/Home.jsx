@@ -1,9 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 
+const RANGE_PRODUCTS = [
+  { title: <>Grains<br />&amp; Staples</>, desc: 'Rice, wheat, sugar and everyday staples for wholesale and retail supply.' },
+  { title: <>Spices<br />&amp; Masalas</>, desc: 'Whole spices and blends.' },
+  { title: <>Oils &amp;<br />Coconut</>, desc: 'Bulk and retail-ready formats.' },
+  { title: <>Snacks<br />&amp; FMCG</>, desc: 'Demand-led products for your market.' },
+];
+
 export default function Home() {
   useScrollReveal();
+  const [productSlide, setProductSlide] = useState(0);
+
+  const goPrev = () => setProductSlide((s) => (s - 1 + RANGE_PRODUCTS.length) % RANGE_PRODUCTS.length);
+  const goNext = () => setProductSlide((s) => (s + 1) % RANGE_PRODUCTS.length);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -226,12 +237,39 @@ export default function Home() {
       <section className="section products-section" id="products">
         <div className="wrap">
           <div className="section-head"><div className="eyebrow reveal">Our range</div><h2 className="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
-          <div className="products-grid" data-stagger>
-            <article className="product reveal"><div className="product-art"></div><h3>Grains<br />&amp; Staples</h3><p>Rice, wheat, sugar and everyday staples for wholesale and retail supply.</p></article>
-            <article className="product small reveal"><div className="product-art"></div><h3>Spices<br />&amp; Masalas</h3><p>Whole spices and blends.</p></article>
-            <article className="product small reveal"><div className="product-art"></div><h3>Oils &amp;<br />Coconut</h3><p>Bulk and retail-ready formats.</p></article>
-            <article className="product small reveal"><div className="product-art"></div><h3>Snacks<br />&amp; FMCG</h3><p>Demand-led products for your market.</p></article>
+
+          <div className="products-carousel reveal">
+            <div className="products-track" style={{ transform: `translateX(-${productSlide * 100}%)` }}>
+              {RANGE_PRODUCTS.map((p, i) => (
+                <article className="product" key={i}>
+                  <div className="product-art"></div>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </article>
+              ))}
+            </div>
           </div>
+
+          <div className="carousel-controls reveal">
+            <button type="button" className="carousel-btn" onClick={goPrev} aria-label="Previous product category">
+              <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" /></svg>
+            </button>
+            <div className="carousel-dots">
+              {RANGE_PRODUCTS.map((_, i) => (
+                <button
+                  type="button"
+                  key={i}
+                  className={`carousel-dot ${i === productSlide ? 'active' : ''}`}
+                  onClick={() => setProductSlide(i)}
+                  aria-label={`Go to product ${i + 1}`}
+                />
+              ))}
+            </div>
+            <button type="button" className="carousel-btn" onClick={goNext} aria-label="Next product category">
+              <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" /></svg>
+            </button>
+          </div>
+
           <Link className="btn dark reveal" style={{ 'marginTop': '28px' }} to="/products">See all seven categories &rarr;</Link>
         </div>
       </section>
