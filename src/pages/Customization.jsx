@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import HeroBgSlider from '../components/HeroBgSlider';
 
 export default function Customization() {
   useScrollReveal();
@@ -9,6 +10,7 @@ export default function Customization() {
     <>
 
 <section className="page-hero">
+  <HeroBgSlider />
   <div className="wrap" data-stagger>
     <p className="eyebrow reveal">Customization &amp; private label</p>
     <h1 className="text-reveal reveal"><span>We don't just supply — we customize every product to your brand and market.</span></h1>
