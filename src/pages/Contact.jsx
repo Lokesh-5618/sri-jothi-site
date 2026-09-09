@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import HeroBgSlider from '../components/HeroBgSlider';
 
 export default function Contact() {
   useScrollReveal();
@@ -9,6 +10,7 @@ export default function Contact() {
     <>
 
 <section className="page-hero">
+  <HeroBgSlider />
   <div className="wrap" data-stagger>
     <p className="eyebrow reveal">Contact &amp; enquiry</p>
     <h1 className="text-reveal reveal"><span>Tell us what you're looking to import.</span></h1>
