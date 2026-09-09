@@ -53,7 +53,10 @@ export default function Layout() {
     <>
       <div id="scroll-progress" ref={progressBarRef}></div>
       <nav className="nav">
-        <Link className="logo" to="/">SRI JOTHI</Link>
+        <Link className="logo" to="/">
+          <span className="logo-placeholder" aria-hidden="true">LOGO</span>
+          SRI JOTHI
+        </Link>
         <div className="navlinks">
           {navLinks.map((link) => (
             <Link 
@@ -65,7 +68,10 @@ export default function Layout() {
             </Link>
           ))}
         </div>
-        <Link className="navcta" to="/contact">Enquire Now</Link>
+        <Link className="navcta" to="/contact">
+          Enquire Now
+          <svg className="cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+        </Link>
         <button 
           className={`hamburger ${menuOpen ? 'open' : ''}`} 
           id="hamburger" 
@@ -87,7 +93,10 @@ export default function Layout() {
             {link.label}
           </Link>
         ))}
-        <Link to="/contact" className="mob-cta" onClick={closeMenu}>Enquire Now</Link>
+        <Link to="/contact" className="mob-cta" onClick={closeMenu}>
+          Enquire Now
+          <svg className="cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+        </Link>
       </div>
 
       <main id="top">
@@ -95,6 +104,22 @@ export default function Layout() {
       </main>
 
       <footer>
+        <div className="wrap footer-top">
+          <div className="footer-connect">
+            <span className="footer-connect-label">Connect with us</span>
+            <div className="footer-socials">
+              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+              <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+              <a href="#" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+              <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener">WA</a>
+            </div>
+          </div>
+          <div className="footer-certs">
+            <span className="footer-cert-badge">FSSAI</span>
+            <span className="footer-cert-badge">APEDA</span>
+            <span className="footer-cert-badge">ISO 22000</span>
+          </div>
+        </div>
         <div className="wrap footer-inner">
           <span>&copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu</span>
           <div className="footer-links">
