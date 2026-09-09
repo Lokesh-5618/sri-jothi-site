@@ -81,7 +81,6 @@ export default function Home() {
     let journeyProgress = 0;
     let journeyLocked = false;
     let journeyLockY = 0;
-    let journeyLockReady = false;
 
     if (jpath && journeyScroll && !reduceMotion) {
       const len = jpath.getTotalLength();
@@ -120,33 +119,33 @@ export default function Home() {
         }
       }
 
-      function getJourneyLockY() {
+      function getJourneyStartY() {
         return window.scrollY + journeyScroll.getBoundingClientRect().top;
       }
 
+      function getJourneyDistance() {
+        return Math.max(journeyScroll.offsetHeight - window.innerHeight, 1);
+      }
+
       function updateJourney() {
-        if (!journeyScroll || !jpath) return;
+        if (!journeyScroll || !jpath || journeyLocked) return;
 
-        // Keep the existing scroll-driven behavior when the Journey is not pinned.
-        const total = journeyScroll.offsetHeight - window.innerHeight;
-        if (total <= 40 || !journeyLocked) {
-          const rect = journeyScroll.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
-          let p;
+        const total = getJourneyDistance();
+        const rect = journeyScroll.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        let p;
 
-          if (total > 40) {
-            p = Math.min(Math.max(-rect.top / total, 0), 1);
-          } else {
-            const start = viewportHeight * 0.85;
-            const end = viewportHeight * 0.15;
-            const range = start - end + rect.height;
-            p = Math.min(Math.max((start - rect.top) / range, 0), 1);
-          }
-
-          journeyProgress = p;
-          renderJourney(p);
+        if (total > 40) {
+          p = Math.min(Math.max(-rect.top / total, 0), 1);
+        } else {
+          const start = viewportHeight * 0.85;
+          const end = viewportHeight * 0.15;
+          const range = start - end + rect.height;
+          p = Math.min(Math.max((start - rect.top) / range, 0), 1);
         }
 
+        journeyProgress = p;
+        renderJourney(p);
         journeyTick = false;
       }
 
@@ -157,96 +156,99 @@ export default function Home() {
         }
       }
 
-      function enterJourneyLock(startProgress = 0) {
-        const total = journeyScroll.offsetHeight - window.innerHeight;
-        if (total <= 40) return false;
-
-        journeyLockY = getJourneyLockY();
-        journeyProgress = Math.min(Math.max(startProgress, 0), 1);
+      function lockJourney(progress) {
+        journeyLockY = getJourneyStartY();
+        journeyProgress = Math.min(Math.max(progress, 0), 1);
         journeyLocked = true;
-        journeyLockReady = true;
         window.scrollTo(0, journeyLockY);
         renderJourney(journeyProgress);
-        return true;
       }
 
-      function leaveJourneyLock(direction) {
+      function unlockJourney(direction) {
+        const total = getJourneyDistance();
         journeyLocked = false;
-        journeyLockReady = false;
 
-        // Release the page at the end of the Journey. The normal document
-        // scroll then continues from the exact end of the pinned track.
-        const total = journeyScroll.offsetHeight - window.innerHeight;
-        const destination = direction > 0
-          ? journeyLockY + Math.max(total, 0)
-          : journeyLockY;
-
-        window.scrollTo(0, destination);
+        // Release exactly where the existing sticky Journey would have ended.
+        window.scrollTo(0, direction > 0 ? journeyLockY + total : journeyLockY);
         requestJourneyUpdate();
       }
 
       journeyListener = () => {
+        // While Journey is locked, do not allow the browser's scroll position
+        // to move. Wheel input is used only to advance the animation.
         if (journeyLocked) {
-          window.scrollTo(0, journeyLockY);
+          if (window.scrollY !== journeyLockY) window.scrollTo(0, journeyLockY);
           return;
-        }
-
-        const total = journeyScroll.offsetHeight - window.innerHeight;
-        if (total > 40) {
-          const top = journeyScroll.getBoundingClientRect().top;
-          if (top <= 0 && window.scrollY < getJourneyLockY() + total) {
-            journeyLockY = getJourneyLockY();
-          }
         }
 
         requestJourneyUpdate();
       };
 
       journeyWheelListener = (event) => {
-        const total = journeyScroll.offsetHeight - window.innerHeight;
-        if (total <= 40) return;
-
         const delta = event.deltaY;
         if (!delta) return;
 
-        if (!journeyLocked) {
-          const lockY = getJourneyLockY();
-          const atJourneyStart = window.scrollY >= lockY - 1 && window.scrollY <= lockY + 1;
-          const atJourneyEnd = window.scrollY >= lockY + total - 1;
+        const startY = getJourneyStartY();
+        const total = getJourneyDistance();
+        const currentY = window.scrollY;
+        const endY = startY + total;
 
-          if ((delta > 0 && atJourneyStart) || (delta < 0 && atJourneyEnd)) {
+        if (!journeyLocked) {
+          // Catch the moment the user reaches Journey. The browser never gets
+          // to scroll past it; that wheel movement starts the animation.
+          if (delta > 0 && currentY < startY && currentY + delta >= startY) {
             event.preventDefault();
-            if (!journeyLockReady) enterJourneyLock(delta > 0 ? 0 : 1);
-          } else {
+            const consumed = startY - currentY;
+            lockJourney(Math.min(Math.max((delta - consumed) / total, 0), 1));
+            if (journeyProgress >= 1) unlockJourney(1);
             return;
           }
-        } else {
-          event.preventDefault();
+
+          // Also catch a wheel event when the user is already exactly at the
+          // Journey start (the common case after normal scrolling).
+          if (delta > 0 && currentY >= startY - 1 && currentY <= startY + 1) {
+            event.preventDefault();
+            lockJourney(Math.min(Math.max(delta / total, 0), 1));
+            if (journeyProgress >= 1) unlockJourney(1);
+            return;
+          }
+
+          // When scrolling back up from below the Journey, intercept at its
+          // end and play the animation backwards before allowing page scroll.
+          if (delta < 0 && currentY > startY && currentY <= endY + 1) {
+            event.preventDefault();
+            lockJourney(1);
+            journeyProgress = Math.min(Math.max(1 + delta / total, 0), 1);
+            renderJourney(journeyProgress);
+            if (journeyProgress <= 0) unlockJourney(-1);
+            return;
+          }
+
+          return;
         }
 
-        if (!journeyLocked) return;
-
-        // One wheel pixel equals one pixel of the original pinned scroll
-        // distance, so the Journey takes the same amount of scrolling as before.
+        // Journey is pinned: every wheel event advances/reverses only the
+        // animation. The document itself stays at the Journey start.
+        event.preventDefault();
         journeyProgress += delta / total;
 
         if (journeyProgress >= 1) {
           journeyProgress = 1;
           renderJourney(1);
-          leaveJourneyLock(1);
+          unlockJourney(1);
         } else if (journeyProgress <= 0) {
           journeyProgress = 0;
           renderJourney(0);
-          leaveJourneyLock(-1);
+          unlockJourney(-1);
         } else {
           renderJourney(journeyProgress);
-          window.scrollTo(0, journeyLockY);
+          if (window.scrollY !== journeyLockY) window.scrollTo(0, journeyLockY);
         }
       };
 
       journeyResizeListener = () => {
         if (journeyLocked) {
-          journeyLockY = getJourneyLockY();
+          journeyLockY = getJourneyStartY();
           window.scrollTo(0, journeyLockY);
           renderJourney(journeyProgress);
         } else {
