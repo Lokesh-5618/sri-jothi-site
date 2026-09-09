@@ -67,7 +67,6 @@ export default function Home() {
     // Journey Scroll Animation
     const jpath = document.getElementById('jpath');
     const journeyScroll = document.querySelector('.journey-scroll');
-    const journeyPin = document.querySelector('.journey-pin');
     const jtruck = document.getElementById('jtruck');
     const jship = document.getElementById('jship');
     const jfill = document.getElementById('journeyProgressFill');
@@ -76,7 +75,6 @@ export default function Home() {
     const jwords = [...document.querySelectorAll('.journey-word')];
 
     let journeyTick = false;
-    let pinTop = 88;
     let journeyListener;
     let journeyResizeListener;
 
@@ -85,15 +83,26 @@ export default function Home() {
       jpath.style.strokeDasharray = len;
 
       function updateJourney() {
-        if (!journeyScroll || !journeyPin || !jpath) return;
-        const rect = journeyPin.getBoundingClientRect();
+        if (!journeyScroll || !jpath) return;
+        const rect = journeyScroll.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        // Start animation when top of element is near bottom of viewport
-        const start = viewportHeight * 0.9;
-        // End animation when bottom of element is near top of viewport
-        const end = viewportHeight * 0.1;
-        const range = start - end + rect.height;
-        const p = Math.min(Math.max((start - rect.top) / range, 0), 1);
+        // journeyScroll is a tall track; journeyPin sticks inside it.
+        // total = how much extra scroll distance exists while the pin is stuck.
+        const total = journeyScroll.offsetHeight - viewportHeight;
+
+        let p;
+        if (total > 40) {
+          // Pinned mode (desktop): the section holds in place while scrolling
+          // through it, and the story completes exactly as the track ends.
+          p = Math.min(Math.max(-rect.top / total, 0), 1);
+        } else {
+          // Fallback for short/unpinned layouts (e.g. small screens where
+          // the pin is disabled): animate as the section passes the viewport.
+          const start = viewportHeight * 0.85;
+          const end = viewportHeight * 0.15;
+          const range = start - end + rect.height;
+          p = Math.min(Math.max((start - rect.top) / range, 0), 1);
+        }
 
         jpath.style.strokeDashoffset = len * (1 - p);
         if (jfill) jfill.style.width = (p * 100) + '%';
@@ -134,7 +143,6 @@ export default function Home() {
       };
 
       journeyResizeListener = () => {
-        if (journeyPin) pinTop = parseFloat(window.getComputedStyle(journeyPin).top) || 88;
         updateJourney();
       };
 
