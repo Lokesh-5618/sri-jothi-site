@@ -77,32 +77,18 @@ export default function Home() {
     let journeyTick = false;
     let journeyListener;
     let journeyResizeListener;
+    let journeyWheelListener;
+    let journeyProgress = 0;
+    let journeyLocked = false;
+    let journeyLockY = 0;
+    let journeyLockReady = false;
 
     if (jpath && journeyScroll && !reduceMotion) {
       const len = jpath.getTotalLength();
       jpath.style.strokeDasharray = len;
 
-      function updateJourney() {
-        if (!journeyScroll || !jpath) return;
-        const rect = journeyScroll.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        // journeyScroll is a tall track; journeyPin sticks inside it.
-        // total = how much extra scroll distance exists while the pin is stuck.
-        const total = journeyScroll.offsetHeight - viewportHeight;
-
-        let p;
-        if (total > 40) {
-          // Pinned mode (desktop): the section holds in place while scrolling
-          // through it, and the story completes exactly as the track ends.
-          p = Math.min(Math.max(-rect.top / total, 0), 1);
-        } else {
-          // Fallback for short/unpinned layouts (e.g. small screens where
-          // the pin is disabled): animate as the section passes the viewport.
-          const start = viewportHeight * 0.85;
-          const end = viewportHeight * 0.15;
-          const range = start - end + rect.height;
-          p = Math.min(Math.max((start - rect.top) / range, 0), 1);
-        }
+      function renderJourney(p) {
+        p = Math.min(Math.max(p, 0), 1);
 
         jpath.style.strokeDashoffset = len * (1 - p);
         if (jfill) jfill.style.width = (p * 100) + '%';
@@ -132,21 +118,144 @@ export default function Home() {
         if (jstatus) {
           jstatus.innerHTML = ['Dindigul<b>Ready to dispatch</b>', 'Dindigul<b>Packed &amp; quality checked</b>', 'At sea<b>Crossing to your market</b>', 'Arriving<b>Ready for handover</b>'][idx];
         }
+      }
+
+      function getJourneyLockY() {
+        return window.scrollY + journeyScroll.getBoundingClientRect().top;
+      }
+
+      function updateJourney() {
+        if (!journeyScroll || !jpath) return;
+
+        // Keep the existing scroll-driven behavior when the Journey is not pinned.
+        const total = journeyScroll.offsetHeight - window.innerHeight;
+        if (total <= 40 || !journeyLocked) {
+          const rect = journeyScroll.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          let p;
+
+          if (total > 40) {
+            p = Math.min(Math.max(-rect.top / total, 0), 1);
+          } else {
+            const start = viewportHeight * 0.85;
+            const end = viewportHeight * 0.15;
+            const range = start - end + rect.height;
+            p = Math.min(Math.max((start - rect.top) / range, 0), 1);
+          }
+
+          journeyProgress = p;
+          renderJourney(p);
+        }
+
         journeyTick = false;
       }
 
-      journeyListener = () => {
+      function requestJourneyUpdate() {
         if (!journeyTick) {
           requestAnimationFrame(updateJourney);
           journeyTick = true;
         }
+      }
+
+      function enterJourneyLock(startProgress = 0) {
+        const total = journeyScroll.offsetHeight - window.innerHeight;
+        if (total <= 40) return false;
+
+        journeyLockY = getJourneyLockY();
+        journeyProgress = Math.min(Math.max(startProgress, 0), 1);
+        journeyLocked = true;
+        journeyLockReady = true;
+        window.scrollTo(0, journeyLockY);
+        renderJourney(journeyProgress);
+        return true;
+      }
+
+      function leaveJourneyLock(direction) {
+        journeyLocked = false;
+        journeyLockReady = false;
+
+        // Release the page at the end of the Journey. The normal document
+        // scroll then continues from the exact end of the pinned track.
+        const total = journeyScroll.offsetHeight - window.innerHeight;
+        const destination = direction > 0
+          ? journeyLockY + Math.max(total, 0)
+          : journeyLockY;
+
+        window.scrollTo(0, destination);
+        requestJourneyUpdate();
+      }
+
+      journeyListener = () => {
+        if (journeyLocked) {
+          window.scrollTo(0, journeyLockY);
+          return;
+        }
+
+        const total = journeyScroll.offsetHeight - window.innerHeight;
+        if (total > 40) {
+          const top = journeyScroll.getBoundingClientRect().top;
+          if (top <= 0 && window.scrollY < getJourneyLockY() + total) {
+            journeyLockY = getJourneyLockY();
+          }
+        }
+
+        requestJourneyUpdate();
+      };
+
+      journeyWheelListener = (event) => {
+        const total = journeyScroll.offsetHeight - window.innerHeight;
+        if (total <= 40) return;
+
+        const delta = event.deltaY;
+        if (!delta) return;
+
+        if (!journeyLocked) {
+          const lockY = getJourneyLockY();
+          const atJourneyStart = window.scrollY >= lockY - 1 && window.scrollY <= lockY + 1;
+          const atJourneyEnd = window.scrollY >= lockY + total - 1;
+
+          if ((delta > 0 && atJourneyStart) || (delta < 0 && atJourneyEnd)) {
+            event.preventDefault();
+            if (!journeyLockReady) enterJourneyLock(delta > 0 ? 0 : 1);
+          } else {
+            return;
+          }
+        } else {
+          event.preventDefault();
+        }
+
+        if (!journeyLocked) return;
+
+        // One wheel pixel equals one pixel of the original pinned scroll
+        // distance, so the Journey takes the same amount of scrolling as before.
+        journeyProgress += delta / total;
+
+        if (journeyProgress >= 1) {
+          journeyProgress = 1;
+          renderJourney(1);
+          leaveJourneyLock(1);
+        } else if (journeyProgress <= 0) {
+          journeyProgress = 0;
+          renderJourney(0);
+          leaveJourneyLock(-1);
+        } else {
+          renderJourney(journeyProgress);
+          window.scrollTo(0, journeyLockY);
+        }
       };
 
       journeyResizeListener = () => {
-        updateJourney();
+        if (journeyLocked) {
+          journeyLockY = getJourneyLockY();
+          window.scrollTo(0, journeyLockY);
+          renderJourney(journeyProgress);
+        } else {
+          updateJourney();
+        }
       };
 
       window.addEventListener('scroll', journeyListener, { passive: true });
+      window.addEventListener('wheel', journeyWheelListener, { passive: false });
       window.addEventListener('resize', journeyResizeListener);
       updateJourney();
 
@@ -163,6 +272,7 @@ export default function Home() {
       if (heroListener) window.removeEventListener('scroll', heroListener);
       if (resizeListener) window.removeEventListener('resize', resizeListener);
       if (journeyListener) window.removeEventListener('scroll', journeyListener);
+      if (journeyWheelListener) window.removeEventListener('wheel', journeyWheelListener);
       if (journeyResizeListener) window.removeEventListener('resize', journeyResizeListener);
     };
   }, []);
