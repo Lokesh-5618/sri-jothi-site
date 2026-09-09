@@ -29,7 +29,7 @@
 
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 body {
   margin: 0;
   background: var(--paper);
@@ -675,12 +675,9 @@ body:before {
 .dark-section .eyebrow { color: var(--lime); }
 .dark-section .display { color: #fff; }
 .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255, 255, 255, .14); border-bottom: 1px solid rgba(255, 255, 255, .14); position: relative; }
-/* connecting progress line across caps */
-/* .cap-grid:after { content: ""; position: absolute; top: 78px; left: 13%; right: 13%; height: 1px; background: linear-gradient(90deg, rgba(219,233,210,.06), rgba(219,233,210,.22) 30%, rgba(219,233,210,.22) 70%, rgba(219,233,210,.06)); pointer-events: none; z-index: 1; } */
 .cap { min-height: 340px; padding: 30px 28px; border-right: 1px solid rgba(255, 255, 255, .18); position: relative; transition: background .4s var(--ease), box-shadow .4s var(--ease); overflow: hidden; }
 .cap:first-child { border-left: 1px solid rgba(255, 255, 255, .18); }
 .cap:hover { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 40px rgba(219, 233, 210, .04); }
-/* icon container */
 .cap-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(219, 233, 210, .10); border: 1px solid rgba(219, 233, 210, .15); display: grid; place-items: center; margin-top: 10px; transition: transform .5s var(--ease), background .4s, border-color .4s; position: relative; z-index: 2; }
 .cap-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--lime); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .cap:hover .cap-icon { transform: scale(1.08) translateY(-2px); background: rgba(219, 233, 210, .16); border-color: rgba(219, 233, 210, .28); }
@@ -689,7 +686,6 @@ body:before {
 .cap h3 { font: 32px var(--serif); margin: 22px 0 12px; color: #fff; transition: transform .35s var(--ease); }
 .cap p { font-size: 13px; line-height: 1.75; color: rgba(255, 255, 255, .58); max-width: 230px; }
 .cap:hover h3 { transform: translateX(5px); }
-/* bottom arrow indicator */
 .cap-arrow { position: absolute; bottom: 24px; right: 24px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .15); display: grid; place-items: center; opacity: 0; transform: translateY(6px); transition: opacity .35s var(--ease), transform .35s var(--ease), border-color .35s; }
 .cap-arrow svg { width: 12px; height: 12px; fill: none; stroke: var(--lime); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .cap:hover .cap-arrow { opacity: 1; transform: translateY(0); border-color: rgba(219, 233, 210, .3); }
@@ -753,7 +749,7 @@ body:before {
 .journey-note { max-width: 300px; font-size: 12px; line-height: 1.7; color: var(--muted); }
 /* tall scroll track: the extra height (300vh - 100vh) is the scroll
    distance the user travels while the section stays pinned in place */
-.journey-scroll { position: relative; height: 350vh; }
+.journey-scroll { position: relative; height: 100vh; min-height: 0; }
 .journey-pin {
   position: sticky;
   top: 0;
@@ -812,7 +808,6 @@ body:before {
   .hero-transport { width: 560px; right: -110px; top: 48%; }
   .intro-grid { grid-template-columns: 110px 1fr; gap: 50px; }
   .cap-grid { grid-template-columns: 1fr 1fr; }
-  /* .cap-grid:after { top: 78px; } */
   .cap:nth-child(1), .cap:nth-child(2) { border-bottom: 1px solid rgba(255, 255, 255, .18); }
   .cap:nth-child(3) { border-left: 1px solid rgba(255, 255, 255, .18); }
   .products-grid { grid-template-columns: 1fr 1fr; }
@@ -838,7 +833,6 @@ body:before {
   .scroll-cue { display: none; }
   .intro-grid { grid-template-columns: 1fr; gap: 24px; }
   .cap-grid { grid-template-columns: 1fr; }
-  /* .cap-grid:after { display: none; } */
   .cap { min-height: auto; padding: 26px 24px 28px; border-left: 1px solid rgba(255, 255, 255, .18) !important; border-right: 1px solid rgba(255, 255, 255, .18); display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 18px; row-gap: 4px; align-items: start; }
   .cap:not(:last-child) { border-bottom: 1px solid rgba(255, 255, 255, .18); }
   .cap-icon { grid-row: 1 / 3; margin-top: 2px; }
