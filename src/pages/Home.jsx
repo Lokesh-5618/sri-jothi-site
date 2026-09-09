@@ -81,6 +81,7 @@ export default function Home() {
     let journeyProgress = 0;
     let journeyLocked = false;
     let journeyLockY = 0;
+    let journeyCompleted = false;
 
     if (jpath && journeyScroll && !reduceMotion) {
       const len = jpath.getTotalLength();
@@ -167,6 +168,7 @@ export default function Home() {
       function unlockJourney(direction) {
         const total = getJourneyDistance();
         journeyLocked = false;
+        journeyCompleted = direction > 0;
 
         // Release exactly where the existing sticky Journey would have ended.
         window.scrollTo(0, direction > 0 ? journeyLockY + total : journeyLockY);
@@ -199,6 +201,7 @@ export default function Home() {
           if (delta > 0 && currentY < startY && currentY + delta >= startY) {
             event.preventDefault();
             const consumed = startY - currentY;
+            journeyCompleted = false;
             lockJourney(Math.min(Math.max((delta - consumed) / total, 0), 1));
             if (journeyProgress >= 1) unlockJourney(1);
             return;
@@ -208,14 +211,17 @@ export default function Home() {
           // Journey start (the common case after normal scrolling).
           if (delta > 0 && currentY >= startY - 1 && currentY <= startY + 1) {
             event.preventDefault();
+            journeyCompleted = false;
             lockJourney(Math.min(Math.max(delta / total, 0), 1));
             if (journeyProgress >= 1) unlockJourney(1);
             return;
           }
 
-          // When scrolling back up from below the Journey, intercept at its
-          // end and play the animation backwards before allowing page scroll.
-          if (delta < 0 && currentY > startY && currentY <= endY + 1) {
+          // Only re-enter Journey when the user is actually coming back up
+          // from its completed end. Do not intercept upward scrolling while
+          // the page is above/below Journey, otherwise normal page scrolling
+          // can get trapped.
+          if (journeyCompleted && delta < 0 && currentY >= endY - 1) {
             event.preventDefault();
             lockJourney(1);
             journeyProgress = Math.min(Math.max(1 + delta / total, 0), 1);
