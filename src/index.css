@@ -454,9 +454,10 @@ footer {
   letter-spacing: .02em;
 }
 
-/* Connect with us — separate top section */
+/* ---------- connect section ---------- */
 .footer-connect-section {
   padding-bottom: 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
 }
 
 .footer-connect {
@@ -500,46 +501,45 @@ footer {
   transform: translateY(-2px);
 }
 
-/* Certifications — own row below Connect with us */
+/* ---------- certifications — separate minimal row ---------- */
 .footer-cert-section {
-  border-top: 1px solid rgba(255, 255, 255, .12);
-  padding-top: 18px;
-  padding-bottom: 18px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  padding: 14px 0 18px;
 }
 
 .footer-certs {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 28px;
 }
 
 .footer-cert-badge {
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, .20);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  display: block;
+  color: rgba(255, 255, 255, .48);
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: .02em;
-  color: rgba(255, 255, 255, .78);
-  transition: background .25s, border-color .25s, transform .25s var(--ease), color .25s;
+  white-space: nowrap;
+  transition: color .25s ease;
 }
 
 .footer-cert-badge:hover {
-  background: rgba(255, 255, 255, .08);
-  border-color: rgba(255, 255, 255, .40);
-  color: #fff;
-  transform: translateY(-2px);
+  background: none;
+  border: 0;
+  color: rgba(255, 255, 255, .85);
+  transform: none;
 }
 
-/* Bottom row */
+/* ---------- bottom row ---------- */
 .footer-inner {
-  border-top: 1px solid rgba(255, 255, 255, .12);
+  border-top: 1px solid rgba(255, 255, 255, .14);
   padding-top: 25px;
   display: flex;
   justify-content: space-between;
@@ -567,17 +567,17 @@ footer {
 @media (max-width: 1000px) {
   .footer-connect { gap: 22px; }
   .footer-connect-label { font-size: 44px; }
-  .footer-socials, .footer-certs { gap: 10px; }
-  .footer-socials a, .footer-cert-badge { width: 58px; height: 58px; }
+  .footer-socials { gap: 10px; }
+  .footer-socials a { width: 58px; height: 58px; }
 }
 
 @media (max-width: 900px) {
-  .footer-inner { flex-direction: column; text-align: center; gap: 10px; }
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
   .footer-links { justify-content: center; }
-}
-
-@media (max-width: 768px) {
-  .footer-main { display: block; }
 }
 
 @media (max-width: 640px) {
@@ -586,11 +586,20 @@ footer {
     align-items: flex-start;
     gap: 20px;
   }
+
   .footer-connect-label { font-size: 42px; }
   .footer-socials { gap: 10px; }
-  .footer-socials a, .footer-cert-badge { width: 54px; height: 54px; }
-  .footer-cert-section { justify-content: flex-start; }
-  .footer-certs { gap: 10px; flex-wrap: wrap; }
+  .footer-socials a { width: 54px; height: 54px; }
+
+  .footer-cert-section {
+    justify-content: flex-start;
+  }
+
+  .footer-certs {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
   .footer-inner { padding-top: 20px; }
   .footer-links { gap: 16px; font-size: 10px; }
   footer { padding: 30px 0 22px; }
@@ -598,7 +607,8 @@ footer {
 
 @media (max-width: 390px) {
   .footer-connect-label { font-size: 38px; }
-  .footer-socials a, .footer-cert-badge { width: 50px; height: 50px; font-size: 10px; }
+  .footer-socials a { width: 50px; height: 50px; font-size: 10px; }
+  .footer-certs { gap: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
