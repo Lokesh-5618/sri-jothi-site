@@ -104,7 +104,7 @@ export default function Layout() {
       </main>
 
       <footer>
-        <div className="wrap footer-top">
+        <div className="wrap footer-connect-section">
           <div className="footer-connect">
             <span className="footer-connect-label">Connect with us</span>
             <div className="footer-socials">
@@ -114,6 +114,8 @@ export default function Layout() {
               <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener">WA</a>
             </div>
           </div>
+        </div>
+        <div className="wrap footer-top">
           <div className="footer-certs">
             <span className="footer-cert-badge">FSSAI</span>
             <span className="footer-cert-badge">APEDA</span>
