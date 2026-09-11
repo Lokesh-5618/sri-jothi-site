@@ -3,8 +3,10 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showFloatEnquire, setShowFloatEnquire] = useState(false);
   const location = useLocation();
   const progressBarRef = useRef(null);
+  const navRef = useRef(null);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -41,6 +43,24 @@ export default function Layout() {
     };
   }, [menuOpen]);
 
+  // Show the floating enquiry button only after the main nav
+  // has completely left the viewport.
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowFloatEnquire(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(nav);
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,7 +79,7 @@ export default function Layout() {
     <>
       <div id="scroll-progress" ref={progressBarRef}></div>
 
-      <nav className="nav">
+      <nav className="nav" ref={navRef}>
         <Link className="logo" to="/">
           <span className="logo-placeholder" aria-hidden="true">LOGO</span>
           SRI JOTHI
@@ -101,7 +121,13 @@ export default function Layout() {
         </button>
       </nav>
 
-      <Link to="/contact" className="float-enquire" aria-label="Enquire Now">
+      <Link
+        to="/contact"
+        className={`float-enquire ${showFloatEnquire ? 'is-visible' : ''}`}
+        aria-label="Enquire Now"
+        aria-hidden={!showFloatEnquire}
+        tabIndex={showFloatEnquire ? 0 : -1}
+      >
         Enquire Now <span aria-hidden="true">↗</span>
       </Link>
 
