@@ -148,7 +148,7 @@ section { padding: var(--space-section) 0; }
   height: 34px;
   border-radius: 8px;
   background: var(--lime);
-  border: 1.5px dashed var(--brown);
+ 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -785,7 +785,16 @@ body:before {
 @keyframes scrollCue { 0%, 100% { transform: scaleY(1); opacity: .5; } 50% { transform: scaleY(1.5); opacity: 1; } }
 
 /* hero transport orbit */
-.hero-transport { position: absolute; width: min(44vw, 590px); aspect-ratio: 1; right: -5%; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: .9; }
+.hero-transport {
+  position: absolute;
+  width: min(42vw, 570px);
+  aspect-ratio: 1;
+  right: -3%;
+  top: 40%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: .9;
+}
 .hero-orbit { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
 .hero-orbit-a { width: 100%; height: 100%; border: 1px solid rgba(23, 70, 53, .10); }
 .hero-orbit-b { width: 78%; height: 78%; border: 1px dashed rgba(23, 70, 53, .075); }
@@ -949,7 +958,7 @@ body:before {
   .hero { padding: 90px 0 55px; align-items: flex-start; }
   .hero-copy { max-width: 720px; }
   .hero-visual { min-height: 470px; margin-top: -10px; }
-  .hero-transport { width: 560px; right: -110px; top: 48%; }
+  .hero-transport { width: 520px; right: -90px; top: 40%; }
   .intro-grid { grid-template-columns: 110px 1fr; gap: 50px; }
   .cap-grid { grid-template-columns: 1fr 1fr; }
   .cap:nth-child(1), .cap:nth-child(2) { border-bottom: 1px solid rgba(255, 255, 255, .18); }
@@ -969,7 +978,7 @@ body:before {
   .hero-intro { font-size: 14px; margin-top: 24px; }
   .hero-actions { flex-wrap: wrap; gap: 10px; }
   .hero-visual { min-height: 200px; margin-top: 0; position: relative; overflow: visible; }
-  .hero-transport { width: 420px; right: auto; left: 50%; top: auto; bottom: -260px; transform: translateX(-50%); opacity: .5; }
+  .hero-transport { width: 400px; right: auto; left: 50%; top: auto; bottom: -145px; transform: translateX(-50%); opacity: .5; }
   .hero-transport-center { width: 58px; height: 58px; }
   .hero-truck { width: 38px; height: 24px; }
   .hero-plane { width: 36px; height: 22px; }
@@ -1014,7 +1023,7 @@ body:before {
 @media (max-width: 390px) {
   .hero h1 { font-size: clamp(42px, 12vw, 56px); }
   .hero-visual { min-height: 180px; }
-  .hero-transport { width: 360px; bottom: -230px; opacity: .4; }
+  .hero-transport { width: 350px; bottom: -125px; opacity: .4; }
   .product h3 { font-size: 30px; }
   .product, .product.small { min-height: 260px; }
   .contact-section h2 { font-size: clamp(38px, 11vw, 52px); }
