@@ -756,18 +756,18 @@ body:before {
 
 /* hero */
 .hero {
-  min-height: 100svh;
+  min-height: calc(100svh - 64px);
   background: var(--cream);
   position: relative;
   overflow: hidden;
-  padding: clamp(130px, 11vw, 160px) 0 72px;
+  padding: clamp(75px, 8vw, 110px) 0 60px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, .95fr) minmax(400px, .85fr);
-  align-items: center;
+  align-items: start;
   gap: clamp(40px, 6vw, 86px);
   position: relative;
   z-index: 3;
@@ -946,7 +946,7 @@ body:before {
 /* ===== Homepage responsive ===== */
 @media (max-width: 1050px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero { padding-top: 140px; align-items: start; }
+  .hero { padding: 90px 0 55px; align-items: flex-start; }
   .hero-copy { max-width: 720px; }
   .hero-visual { min-height: 470px; margin-top: -10px; }
   .hero-transport { width: 560px; right: -110px; top: 48%; }
@@ -963,7 +963,7 @@ body:before {
   .statement p { margin-left: 0; max-width: 100%; }
 }
 @media (max-width: 768px) {
-  .hero { padding: 100px 0 30px; min-height: auto; overflow: hidden; }
+  .hero { padding: 70px 0 30px; min-height: auto; align-items: flex-start; overflow: hidden; }
   .hero-grid { gap: 0; }
   .hero h1 { font-size: clamp(48px, 13vw, 88px); }
   .hero-intro { font-size: 14px; margin-top: 24px; }
