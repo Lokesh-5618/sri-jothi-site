@@ -64,7 +64,13 @@ export default function Home() {
       updateHeroTransport();
     }
 
-    // Journey Scroll Animation
+    // Journey Scroll Animation — real scroll-jacking.
+    // Desktop: page scroll is frozen the instant the journey box reaches the
+    // top of the viewport. Wheel/touch/keyboard input then drives the story
+    // progress directly (no page movement at all) until it hits 0% or 100%,
+    // at which point scroll is released and the page continues normally.
+    // Small screens keep the old lightweight pass-through animation, since
+    // hard-locking scroll on touch devices is a bad, janky experience there.
     const jpath = document.getElementById('jpath');
     const journeyScroll = document.querySelector('.journey-scroll');
     const jtruck = document.getElementById('jtruck');
@@ -74,36 +80,21 @@ export default function Home() {
     const jstatus = document.getElementById('jstatus');
     const jwords = [...document.querySelectorAll('.journey-word')];
 
-    let journeyTick = false;
-    let journeyListener;
-    let journeyResizeListener;
+    let cleanupJourney = () => {};
 
-    if (jpath && journeyScroll && !reduceMotion) {
+    if (jpath && journeyScroll) {
       const len = jpath.getTotalLength();
       jpath.style.strokeDasharray = len;
 
-      function updateJourney() {
-        if (!journeyScroll || !jpath) return;
-        const rect = journeyScroll.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        // journeyScroll is a tall track; journeyPin sticks inside it.
-        // total = how much extra scroll distance exists while the pin is stuck.
-        const total = journeyScroll.offsetHeight - viewportHeight;
+      const STAGE_LABELS = ['01 · Source', '02 · Prepare', '03 · Ship', '04 · Deliver'];
+      const STATUS_HTML = [
+        'Dindigul<b>Ready to dispatch</b>',
+        'Dindigul<b>Packed &amp; quality checked</b>',
+        'At sea<b>Crossing to your market</b>',
+        'Arriving<b>Ready for handover</b>',
+      ];
 
-        let p;
-        if (total > 40) {
-          // Pinned mode (desktop): the section holds in place while scrolling
-          // through it, and the story completes exactly as the track ends.
-          p = Math.min(Math.max(-rect.top / total, 0), 1);
-        } else {
-          // Fallback for short/unpinned layouts (e.g. small screens where
-          // the pin is disabled): animate as the section passes the viewport.
-          const start = viewportHeight * 0.85;
-          const end = viewportHeight * 0.15;
-          const range = start - end + rect.height;
-          p = Math.min(Math.max((start - rect.top) / range, 0), 1);
-        }
-
+      function render(p) {
         jpath.style.strokeDashoffset = len * (1 - p);
         if (jfill) jfill.style.width = (p * 100) + '%';
 
@@ -127,43 +118,138 @@ export default function Home() {
 
         const idx = p < 0.42 ? 0 : p < 0.48 ? 1 : p < 0.9 ? 2 : 3;
         jwords.forEach((w, i) => w.classList.toggle('active', i === idx));
-
-        if (jstage) jstage.textContent = ['01 · Source', '02 · Prepare', '03 · Ship', '04 · Deliver'][idx];
-        if (jstatus) {
-          jstatus.innerHTML = ['Dindigul<b>Ready to dispatch</b>', 'Dindigul<b>Packed &amp; quality checked</b>', 'At sea<b>Crossing to your market</b>', 'Arriving<b>Ready for handover</b>'][idx];
-        }
-        journeyTick = false;
+        if (jstage) jstage.textContent = STAGE_LABELS[idx];
+        if (jstatus) jstatus.innerHTML = STATUS_HTML[idx];
       }
 
-      journeyListener = () => {
-        if (!journeyTick) {
-          requestAnimationFrame(updateJourney);
-          journeyTick = true;
-        }
-      };
+      if (reduceMotion) {
+        render(1);
+      } else if (window.innerWidth <= 1050) {
+        // --- Small screens: simple pass-through, no locking ---
+        let ticking = false;
+        const updatePassThrough = () => {
+          const rect = journeyScroll.getBoundingClientRect();
+          const vh = window.innerHeight;
+          const start = vh * 0.85;
+          const end = vh * 0.15;
+          const range = start - end + rect.height;
+          const p = Math.min(Math.max((start - rect.top) / range, 0), 1);
+          render(p);
+          ticking = false;
+        };
+        const onScroll = () => {
+          if (!ticking) { requestAnimationFrame(updatePassThrough); ticking = true; }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', updatePassThrough);
+        updatePassThrough();
+        cleanupJourney = () => {
+          window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('resize', updatePassThrough);
+        };
+      } else {
+        // --- Desktop: hard scroll-lock ---
+        let progress = 0;
+        let locked = false;
+        let lastScrollY = window.scrollY;
+        let rafId = null;
 
-      journeyResizeListener = () => {
-        updateJourney();
-      };
+        render(0);
 
-      window.addEventListener('scroll', journeyListener, { passive: true });
-      window.addEventListener('resize', journeyResizeListener);
-      updateJourney();
+        const lockScroll = () => {
+          if (locked) return;
+          locked = true;
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+        };
+        const unlockScroll = () => {
+          if (!locked) return;
+          locked = false;
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+        };
 
-    } else if (jpath) {
-      jpath.style.strokeDashoffset = 0;
-      if (jship) {
-        jship.style.opacity = 1;
-        jship.setAttribute('transform', 'translate(1090 220)');
+        const onWheel = (e) => {
+          if (!locked) return;
+          e.preventDefault();
+          progress = Math.min(Math.max(progress + e.deltaY / 2200, 0), 1);
+          render(progress);
+          if (progress >= 1 && e.deltaY > 0) unlockScroll();
+          else if (progress <= 0 && e.deltaY < 0) unlockScroll();
+        };
+
+        let touchY = 0;
+        const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
+        const onTouchMove = (e) => {
+          if (!locked) return;
+          e.preventDefault();
+          const y = e.touches[0].clientY;
+          const delta = touchY - y;
+          touchY = y;
+          progress = Math.min(Math.max(progress + delta / 900, 0), 1);
+          render(progress);
+          if (progress >= 1 && delta > 0) unlockScroll();
+          else if (progress <= 0 && delta < 0) unlockScroll();
+        };
+
+        const onKeyDown = (e) => {
+          if (!locked) return;
+          if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+            e.preventDefault();
+            progress = Math.min(progress + 0.08, 1);
+            render(progress);
+            if (progress >= 1) unlockScroll();
+          } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            e.preventDefault();
+            progress = Math.max(progress - 0.08, 0);
+            render(progress);
+            if (progress <= 0) unlockScroll();
+          }
+        };
+
+        const checkEntry = () => {
+          if (locked) return;
+          const rect = journeyScroll.getBoundingClientRect();
+          const scrollingDown = window.scrollY > lastScrollY;
+          lastScrollY = window.scrollY;
+          if (Math.abs(rect.top) <= 3) {
+            if (scrollingDown && progress < 1) {
+              window.scrollBy(0, rect.top);
+              lockScroll();
+            } else if (!scrollingDown && progress > 0) {
+              window.scrollBy(0, rect.top);
+              lockScroll();
+            }
+          }
+        };
+
+        const onScroll = () => {
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => { checkEntry(); rafId = null; });
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('wheel', onWheel, { passive: false });
+        window.addEventListener('touchstart', onTouchStart, { passive: true });
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('keydown', onKeyDown);
+
+        cleanupJourney = () => {
+          window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('wheel', onWheel);
+          window.removeEventListener('touchstart', onTouchStart);
+          window.removeEventListener('touchmove', onTouchMove);
+          window.removeEventListener('keydown', onKeyDown);
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+        };
       }
-      if (jtruck) jtruck.style.opacity = 0;
     }
 
     return () => {
       if (heroListener) window.removeEventListener('scroll', heroListener);
       if (resizeListener) window.removeEventListener('resize', resizeListener);
-      if (journeyListener) window.removeEventListener('scroll', journeyListener);
-      if (journeyResizeListener) window.removeEventListener('resize', journeyResizeListener);
+      cleanupJourney();
     };
   }, []);
 
