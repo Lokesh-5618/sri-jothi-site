@@ -152,6 +152,7 @@ export default function Home() {
         let progress = 0;
         let locked = false;
         let lastScrollY = window.scrollY;
+        let lastTop = journeyScroll.getBoundingClientRect().top;
         let rafId = null;
 
         render(0);
@@ -212,14 +213,25 @@ export default function Home() {
           const rect = journeyScroll.getBoundingClientRect();
           const scrollingDown = window.scrollY > lastScrollY;
           lastScrollY = window.scrollY;
-          if (Math.abs(rect.top) <= 3) {
-            if (scrollingDown && progress < 1) {
-              window.scrollBy(0, rect.top);
-              lockScroll();
-            } else if (!scrollingDown && progress > 0) {
-              window.scrollBy(0, rect.top);
-              lockScroll();
-            }
+
+          const prevTop = lastTop;
+          const curTop = rect.top;
+          lastTop = curTop;
+
+          // Detect the boundary being crossed between the last frame and this
+          // one, rather than requiring the scroll to land inside a tiny pixel
+          // window — normal/fast scrolling easily jumps past a fixed-pixel
+          // check in a single frame, which silently skipped the lock before.
+          const crossedDown = prevTop > 0 && curTop <= 0;
+          const crossedUp = prevTop < 0 && curTop >= 0;
+          const atBoundary = Math.abs(curTop) < 1;
+
+          if (scrollingDown && progress < 1 && (crossedDown || (atBoundary && curTop <= 0))) {
+            window.scrollBy(0, curTop);
+            lockScroll();
+          } else if (!scrollingDown && progress > 0 && (crossedUp || (atBoundary && curTop >= 0))) {
+            window.scrollBy(0, curTop);
+            lockScroll();
           }
         };
 
