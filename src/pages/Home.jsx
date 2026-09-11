@@ -260,7 +260,7 @@ export default function Home() {
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
-            <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span><span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
+            <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
             <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
             <div className="hero-actions"><Link className="btn dark" to="/contact">Start an enquiry</Link><a className="btn light" href="#products">Explore products</a></div>
           </div>
