@@ -5,36 +5,9 @@ export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showFloatEnquire, setShowFloatEnquire] = useState(false);
   const location = useLocation();
-  const progressBarRef = useRef(null);
   const navRef = useRef(null);
 
   const closeMenu = () => setMenuOpen(false);
-
-  useEffect(() => {
-    let progressTicking = false;
-
-    const updateProgress = () => {
-      if (progressBarRef.current) {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        progressBarRef.current.style.width =
-          (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
-      }
-      progressTicking = false;
-    };
-
-    const handleScroll = () => {
-      if (!progressTicking) {
-        requestAnimationFrame(updateProgress);
-        progressTicking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    updateProgress();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [location.pathname]);
-
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
 
@@ -77,7 +50,6 @@ export default function Layout() {
 
   return (
     <>
-      <div id="scroll-progress" ref={progressBarRef}></div>
 
       <nav className="nav" ref={navRef}>
         <Link className="logo" to="/">
