@@ -920,67 +920,92 @@ body:before {
 .statement h2 .accent { color: var(--brown); }
 .statement p { margin: 40px 0 0; max-width: 500px; }/* journey */
 /* statement ambient visual */
+/* statement visual */
 .statement {
+  position: relative;
   overflow: hidden;
   isolation: isolate;
 }
 
 .statement-inner {
   position: relative;
-  z-index: 2;
-}
-
-.statement::after {
-  content: "";
-  position: absolute;
-  width: min(34vw, 520px);
-  aspect-ratio: 1;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 1px solid rgba(23, 70, 53, .10);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 70px rgba(23, 70, 53, .035),
-    0 0 0 140px rgba(137, 107, 75, .025);
-  animation: statementOrbit 18s linear infinite;
-  pointer-events: none;
+  z-index: 3;
 }
 
 .statement::before {
   content: "";
   position: absolute;
-  width: 7px;
-  height: 7px;
-  right: calc(5% + min(17vw, 260px));
+  width: min(42vw, 600px);
+  height: min(42vw, 600px);
+  right: -40px;
   top: 50%;
-  margin-top: -3px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(23, 70, 53, .13);
   border-radius: 50%;
-  background: var(--brown);
   box-shadow:
-    0 0 0 8px rgba(137, 107, 75, .08),
-    0 0 25px rgba(137, 107, 75, .16);
-  animation: statementPulse 3s ease-in-out infinite;
+    0 0 0 55px rgba(23, 70, 53, .035),
+    0 0 0 110px rgba(137, 107, 75, .025);
+  animation: statementRing 18s linear infinite;
+  pointer-events: none;
   z-index: 1;
 }
 
-@keyframes statementOrbit {
-  from {
+.statement::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  right: calc(min(21vw, 300px) - 5px);
+  top: 50%;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--brown);
+  box-shadow:
+    0 0 0 9px rgba(137, 107, 75, .10),
+    0 0 30px rgba(137, 107, 75, .20);
+  animation: statementDot 3s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes statementRing {
+  0% {
     transform: translateY(-50%) rotate(0deg);
   }
-  to {
+
+  100% {
     transform: translateY(-50%) rotate(360deg);
   }
 }
 
-@keyframes statementPulse {
+@keyframes statementDot {
   0%, 100% {
     transform: scale(1);
     opacity: .65;
   }
+
   50% {
-    transform: scale(1.5);
+    transform: scale(1.45);
     opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .statement::before {
+    width: 420px;
+    height: 420px;
+    right: -180px;
+  }
+
+  .statement::after {
+    right: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .statement::before,
+  .statement::after {
+    display: none;
   }
 }
 .journey { background: var(--paper); padding-bottom: 0; }
