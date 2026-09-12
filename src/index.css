@@ -92,15 +92,6 @@ section { padding: var(--space-section) 0; }
 .section-head .eyebrow { padding-top: 10px; }
 
 /* ---------- scroll progress ---------- */
-#scroll-progress {
-  position: fixed;
-  top: 0; left: 0;
-  height: 2px;
-  width: 0%;
-  background: var(--brown);
-  z-index: 300;
-  transform-origin: left;
-}
 
 /* ---------- reveal system ---------- */
 .reveal {
