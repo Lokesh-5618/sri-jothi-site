@@ -180,21 +180,8 @@ export default function Layout() {
           </div>
         </div>
 
-        {/* Certifications — separate row below Connect with us */}
-        <div className="wrap footer-cert-section">
-          <div className="footer-certs">
-            <span>FSSAI</span>
-            <span>APEDA</span>
-            <span>ISO 22000</span>
-          </div>
-        </div>
-
-        {/* Bottom section */}
-        <div className="wrap footer-inner">
-          <span>
-            &copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu
-          </span>
-
+        {/* Bottom section — certifications sit just above the copyright */}
+        <div className="wrap footer-bottom-group">
           <nav className="footer-links">
             <Link to="/about">About</Link>
             <Link to="/products">Products</Link>
@@ -202,6 +189,18 @@ export default function Layout() {
             <Link to="/certifications">Certifications</Link>
             <Link to="/contact">Contact</Link>
           </nav>
+
+          <div className="footer-cert-section">
+            <div className="footer-certs">
+              <span>FSSAI</span>
+              <span>APEDA</span>
+              <span>ISO 22000</span>
+            </div>
+          </div>
+
+          <span className="footer-copyright">
+            &copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu
+          </span>
         </div>
       </footer>
     </>
