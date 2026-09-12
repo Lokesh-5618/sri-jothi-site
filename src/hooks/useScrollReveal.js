@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export default function useScrollReveal() {
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealEls = document.querySelectorAll('.reveal, .text-reveal');
+const revealEls = document.querySelectorAll('.reveal, .text-reveal, .blur-reveal');
     
     if (reduceMotion) {
       revealEls.forEach(el => el.classList.add('is-visible'));
