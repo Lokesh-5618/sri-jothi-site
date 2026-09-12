@@ -919,6 +919,70 @@ body:before {
 .statement-inner { max-width: 1120px; margin: auto; display: flex; flex-direction: column; align-items: flex-start; }.statement h2 { font: 400 clamp(56px, 8vw, 112px)/.9 var(--serif); letter-spacing: -.05em; color: var(--green); margin: 0; }
 .statement h2 .accent { color: var(--brown); }
 .statement p { margin: 40px 0 0; max-width: 500px; }/* journey */
+/* statement ambient visual */
+.statement {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.statement-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.statement::after {
+  content: "";
+  position: absolute;
+  width: min(34vw, 520px);
+  aspect-ratio: 1;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(23, 70, 53, .10);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px rgba(23, 70, 53, .035),
+    0 0 0 140px rgba(137, 107, 75, .025);
+  animation: statementOrbit 18s linear infinite;
+  pointer-events: none;
+}
+
+.statement::before {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  right: calc(5% + min(17vw, 260px));
+  top: 50%;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--brown);
+  box-shadow:
+    0 0 0 8px rgba(137, 107, 75, .08),
+    0 0 25px rgba(137, 107, 75, .16);
+  animation: statementPulse 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes statementOrbit {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes statementPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: .65;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
 .journey { background: var(--paper); padding-bottom: 0; }
 .journey-copy { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 28px; }
 .journey-copy .display { max-width: 760px; }
