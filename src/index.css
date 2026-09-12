@@ -952,8 +952,7 @@ body:before {
 .market { display: grid; grid-template-columns: 70px 1fr auto; gap: 25px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); transition: padding-left .35s var(--ease), opacity .85s var(--ease), transform .85s var(--ease), filter .85s var(--ease); }
 .market:hover { padding-left: 10px; }
 .market-num { font-size: 10px; color: var(--brown); }
-.market h3 { font: clamp(34px, 4vw, 54px)/1 var(--serif); color: var(--green); margin: 0; transition: transform .35s var(--ease); }
-.market:hover h3 { transform: translateX(12px); }
+.market h3 { font: clamp(34px, 4vw, 54px)/1.15 var(--serif); color: var(--green); margin: 0; transition: transform .35s var(--ease); }.market:hover h3 { transform: translateX(12px); }
 .market b { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .12em; color: var(--brown); }
 
 /* contact section */
