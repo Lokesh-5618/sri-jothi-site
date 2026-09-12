@@ -919,8 +919,7 @@ body:before {
 .statement-inner { max-width: 1120px; margin: auto; }
 .statement h2 { font: 400 clamp(56px, 8vw, 112px)/.9 var(--serif); letter-spacing: -.05em; color: var(--green); margin: 0; }
 .statement h2 .accent { color: var(--brown); }
-.statement p { margin: 40px 0 0 auto; max-width: 500px; font-size: 15px; line-height: 1.8; color: #686860; }
-
+.statement p { margin: 40px 0 0; max-width: 500px; font-size: 15px; line-height: 1.8; color: #686860; }
 /* journey */
 .journey { background: var(--paper); padding-bottom: 0; }
 .journey-copy { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 28px; }
