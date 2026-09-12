@@ -392,7 +392,6 @@ export default function Home() {
       <section className="section journey" id="journey">
         <div className="wrap journey-copy">
           <div><div className="eyebrow reveal">Export in motion</div><h2 className="display text-reveal reveal" data-stagger><span>Watch the shipment</span><span>move to your market.</span></h2></div>
-          <p className="journey-note reveal">Keep scrolling. The route builds from sourcing to preparation, port and final delivery.</p>
         </div>
         <div className="journey-scroll">
           <div className="journey-pin">
