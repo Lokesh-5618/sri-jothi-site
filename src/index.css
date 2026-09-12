@@ -1007,8 +1007,7 @@ body:before {
   .product.small .product-art { width: 110px; }
   .product p { left: 22px; bottom: 22px; max-width: 200px; font-size: 11.5px; }
   .statement { padding-top: 80px; padding-bottom: 80px; }
-  .statement h2 { font-size: clamp(42px, 12vw, 80px); }
-  .statement p { margin-left: 0; margin-top: 28px; font-size: 14px; }
+.statement h2 { font-size: clamp(42px, 12vw, 80px); letter-spacing: -.03em; }  .statement p { margin-left: 0; margin-top: 28px; font-size: 14px; }
   .journey-scroll { height: auto; }
   .journey-pin { position: static; top: auto; height: auto; }
   .journey-svg { min-width: 640px; left: -120px; }
