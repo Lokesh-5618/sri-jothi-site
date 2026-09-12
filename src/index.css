@@ -163,7 +163,6 @@ section { padding: var(--space-section) 0; }
   height: 34px;
   border-radius: 8px;
   background: var(--lime);
-  border: 1.5px dashed var(--brown);
   display: flex;
   align-items: center;
   justify-content: center;
