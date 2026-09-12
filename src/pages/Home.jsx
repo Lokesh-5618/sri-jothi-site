@@ -420,11 +420,11 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head"><div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever</span><span>you need it.</span></h2></div>
           <div className="market-list" data-stagger>
-            <div className="market reveal"><span className="market-num">01</span><h3>United Kingdom</h3><b>Established</b></div>
-            <div className="market reveal"><span className="market-num">02</span><h3>Gulf</h3><b>Established</b></div>
-            <div className="market reveal"><span className="market-num">03</span><h3>United States</h3><b>Priority</b></div>
-            <div className="market reveal"><span className="market-num">04</span><h3>Canada</h3><b>Expansion</b></div>
-            <div className="market reveal"><span className="market-num">05</span><h3>Australia</h3><b>Expansion</b></div>
+            <div className="market blur-reveal"><span className="market-num">01</span><h3>United Kingdom</h3><b>Established</b></div>
+            <div className="market blur-reveal"><span className="market-num">02</span><h3>Gulf</h3><b>Established</b></div>
+            <div className="market blur-reveal"><span className="market-num">03</span><h3>United States</h3><b>Priority</b></div>
+            <div className="market blur-reveal"><span className="market-num">04</span><h3>Canada</h3><b>Expansion</b></div>
+            <div className="market blur-reveal"><span className="market-num">05</span><h3>Australia</h3><b>Expansion</b></div>
           </div>
         </div>
       </section>
