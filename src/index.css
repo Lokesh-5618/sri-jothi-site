@@ -161,8 +161,7 @@ section { padding: var(--space-section) 0; }
 .logo-placeholder {
   width: 34px;
   height: 34px;
-  border-radius: 8px;
-  background: var(--lime);
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
