@@ -573,21 +573,21 @@ footer {
 .footer-cert-section {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 10px 0 14px;
 }
 
 .footer-certs {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 34px;
 }
 
 .footer-certs span {
-  color: rgba(255, 255, 255, .48);
-  font-size: 10px;
-  font-weight: 500;
+  color: rgba(255, 255, 255, .62);
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: .025em;
   text-transform: uppercase;
 }
