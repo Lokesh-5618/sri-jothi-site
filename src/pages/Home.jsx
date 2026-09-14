@@ -9,6 +9,14 @@ const RANGE_PRODUCTS = [
   { title: <>Snacks<br />&amp; FMCG</>, desc: 'Demand-led products for your market.' },
 ];
 
+const MARKETS = [
+  { name: 'United Kingdom', flag: '🇬🇧', status: 'Established', ports: 'Felixstowe · Southampton · London Gateway' },
+  { name: 'Gulf', flag: '🇦🇪', status: 'Established', ports: 'Jebel Ali · Sohar · Hamad' },
+  { name: 'United States', flag: '🇺🇸', status: 'Priority', ports: 'Los Angeles · New York · Savannah' },
+  { name: 'Canada', flag: '🇨🇦', status: 'Expansion', ports: 'Vancouver · Montreal · Halifax' },
+  { name: 'Australia', flag: '🇦🇺', status: 'Expansion', ports: 'Sydney · Melbourne · Brisbane' },
+];
+
 export default function Home() {
   useScrollReveal();
   const [productSlide, setProductSlide] = useState(0);
@@ -418,12 +426,17 @@ export default function Home() {
       <section className="section markets" id="markets">
         <div className="wrap">
           <div className="section-head"><div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever</span><span>you need it.</span></h2></div>
-          <div className="market-list" data-stagger>
-            <div className="market blur-reveal"><span className="market-num">01</span><h3>United Kingdom</h3><b>Established</b></div>
-            <div className="market blur-reveal"><span className="market-num">02</span><h3>Gulf</h3><b>Established</b></div>
-            <div className="market blur-reveal"><span className="market-num">03</span><h3>United States</h3><b>Priority</b></div>
-            <div className="market blur-reveal"><span className="market-num">04</span><h3>Canada</h3><b>Expansion</b></div>
-            <div className="market blur-reveal"><span className="market-num">05</span><h3>Australia</h3><b>Expansion</b></div>
+          <div className="markets-grid" data-stagger>
+            {MARKETS.map((market) => (
+              <div className="market-card blur-reveal" key={market.name}>
+                <div className="market-card-top">
+                  <span className="market-flag" aria-hidden="true">{market.flag}</span>
+                  <span className="market-status">{market.status}</span>
+                </div>
+                <h3>{market.name}</h3>
+                <p className="market-ports">{market.ports}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
