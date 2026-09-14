@@ -785,9 +785,8 @@ body:before {
 .scroll-cue i { display: block; width: 1px; height: 28px; background: var(--brown); opacity: .5; animation: scrollCue 1.5s ease-in-out infinite; }
 @keyframes scrollCue { 0%, 100% { transform: scaleY(1); opacity: .5; } 50% { transform: scaleY(1.5); opacity: 1; } }
 
-/* hero transport orbit — DELIVERY ANIMATION REMOVED (hidden) */
+/* hero transport orbit */
 .hero-transport {
-  display: none;
   position: absolute;
   width: min(42vw, 570px);
   aspect-ratio: 1;
@@ -1009,14 +1008,14 @@ body:before {
     display: none;
   }
 }
-/* journey / shipment-progress section — DELIVERY ANIMATION REMOVED (hidden) */
+/* journey */
 .journey { background: var(--paper); padding-bottom: 0; }
 .journey-copy { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 28px; }
 .journey-copy .display { max-width: 760px; }
 .journey-note { max-width: 300px; font-size: 12px; line-height: 1.7; color: var(--muted); }
 /* tall scroll track: the extra height (300vh - 100vh) is the scroll
    distance the user travels while the section stays pinned in place */
-.journey-scroll { display: none; position: relative; height: 100vh; min-height: 0; }
+.journey-scroll { position: relative; height: 100vh; min-height: 0; }
 .journey-pin {
   position: sticky;
   top: 0;
