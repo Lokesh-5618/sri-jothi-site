@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 
@@ -17,12 +17,48 @@ const MARKETS = [
   { name: 'Australia', flag: '🇦🇺', status: 'Expansion', ports: 'Sydney · Melbourne · Brisbane' },
 ];
 
+// How long each product card stays on screen before the carousel
+// glides to the next one, in milliseconds. Kept slow/relaxed on purpose.
+const PRODUCT_AUTOPLAY_MS = 5000;
+
 export default function Home() {
   useScrollReveal();
   const [productSlide, setProductSlide] = useState(0);
 
-  const goPrev = () => setProductSlide((s) => (s - 1 + RANGE_PRODUCTS.length) % RANGE_PRODUCTS.length);
-  const goNext = () => setProductSlide((s) => (s + 1) % RANGE_PRODUCTS.length);
+  const autoplayRef = useRef(null);
+  const reduceMotionRef = useRef(false);
+
+  const startProductAutoplay = () => {
+    clearInterval(autoplayRef.current);
+    if (reduceMotionRef.current) return;
+    autoplayRef.current = setInterval(() => {
+      setProductSlide((s) => (s + 1) % RANGE_PRODUCTS.length);
+    }, PRODUCT_AUTOPLAY_MS);
+  };
+
+  const stopProductAutoplay = () => clearInterval(autoplayRef.current);
+
+  // Start the hands-off autoplay on mount, and keep it running unless the
+  // visitor is actively hovering/focusing the carousel or just used the
+  // controls (handled below), in which case it restarts a moment later.
+  useEffect(() => {
+    reduceMotionRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    startProductAutoplay();
+    return () => stopProductAutoplay();
+  }, []);
+
+  const goPrev = () => {
+    setProductSlide((s) => (s - 1 + RANGE_PRODUCTS.length) % RANGE_PRODUCTS.length);
+    startProductAutoplay();
+  };
+  const goNext = () => {
+    setProductSlide((s) => (s + 1) % RANGE_PRODUCTS.length);
+    startProductAutoplay();
+  };
+  const goTo = (i) => {
+    setProductSlide(i);
+    startProductAutoplay();
+  };
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -352,7 +388,13 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head"><div className="eyebrow reveal">Our range</div><h2 className="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
 
-          <div className="products-carousel reveal">
+          <div
+            className="products-carousel reveal"
+            onMouseEnter={stopProductAutoplay}
+            onMouseLeave={startProductAutoplay}
+            onFocus={stopProductAutoplay}
+            onBlur={startProductAutoplay}
+          >
             <div className="products-track" style={{ transform: `translateX(-${productSlide * 100}%)` }}>
               {RANGE_PRODUCTS.map((p, i) => (
                 <article className="product" key={i}>
@@ -374,7 +416,7 @@ export default function Home() {
                   type="button"
                   key={i}
                   className={`carousel-dot ${i === productSlide ? 'active' : ''}`}
-                  onClick={() => setProductSlide(i)}
+                  onClick={() => goTo(i)}
                   aria-label={`Go to product ${i + 1}`}
                 />
               ))}
