@@ -377,7 +377,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section journey" id="journey">
+      {/* <section className="section journey" id="journey">
         <div className="wrap journey-copy">
           <div><div className="eyebrow reveal">Export in motion</div><h2 className="display text-reveal reveal" data-stagger><span>Watch the shipment</span><span>move to your market.</span></h2></div>
         </div>
@@ -401,7 +401,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="section markets" id="markets">
         <div className="wrap">
