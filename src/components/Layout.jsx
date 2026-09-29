@@ -114,7 +114,7 @@ export default function Layout() {
         ))}
 
         <Link to="/contact" className="mob-cta" onClick={closeMenu}>
-          Enquire Now
+          Contact us
           <svg
             className="cta-icon"
             viewBox="0 0 24 24"
