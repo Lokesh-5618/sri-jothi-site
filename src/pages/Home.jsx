@@ -310,7 +310,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="marquee"><div className="marquee-track"><span>RICE</span><span>SPICES</span><span>MASALAS</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span><span>RICE</span><span>SPICES</span><span>MASALAS</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span></div></div>
+      <div className="marquee"><div className="marquee-track"><span>RICE</span><span>Fruits</span><span>SPICES</span><span>MASALAS</span><span>DAL</span><span>FLOUR</span><span>Kitchen whh</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span><span>RICE</span><span>SPICES</span><span>MASALAS</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span></div></div>
 
       <section className="section dark-section" id="export">
         <div className="wrap">
