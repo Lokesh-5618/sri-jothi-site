@@ -492,17 +492,14 @@ export default function Home() {
 
       <section className="section why" id="why">
         <div className="wrap">
-          <div className="section-head">
-            <div className="eyebrow reveal">Why Sri Jothi</div>
-            <h2 className="display text-reveal reveal" data-stagger><span>Our value to you.</span></h2>
-          </div>
+          <div className="why-label reveal">Why Sri Jothi</div>
           <div className="why-grid" data-stagger>
             {VALUE_POINTS.map((v, i) => (
-              <div className="why-item reveal" key={v.title}>
+              <article className="why-item reveal" key={v.title} style={{ '--i': i }}>
                 <span className="why-num">0{i + 1}</span>
                 <h3>{v.title}</h3>
                 <p>{v.text}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
