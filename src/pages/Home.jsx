@@ -328,17 +328,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="hero-dots">
-            {HERO_SLIDES.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                className={i === slide ? 'active' : ''}
-                aria-label={`Go to slide ${i + 1}`}
-                onClick={() => setSlide(i)}
-              />
-            ))}
-          </div>
         </div>
 
         <div className="wrap hero-copy">
