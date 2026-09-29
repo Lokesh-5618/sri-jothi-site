@@ -1690,30 +1690,6 @@ html, body {
   color: rgba(219, 233, 210, .5);
 }
 
-.hero-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.hero-dots button {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .45);
-  cursor: pointer;
-  transition: background .3s, transform .3s var(--ease);
-}
-
-.hero-dots button.active {
-  background: #fff;
-  transform: scale(1.3);
-}
 
 .hero-copy {
   max-width: 900px;
