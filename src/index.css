@@ -2098,3 +2098,132 @@ html, body {
     margin-top: 22px !important;
   }
 }
+
+/* ===== Why Sri Jothi: value cards ===== */
+.why {
+  background: var(--paper);
+  overflow: hidden;
+  padding-top: clamp(54px, 6vw, 82px);
+  padding-bottom: clamp(60px, 7vw, 92px);
+}
+
+.why-label {
+  margin-bottom: clamp(28px, 4vw, 44px);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--brown);
+  font-weight: 700;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  border: 0;
+}
+
+.why-item {
+  min-height: 245px;
+  padding: 30px 28px 32px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(23, 70, 53, .035);
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity .7s var(--ease),
+    transform .7s var(--ease),
+    box-shadow .35s var(--ease),
+    background .35s ease;
+  transition-delay: calc(var(--i, 0) * 100ms);
+}
+
+.why-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.why-item:hover {
+  transform: translateY(-8px);
+  background: #fff;
+  box-shadow: 0 20px 45px rgba(23, 70, 53, .10);
+}
+
+.why-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--lime);
+  font-size: 10px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.why-item h3 {
+  font-size: clamp(23px, 2vw, 28px);
+  color: var(--green);
+  margin: 28px 0 12px;
+}
+
+.why-item p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  max-width: 31ch;
+}
+
+@media (max-width: 1000px) {
+  .why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .why-item {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .why {
+    padding-top: 50px;
+    padding-bottom: 58px;
+  }
+
+  .why-label {
+    margin-bottom: 24px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .why-item {
+    min-height: 0;
+    padding: 26px 24px 28px;
+  }
+
+  .why-item h3 {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .why-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .why-item:hover {
+    transform: none;
+  }
+}
