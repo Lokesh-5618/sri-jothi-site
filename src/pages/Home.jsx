@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 
@@ -21,56 +21,101 @@ const MARKETS = [
 // copy's width, then the second identical copy picks up invisibly).
 const LOOPED_RANGE_PRODUCTS = [...RANGE_PRODUCTS, ...RANGE_PRODUCTS];
 
+
+const HERO_SLIDES = [
+  { label: 'Image 1' },
+  { label: 'Image 2' },
+  { label: 'Image 3' },
+  { label: 'Image 4' },
+];
+
+const MARQUEE_ITEMS = [
+  'RICE', 'FRUITS', 'SPICES', 'MASALAS', 'DAL', 'FLOUR',
+  'KITCHEN ESSENTIALS', 'COCONUT', 'DAIRY', 'SNACKS', 'FMCG',
+];
+const LOOPED_MARQUEE = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+
+const CAPS = [
+  {
+    num: '01',
+    title: 'Source',
+    short: 'Find the right Indian products and trusted suppliers for your requirement.',
+    icon: <><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></>,
+    more: 'We shortlist verified suppliers in Dindigul and across India, compare samples and pricing, and match you with the right producers for your volumes and quality standards.',
+    link: '/products',
+    linkLabel: 'Explore our products',
+  },
+  {
+    num: '02',
+    title: 'Customize',
+    short: 'Private label, pack size and market-specific product preparation.',
+    icon: <path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9" />,
+    more: 'Put your brand on the product. We handle label design inputs, pack sizes, and formulation tweaks so the product fits your destination market.',
+    link: '/customization',
+    linkLabel: 'How customization works',
+  },
+  {
+    num: '03',
+    title: 'Prepare',
+    short: 'Quality checks, documentation, packaging and destination compliance.',
+    icon: <><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></>,
+    more: 'Every batch goes through quality checks, export-grade packaging and the paperwork your destination requires, so shipments clear without surprises.',
+    link: '/certifications',
+    linkLabel: 'View certifications',
+  },
+  {
+    num: '04',
+    title: 'Export',
+    short: 'Coordinated handover to logistics and shipment tracking to your market.',
+    icon: <path d="M5 12h14M12 5l7 7-7 7" />,
+    more: 'We coordinate freight, port handover and tracking, and keep you updated until your goods arrive in the UK, Gulf, US, Canada or Australia.',
+    link: '/contact',
+    linkLabel: 'Start an enquiry',
+  },
+];
+
+const REVIEWS = [
+  { name: 'Buyer Name', role: 'Distributor · United Kingdom', text: 'Placeholder review. Replace with a real customer testimonial about quality and reliability.' },
+  { name: 'Buyer Name', role: 'Wholesaler · UAE', text: 'Placeholder review. Replace with a real customer testimonial about communication and shipping.' },
+  { name: 'Buyer Name', role: 'Retail Chain · Canada', text: 'Placeholder review. Replace with a real customer testimonial about private label support.' },
+  { name: 'Buyer Name', role: 'Importer · Australia', text: 'Placeholder review. Replace with a real customer testimonial about documentation and compliance.' },
+  { name: 'Buyer Name', role: 'Brand Owner · United States', text: 'Placeholder review. Replace with a real customer testimonial about sourcing quality.' },
+];
+const LOOPED_REVIEWS = [...REVIEWS, ...REVIEWS];
+
+const VALUE_POINTS = [
+  { title: 'Trusted suppliers', text: 'Verified producers in Dindigul and across India, checked before we work with them.' },
+  { title: 'Private label ready', text: 'Your brand, pack size and specs, handled from one place.' },
+  { title: 'Export-grade quality', text: 'Quality checks, packaging and documentation on every shipment.' },
+  { title: 'One point of contact', text: 'From first brief to final delivery, one team keeps you updated.' },
+];
+
 export default function Home() {
   useScrollReveal();
 
+  const [slide, setSlide] = useState(0);
+  const [activeCap, setActiveCap] = useState(null);
+
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+    const id = setInterval(() => setSlide((s) => (s + 1) % HERO_SLIDES.length), 4000);
+    return () => clearInterval(id);
+  }, []);
 
-    // Hero Transport Animation
-    const hero = document.querySelector('.hero');
-    const heroTransport = document.getElementById('heroTransport');
-    const heroTruck = document.getElementById('heroTruck');
-    const heroPlane = document.getElementById('heroPlane');
-    const heroShip = document.getElementById('heroShip');
+  useEffect(() => {
+    if (activeCap === null) return;
+    const onKey = (e) => { if (e.key === 'Escape') setActiveCap(null); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [activeCap]);
 
-    let heroTick = false;
-    let heroListener;
-    let resizeListener;
-
-    if (hero && heroTransport && !reduceMotion) {
-      function updateHeroTransport() {
-        const range = Math.max(hero.offsetHeight, 1);
-        const p = Math.min(Math.max(window.scrollY / range, 0), 1);
-        const base = -35 + p * 270;
-        const r = heroTransport.clientWidth * 0.43;
-
-        const place = (el, offset, radius) => {
-          const a = (base + offset) * Math.PI / 180;
-          const x = Math.cos(a) * radius;
-          const y = Math.sin(a) * radius;
-          if (el) el.style.transform = `translate(calc(-50% + ${x}px),calc(-50% + ${y}px)) rotate(${a * 180 / Math.PI + 90}deg)`;
-        };
-
-        place(heroTruck, 0, r);
-        place(heroPlane, 120, r * 0.82);
-        place(heroShip, 240, r * 0.66);
-        heroTick = false;
-      }
-
-      heroListener = () => {
-        if (!heroTick) {
-          requestAnimationFrame(updateHeroTransport);
-          heroTick = true;
-        }
-      };
-
-      resizeListener = updateHeroTransport;
-
-      window.addEventListener('scroll', heroListener, { passive: true });
-      window.addEventListener('resize', resizeListener);
-      updateHeroTransport();
-    }
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Journey Scroll Animation — real scroll-jacking.
     // Desktop: page scroll is frozen the instant the journey box reaches the
@@ -267,8 +312,6 @@ export default function Home() {
     }
 
     return () => {
-      if (heroListener) window.removeEventListener('scroll', heroListener);
-      if (resizeListener) window.removeEventListener('resize', resizeListener);
       cleanupJourney();
     };
   }, []);
@@ -277,25 +320,33 @@ export default function Home() {
     <>
 
       <section className="hero">
-        <div className="wrap hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
-            <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
-            <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
-            <div className="hero-actions"><Link className="btn dark" to="/contact">Start an enquiry</Link><a className="btn light" href="#products">Explore products</a></div>
+        <div className="hero-slider" aria-roledescription="carousel">
+          <div className="hero-slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
+            {HERO_SLIDES.map((s, i) => (
+              <div className="hero-slide" key={i} aria-hidden={i !== slide}>
+                <span>{s.label} · placeholder</span>
+              </div>
+            ))}
           </div>
-          <div className="hero-visual" aria-hidden="true">
-            <div className="hero-transport" id="heroTransport">
-              <div className="hero-orbit hero-orbit-a"></div><div className="hero-orbit hero-orbit-b"></div><div className="hero-orbit hero-orbit-c"></div>
-              <div className="hero-transport-glow"></div>
-              <div className="hero-vehicle hero-truck" id="heroTruck"><svg viewBox="-32 -18 72 38"><rect x="-29" y="-14" width="39" height="20" rx="3" /><path d="M10 -9h14l9 9v6H10z" /><circle cx="-18" cy="9" r="4" /><circle cx="20" cy="9" r="4" /></svg></div>
-              <div className="hero-vehicle hero-plane" id="heroPlane"><svg viewBox="-28 -18 58 36"><path d="M-25 2L24 -6L2 2L24 10L-25 4L-12 2Z" /><path d="M-3 1L-12 -14L-8 1Z" /></svg></div>
-              <div className="hero-vehicle hero-ship" id="heroShip"><svg viewBox="-46 -22 92 44"><path d="M-40 4h76L24 17h-50z" /><rect x="-23" y="-11" width="17" height="14" rx="1" /><rect x="-3" y="-11" width="17" height="14" rx="1" /><rect x="17" y="-11" width="10" height="14" rx="1" /></svg></div>
-              <div className="hero-transport-center"></div>
-            </div>
+          <div className="hero-dots">
+            {HERO_SLIDES.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                className={i === slide ? 'active' : ''}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => setSlide(i)}
+              />
+            ))}
           </div>
         </div>
-        <div className="scroll-cue"><i></i></div>
+
+        <div className="wrap hero-copy">
+          <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
+          <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
+          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
+          <div className="hero-actions"><Link className="btn dark" to="/contact">Start an enquiry</Link><a className="btn light" href="#products">Explore products</a></div>
+        </div>
       </section>
 
       <section className="section intro" id="about">
@@ -310,40 +361,38 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="marquee"><div className="marquee-track"><span>RICE</span><span>Fruits</span><span>SPICES</span><span>MASALAS</span><span>DAL</span><span>FLOUR</span><span>Kitchen whh</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span><span>RICE</span><span>SPICES</span><span>MASALAS</span><span>COCONUT</span><span>DAIRY</span><span>SNACKS</span><span>FMCG</span></div></div>
-
+      <div className="marquee">
+        <div className="marquee-track">
+          {LOOPED_MARQUEE.map((item, i) => (
+            <span key={i} aria-hidden={i >= MARQUEE_ITEMS.length}>{item}</span>
+          ))}
+        </div>
+      </div>
       <section className="section dark-section" id="export">
         <div className="wrap">
           <div className="section-head"><div className="eyebrow reveal">What we do</div><h2 className="display text-reveal reveal" data-stagger><span>From the first product brief</span><span>to the final shipment.</span></h2></div>
           <div className="cap-grid" data-stagger>
-            <article className="cap reveal">
-              <span className="cap-num">01</span>
-              <div className="cap-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg></div>
-              <h3>Source</h3>
-              <p>Find the right Indian products and trusted suppliers for your requirement.</p>
-              <div className="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
-            </article>
-            <article className="cap reveal">
-              <span className="cap-num">02</span>
-              <div className="cap-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9" /></svg></div>
-              <h3>Customize</h3>
-              <p>Private label, pack size and market-specific product preparation.</p>
-              <div className="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
-            </article>
-            <article className="cap reveal">
-              <span className="cap-num">03</span>
-              <div className="cap-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg></div>
-              <h3>Prepare</h3>
-              <p>Quality checks, documentation, packaging and destination compliance.</p>
-              <div className="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
-            </article>
-            <article className="cap reveal">
-              <span className="cap-num">04</span>
-              <div className="cap-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg></div>
-              <h3>Export</h3>
-              <p>Coordinated handover to logistics and shipment tracking to your market.</p>
-              <div className="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
-            </article>
+            {CAPS.map((c, i) => (
+              <article
+                className="cap reveal"
+                key={c.num}
+                role="button"
+                tabIndex={0}
+                onClick={() => setActiveCap(i)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setActiveCap(i);
+                  }
+                }}
+              >
+                <span className="cap-num">{c.num}</span>
+                <div className="cap-icon"><svg viewBox="0 0 24 24">{c.icon}</svg></div>
+                <h3>{c.title}</h3>
+                <p>{c.short}</p>
+                <div className="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -373,7 +422,7 @@ export default function Home() {
           <div className="eyebrow reveal">Private label</div>
           <h2 className="text-reveal reveal" data-stagger><span>Your brand.</span><span className="accent">Our sourcing.</span></h2>
           <p className="reveal">Build a product around your brand, pack size and destination requirements without managing multiple suppliers in India.</p>
-          <Link className="btn light reveal" style={{ 'marginTop': '30px' }} to="/customization">How customization works &rarr;</Link>
+          <Link className="btn light reveal" to="/customization">How customization works &rarr;</Link>
         </div>
       </section>
 
@@ -431,6 +480,64 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="section reviews" id="reviews">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow reveal">Reviews</div>
+            <h2 className="display text-reveal reveal" data-stagger><span>What buyers say</span><span>about working with us.</span></h2>
+          </div>
+        </div>
+        <div className="reviews-carousel">
+          <div className="reviews-track">
+            {LOOPED_REVIEWS.map((r, i) => (
+              <figure className="review-card" key={i} aria-hidden={i >= REVIEWS.length}>
+                <div className="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <blockquote>{r.text}</blockquote>
+                <figcaption><b>{r.name}</b><span>{r.role}</span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section why" id="why">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow reveal">Why Sri Jothi</div>
+            <h2 className="display text-reveal reveal" data-stagger><span>Our value to you.</span></h2>
+          </div>
+          <div className="why-grid" data-stagger>
+            {VALUE_POINTS.map((v, i) => (
+              <div className="why-item reveal" key={v.title}>
+                <span className="why-num">0{i + 1}</span>
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {activeCap !== null && (
+        <div className="cap-modal-overlay" onClick={() => setActiveCap(null)}>
+          <div
+            className="cap-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="capModalTitle"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button type="button" className="cap-modal-close" aria-label="Close" onClick={() => setActiveCap(null)}>&times;</button>
+            <span className="cap-modal-num">{CAPS[activeCap].num}</span>
+            <h3 id="capModalTitle">{CAPS[activeCap].title}</h3>
+            <p>{CAPS[activeCap].more}</p>
+            <Link className="btn dark" to={CAPS[activeCap].link} onClick={() => setActiveCap(null)}>
+              {CAPS[activeCap].linkLabel} &rarr;
+            </Link>
+          </div>
+        </div>
+      )}
 
     </>
   );
