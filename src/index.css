@@ -64,7 +64,7 @@ section { padding: var(--space-section) 0; }
   text-transform: uppercase;
   letter-spacing: .18em;
   color: var(--brown);
-  font-weight: 600;
+  font-weight: 900;
   line-height: 1.4;
 }
 .display {
