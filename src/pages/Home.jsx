@@ -443,7 +443,7 @@ export default function Home() {
 
       <section className="section markets" id="markets">
         <div className="wrap">
-          <div className="section-head"><div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever</span><span>you need it.</span></h2></div>
+          <div className="section-head"><div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever you need it.</span></h2></div>
           <div className="markets-grid" data-stagger>
             {MARKETS.map((market) => (
               <div className="market-card blur-reveal" key={market.name}>
