@@ -2227,3 +2227,190 @@ html, body {
     transform: none;
   }
 }
+
+
+/* ============================================================
+   Customization — storytelling layout
+   ============================================================ */
+
+.custom-story {
+  padding: clamp(82px, 9vw, 130px) 0;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.custom-story-intro {
+  max-width: 760px;
+  margin-bottom: clamp(65px, 9vw, 120px);
+}
+
+.custom-story-intro .eyebrow { margin-bottom: 22px; }
+
+.custom-story-intro h2 {
+  font-size: clamp(46px, 6vw, 82px);
+  color: var(--green);
+  line-height: .98;
+}
+
+.custom-story-intro h2 em {
+  color: var(--brown);
+  font-style: normal;
+}
+
+.custom-story-intro p {
+  max-width: 570px;
+  margin-top: 28px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.custom-story-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(80px, 11vw, 150px);
+}
+
+.custom-story-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+  gap: clamp(45px, 8vw, 120px);
+  align-items: center;
+}
+
+.custom-story-item.reverse {
+  grid-template-columns: minmax(320px, .85fr) minmax(0, 1.15fr);
+}
+
+.custom-story-item.reverse .custom-story-media { order: 2; }
+.custom-story-item.reverse .custom-story-copy { order: 1; }
+
+.custom-story-media { position: relative; }
+
+.custom-image-placeholder {
+  min-height: clamp(340px, 38vw, 540px);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(30, 90, 65, .92), rgba(16, 56, 42, .98));
+  border: 1px solid rgba(23, 70, 53, .12);
+  box-shadow: 0 24px 70px rgba(23, 70, 53, .10);
+  transition: transform .7s var(--ease), box-shadow .7s var(--ease);
+}
+
+.custom-image-placeholder::before {
+  content: "";
+  position: absolute;
+  width: 65%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(219, 233, 210, .18);
+  border-radius: 50%;
+  animation: customImageFloat 8s ease-in-out infinite;
+}
+
+.custom-image-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(219, 233, 210, .08);
+  border-radius: 18px;
+}
+
+.custom-story-media:hover .custom-image-placeholder {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 32px 90px rgba(23, 70, 53, .16);
+}
+
+.custom-image-placeholder span,
+.custom-image-placeholder small {
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  text-align: center;
+}
+
+.custom-image-placeholder span {
+  color: var(--lime);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.custom-image-placeholder small {
+  margin-top: 9px;
+  color: rgba(219, 233, 210, .48);
+  font-size: 9px;
+}
+
+.custom-story-copy { max-width: 520px; }
+
+.custom-story-num {
+  display: block;
+  color: var(--brown);
+  font: 700 13px var(--sans);
+  letter-spacing: .18em;
+  margin-bottom: 18px;
+}
+
+.custom-story-line {
+  width: 48px;
+  height: 1px;
+  background: var(--brown);
+  opacity: .55;
+  margin-bottom: 25px;
+}
+
+.custom-story-copy h3 {
+  color: var(--green);
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1;
+  margin: 0;
+}
+
+.custom-story-copy p {
+  max-width: 500px;
+  margin-top: 23px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+@keyframes customImageFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-image-placeholder { transition: none; }
+  .custom-image-placeholder::before { animation: none; }
+}
+
+@media (max-width: 800px) {
+  .custom-story { padding: 70px 0 85px; }
+  .custom-story-intro { margin-bottom: 60px; }
+
+  .custom-story-item,
+  .custom-story-item.reverse {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .custom-story-item.reverse .custom-story-media,
+  .custom-story-item.reverse .custom-story-copy {
+    order: initial;
+  }
+
+  .custom-image-placeholder { min-height: 300px; }
+  .custom-story-copy h3 { font-size: 40px; }
+}
+
+@media (max-width: 560px) {
+  .custom-story-intro h2 { font-size: 42px; }
+  .custom-story-copy h3 { font-size: 34px; }
+  .custom-story-copy p { font-size: 14px; }
+  .custom-image-placeholder { min-height: 250px; border-radius: 15px; }
+}
