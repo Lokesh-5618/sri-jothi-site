@@ -171,7 +171,7 @@ section { padding: var(--space-section) 0; }
   text-transform: uppercase;
   flex-shrink: 0;
 }
-.navlinks { display: flex; gap: 26px; font-size: 12px; align-items: center; }
+.navlinks { display: flex; gap: 26px; font-size: 18px; align-items: center; }
 .navlinks a {
   opacity: .62;
   transition: opacity .25s;
