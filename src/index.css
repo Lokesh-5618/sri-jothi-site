@@ -60,7 +60,7 @@ section { padding: var(--space-section) 0; }
 
 /* ---------- typography ---------- */
 .eyebrow {
-  font-size: 15px;
+  font-size: 18px;
   text-transform: uppercase;
   letter-spacing: .18em;
   color: var(--brown);
