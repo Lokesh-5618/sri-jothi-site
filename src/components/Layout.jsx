@@ -70,7 +70,7 @@ export default function Layout() {
         </div>
 
         <Link className="navcta" to="/contact">
-          Enquire Now
+          Contact us
           <svg
             className="cta-icon"
             viewBox="0 0 24 24"
