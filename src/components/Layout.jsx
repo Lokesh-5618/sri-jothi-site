@@ -100,7 +100,7 @@ export default function Layout() {
         aria-hidden={!showFloatEnquire}
         tabIndex={showFloatEnquire ? 0 : -1}
       >
-        Enquire Now <span aria-hidden="true">↗</span>
+       Contact us <span aria-hidden="true">↗</span>
       </Link>
 
       <div
