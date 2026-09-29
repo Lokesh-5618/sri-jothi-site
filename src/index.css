@@ -2037,3 +2037,64 @@ html, body {
 .intro {
   padding-top: clamp(32px, 4vw, 56px);
 }
+
+/* ===== Private label: compact, balanced section ===== */
+.statement {
+  min-height: auto;
+  padding: clamp(42px, 5vw, 64px) 0 clamp(46px, 5vw, 68px);
+}
+
+.statement-inner {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  padding: 0 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.statement .eyebrow {
+  margin: 0;
+}
+
+.statement h2 {
+  width: 100%;
+  max-width: 820px;
+  margin: 12px auto 0;
+  font-size: clamp(46px, 6vw, 84px);
+  line-height: .9;
+}
+
+.statement p {
+  width: min(100%, 560px);
+  margin: 22px auto 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.statement .btn {
+  margin-top: 24px !important;
+}
+
+@media (max-width: 640px) {
+  .statement {
+    padding: 42px 0 48px;
+  }
+
+  .statement-inner {
+    padding: 0 18px;
+  }
+
+  .statement h2 {
+    font-size: clamp(40px, 11vw, 58px);
+    line-height: .94;
+  }
+
+  .statement p {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .statement .btn {
+    margin-top: 22px !important;
+  }
+}
