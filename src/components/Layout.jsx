@@ -54,7 +54,7 @@ export default function Layout() {
       <nav className="nav" ref={navRef}>
         <Link className="logo" to="/">
           <span className="logo-placeholder" aria-hidden="true">LOGO</span>
-          SRI JOTHI
+          SRI JOTHI TRADERS
         </Link>
 
         <div className="navlinks">
