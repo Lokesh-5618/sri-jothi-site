@@ -359,7 +359,9 @@ export default function Home() {
       </div>
       <section className="section dark-section" id="export">
         <div className="wrap">
-          <div className="section-head"><div className="eyebrow reveal">What we do</div><h2 className="display text-reveal reveal" data-stagger><span>From the first product brief</span><span>to the final shipment.</span></h2></div>
+          <div className="section-head">
+            <div className="section-number reveal">02</div>
+            <div className="eyebrow reveal">What we do</div><h2 className="display text-reveal reveal" data-stagger><span>From the first product brief</span><span>to the final shipment.</span></h2></div>
           <div className="cap-grid" data-stagger>
             {CAPS.map((c, i) => (
               <article
@@ -388,7 +390,9 @@ export default function Home() {
 
       <section className="section products-section" id="products">
         <div className="wrap">
-          <div className="section-head"><div className="eyebrow reveal">Our range</div><h2 className="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
+          <div className="section-head">
+            <div className="section-number reveal">03</div>
+            <div className="eyebrow reveal">Our range</div><h2 className="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
 
           <div className="products-carousel reveal">
             <div className="products-track">
@@ -408,6 +412,7 @@ export default function Home() {
 
       <section className="section statement">
         <div className="wrap statement-inner">
+          <div className="section-number section-number-center reveal">04</div>
           <div className="eyebrow reveal">Private label</div>
           <h2 className="text-reveal reveal" data-stagger><span>Your brand.</span><span className="accent">Our sourcing.</span></h2>
           <p className="reveal">Build a product around your brand, pack size and destination requirements without managing multiple suppliers in India.</p>
@@ -443,7 +448,9 @@ export default function Home() {
 
       <section className="section markets" id="markets">
         <div className="wrap">
-          <div className="section-head"><div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever you need it.</span></h2></div>
+          <div className="section-head">
+            <div className="section-number reveal">05</div>
+            <div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever you need it.</span></h2></div>
           <div className="markets-grid" data-stagger>
             {MARKETS.map((market) => (
               <div className="market-card blur-reveal" key={market.name}>
@@ -461,6 +468,7 @@ export default function Home() {
 
       <section className="section contact-section" id="contact">
         <div className="wrap">
+          <div className="section-number section-number-on-dark reveal">06</div>
           <div className="eyebrow">Let's move something</div>
           <h2 className="text-reveal reveal" data-stagger><span>Tell us what you need.</span><span><em>We'll take it from India.</em></span></h2>
           <div className="contact-row">
@@ -473,6 +481,7 @@ export default function Home() {
       <section className="section reviews" id="reviews">
         <div className="wrap">
           <div className="section-head">
+            <div className="section-number reveal">07</div>
             <div className="eyebrow reveal">Reviews</div>
             <h2 className="display text-reveal reveal" data-stagger><span>What buyers say</span><span>about working with us.</span></h2>
           </div>
@@ -492,6 +501,7 @@ export default function Home() {
 
       <section className="section why" id="why">
         <div className="wrap">
+          <div className="section-number reveal">08</div>
           <div className="why-label reveal">Why Sri Jothi</div>
           <div className="why-grid" data-stagger>
             {VALUE_POINTS.map((v, i) => (
