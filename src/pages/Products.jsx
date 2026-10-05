@@ -54,16 +54,28 @@ export default function Products() {
 
   return (
     <>
-
+      {/* HERO */}
       <section className="page-hero">
         <HeroBgSlider />
+
         <div className="wrap" data-stagger>
           <p className="eyebrow reveal">Products</p>
-          <h1 className="text-reveal reveal"><span>Seven categories, sourced and prepared to order.</span></h1>
-          <p className="reveal">We don't list individual SKUs — tell us your market and volume, and we'll put together a catalogue and quote for exactly what you need.</p>
+
+          <h1 className="text-reveal reveal">
+            <span>
+              A wide range of Indian products, sourced and prepared to order.
+            </span>
+          </h1>
+
+          <p className="reveal">
+            Explore our main categories below. Tell us your market and required
+            volumes, and we’ll prepare a tailored catalogue and quotation,
+            including products not listed here.
+          </p>
         </div>
       </section>
 
+      {/* PRODUCT LISTING */}
       <section>
         <div className="wrap">
           <div className="product-grid reveal-stagger">
@@ -71,9 +83,14 @@ export default function Products() {
             {products.map((product) => (
               <div className="product-card reveal" key={product.title}>
                 <div className="product-card-body">
-                  <span className="product-card-num">{product.num}</span>
+                  <span className="product-card-num">
+                    {product.num}
+                  </span>
+
                   <h3>{product.title}</h3>
+
                   <p>{product.desc}</p>
+
                   <span className="tag">
                     Request a quote
                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -81,17 +98,29 @@ export default function Products() {
                     </svg>
                   </span>
                 </div>
+
                 <div className="product-card-media">
-                  <img src={product.img} alt={product.title} loading="lazy" />
+                  <img
+                    src={product.img}
+                    alt={product.title}
+                    loading="lazy"
+                  />
                 </div>
               </div>
             ))}
 
+            {/* OTHER PRODUCTS */}
             <div className="product-card highlight reveal">
               <div className="product-card-body">
                 <span className="product-card-num">08</span>
+
                 <h3>Not seeing what you need?</h3>
-                <p>If it's an Indian FMCG product, there's a good chance we can source it.</p>
+
+                <p>
+                  If it's an Indian FMCG product, there's a good chance we can
+                  source it.
+                </p>
+
                 <span className="tag">
                   Ask us
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -99,6 +128,7 @@ export default function Products() {
                   </svg>
                 </span>
               </div>
+
               <div className="product-card-media">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 5v14M5 12h14" />
@@ -110,14 +140,27 @@ export default function Products() {
         </div>
       </section>
 
+      {/* CUSTOMIZATION BANNER */}
       <section className="callout">
         <div className="wrap">
-          <h2 className="reveal">We don't just supply — we customize every product to your brand and market.</h2>
-          <p className="reveal">Private labeling, destination-compliant packaging, and bulk-to-retail repacking, all handled before your order ships.</p>
-          <Link to="/customization" className="btn cta reveal">See how customization works</Link>
+          <h2 className="reveal">
+            Want it under your own brand?
+          </h2>
+
+          <p className="reveal">
+            Your label, your pack size, your packaging. We prepare every order
+            exactly as you ask, according to your country’s requirements,
+            before it leaves India.
+          </p>
+
+          <Link
+            to="/customization"
+            className="btn cta reveal"
+          >
+            See How Customization Works →
+          </Link>
         </div>
       </section>
-
     </>
   );
 }
