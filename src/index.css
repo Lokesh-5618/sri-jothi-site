@@ -2919,3 +2919,96 @@ html, body {
   .countries-grid,
   .country-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ============================================================
+   HOMEPAGE EDITORIAL SECTION HEADERS — ISOLATED
+   Number: left
+   Eyebrow: centered
+   Headline: left, underneath
+   This intentionally uses a unique class so legacy .section-head
+   styles cannot affect the homepage alignment.
+   ============================================================ */
+
+.home-section-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+  width: 100%;
+  margin: 0 0 clamp(48px, 6vw, 72px);
+  padding: 0;
+}
+
+.home-section-head > .section-number {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  margin: 0;
+  padding: 0;
+  font: 400 clamp(48px, 5vw, 68px)/.85 var(--serif);
+  letter-spacing: -.04em;
+}
+
+.home-section-head > .eyebrow {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.home-section-head > .display {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-self: start;
+  width: min(100%, 820px);
+  margin: clamp(110px, 10vw, 145px) 0 0;
+  padding: 0;
+  text-align: left;
+}
+
+.dark-section .home-section-head > .section-number {
+  color: var(--lime);
+}
+
+.products-section .home-section-head > .section-number,
+.markets .home-section-head > .section-number,
+.reviews .home-section-head > .section-number {
+  color: var(--brown);
+}
+
+@media (max-width: 768px) {
+  .home-section-head {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 42px;
+  }
+
+  .home-section-head > .section-number {
+    font-size: 42px;
+  }
+
+  .home-section-head > .eyebrow {
+    grid-column: 2;
+    justify-self: end;
+    text-align: right;
+    font-size: 10px;
+  }
+
+  .home-section-head > .display {
+    width: 100%;
+    margin-top: 82px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-section-head > .eyebrow {
+    max-width: 180px;
+    white-space: normal;
+  }
+
+  .home-section-head > .display {
+    margin-top: 72px;
+  }
+}
