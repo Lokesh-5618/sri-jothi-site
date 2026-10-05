@@ -3012,3 +3012,79 @@ html, body {
     margin-top: 42px;
   }
 }
+
+
+/* ============================================================
+   UNIFIED SECTION HEADERS (01–08)  — KEEP THIS BLOCK LAST
+   Every homepage section uses the same pattern:
+   number (left) · eyebrow (centre) · heading underneath.
+   Size, gap and colour come from the variables below, so
+   sections 04 (private label) and 06 (contact) can no longer
+   drift away from the others.
+   ============================================================ */
+
+:root {
+  --hs-size: clamp(42px, 5.2vw, 76px);   /* heading size  */
+  --hs-gap: clamp(110px, 10vw, 145px);   /* number → heading gap */
+}
+@media (max-width: 768px) { :root { --hs-size: clamp(36px, 10vw, 60px); --hs-gap: 48px; } }
+@media (max-width: 640px) { :root { --hs-size: clamp(32px, 9vw, 52px); } }
+@media (max-width: 480px) { :root { --hs-gap: 42px; } }
+@media (max-width: 390px) { :root { --hs-size: clamp(28px, 8vw, 42px); } }
+
+/* number: brown on light sections, lime on dark ones */
+.home-section-head > .section-number { color: var(--brown); }
+.dark-section .home-section-head > .section-number,
+.contact-section .home-section-head > .section-number { color: var(--lime); }
+
+/* eyebrow: lime on dark sections, brown on light ones */
+.home-section-head > .eyebrow { color: var(--brown); }
+.dark-section .home-section-head > .eyebrow,
+.contact-section .home-section-head > .eyebrow { color: var(--lime); }
+
+/* heading: identical size, gap and width everywhere */
+.home-section-head > .display {
+  width: min(100%, 1100px);
+  max-width: none;
+  margin: var(--hs-gap) 0 0;
+  font-size: var(--hs-size);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+.home-section-head > .display > span { display: block; }
+
+/* heading colour per background */
+.dark-section .home-section-head > .display,
+.contact-section .home-section-head > .display { color: #fff; }
+.contact-section .home-section-head > .display em { font-style: normal; color: var(--lime); }
+.statement .home-section-head > .display .accent { color: var(--brown); }
+
+/* 04 Private label: same spacing as other light sections */
+.statement {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+@media (max-width: 768px) { .statement { padding-top: clamp(60px, 8vw, 90px); padding-bottom: clamp(60px, 8vw, 90px); } }
+@media (max-width: 640px) { .statement { padding-top: 60px; padding-bottom: 60px; } }
+
+.statement .body-copy {
+  width: auto;
+  max-width: 650px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.78;
+  color: #696860;
+}
+.statement .btn { margin-top: 30px !important; }
+@media (max-width: 768px) { .statement .body-copy { font-size: 14px; } }
+
+/* 06 Contact: row sits under the shared header */
+.contact-section .contact-row { margin-top: 0; }
+.contact-section .home-section-head { margin-bottom: clamp(40px, 5vw, 56px); }
+@media (max-width: 768px) { .contact-section .contact-row { margin-top: 0; } }
+
+/* 01 Intro: body copy sits directly under the header */
+.intro .body-copy { margin-top: 0; }
+
+/* 08 Why: header has the same bottom spacing as the rest */
+.why .home-section-head { margin-bottom: clamp(48px, 6vw, 72px); }
