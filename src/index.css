@@ -122,36 +122,47 @@ section { padding: var(--space-section) 0; }
 
 
 /* ============================================================
-   HOMEPAGE SECTION NUMBERING
-   The number is positioned independently so it never becomes
-   a grid column or squeezes the editorial headline.
+   HOMEPAGE SECTION HEADERS
+   Number: top-left
+   Eyebrow: centered across the section
+   Headline: left-aligned below, never part of the grid
    ============================================================ */
 
 .section-head {
   position: relative;
   display: block;
+  min-height: 330px;
+  margin-bottom: clamp(48px, 6vw, 72px);
 }
 
 .section-head > .section-number {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
   margin: 0;
-  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  font: 400 clamp(48px, 5vw, 68px)/.85 var(--serif);
   color: var(--lime);
   opacity: .9;
   letter-spacing: -.04em;
-  z-index: 1;
 }
 
 .section-head > .eyebrow {
-  padding-top: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 0;
+  margin: 0;
   text-align: center;
+  white-space: nowrap;
 }
 
 .section-head > .display {
-  width: min(100%, 620px);
-  margin: clamp(105px, 11vw, 155px) 0 0;
+  width: min(100%, 820px);
+  margin: 150px 0 0;
+  text-align: left;
 }
 
 .products-section .section-number,
@@ -174,50 +185,33 @@ section { padding: var(--space-section) 0; }
   margin-bottom: 18px;
 }
 
-/* ---------- scroll progress ---------- */
+@media (max-width: 768px) {
+  .section-head {
+    min-height: 250px;
+  }
 
-/* ---------- reveal system ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .75s var(--ease), transform .75s var(--ease);
-  transition-delay: calc(var(--i, 0) * 80ms);
-}
-.reveal.is-visible { opacity: 1; transform: none; }
+  .section-head > .section-number {
+    font-size: 42px;
+  }
 
-/* blur-reveal variant — used on market country rows */
-.blur-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  filter: blur(12px);
-  transition: opacity .85s var(--ease), transform .85s var(--ease), filter .85s var(--ease);
-  transition-delay: calc(var(--i, 0) * 100ms);
-}
-.blur-reveal.is-visible {
-  opacity: 1;
-  transform: none;
-  filter: blur(0);
-}
+  .section-head > .eyebrow {
+    top: 2px;
+    font-size: 10px;
+  }
 
-.text-reveal {
-  display: block;
-  overflow: visible;
-  padding-bottom: .12em;
-}
-.text-reveal > * {
-  display: block;
-  opacity: 0;
-  transform: translate3d(0, 22px, 0);
-  transition: opacity .7s var(--ease), transform .8s var(--ease);
-  transition-delay: calc(var(--i, 0) * 80ms);
-  will-change: opacity, transform;
-}
-.text-reveal.is-visible > * {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
+  .section-head > .display {
+    width: min(100%, 100%);
+    margin-top: 105px;
+  }
+
+  .section-number-center,
+  .section-number-on-dark {
+    font-size: 42px;
+    margin-bottom: 14px;
+  }
 }
 
-
+/* ---------- nav ---------- */
 /* ---------- nav ---------- */
 .nav {
   position: relative;
