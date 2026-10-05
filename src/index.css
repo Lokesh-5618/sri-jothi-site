@@ -129,6 +129,7 @@ section { padding: var(--space-section) 0; }
 
 .section-head {
   position: relative;
+  display: block;
 }
 
 .section-head > .section-number {
