@@ -8,6 +8,7 @@ export default function Layout() {
   const navRef = useRef(null);
 
   const closeMenu = () => setMenuOpen(false);
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
 
@@ -16,7 +17,7 @@ export default function Layout() {
     };
   }, [menuOpen]);
 
-  // Show the floating enquiry button only after the main nav
+  // Show the floating contact button only after the main nav
   // has completely left the viewport.
   useEffect(() => {
     const nav = navRef.current;
@@ -50,11 +51,18 @@ export default function Layout() {
 
   return (
     <>
-
       <nav className="nav" ref={navRef}>
-        <Link className="logo" to="/">
-          <span className="logo-placeholder" aria-hidden="true">LOGO</span>
-          SRI JOTHI TRADERS
+        <Link
+          className="logo"
+          to="/"
+          aria-label="Sri Jothi Traders home"
+        >
+          <img
+            className="logo-mark"
+            src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg"
+            alt="Sri Jothi Traders"
+          />
+          <span>SRI JOTHI TRADERS</span>
         </Link>
 
         <div className="navlinks">
@@ -62,7 +70,9 @@ export default function Layout() {
             <Link
               key={link.path}
               to={link.path}
-              className={location.pathname === link.path ? 'active' : ''}
+              className={
+                location.pathname === link.path ? 'active' : ''
+              }
             >
               {link.label}
             </Link>
@@ -95,12 +105,14 @@ export default function Layout() {
 
       <Link
         to="/contact"
-        className={`float-enquire ${showFloatEnquire ? 'is-visible' : ''}`}
-        aria-label="Enquire Now"
+        className={`float-enquire ${
+          showFloatEnquire ? 'is-visible' : ''
+        }`}
+        aria-label="Contact us"
         aria-hidden={!showFloatEnquire}
         tabIndex={showFloatEnquire ? 0 : -1}
       >
-       Contact us <span aria-hidden="true">↗</span>
+        Contact us <span aria-hidden="true">↗</span>
       </Link>
 
       <div
@@ -108,12 +120,20 @@ export default function Layout() {
         id="mobileDrawer"
       >
         {navLinks.map((link) => (
-          <Link key={link.path} to={link.path} onClick={closeMenu}>
+          <Link
+            key={link.path}
+            to={link.path}
+            onClick={closeMenu}
+          >
             {link.label}
           </Link>
         ))}
 
-        <Link to="/contact" className="mob-cta" onClick={closeMenu}>
+        <Link
+          to="/contact"
+          className="mob-cta"
+          onClick={closeMenu}
+        >
           Contact us
           <svg
             className="cta-icon"
@@ -133,26 +153,51 @@ export default function Layout() {
         {/* Connect section */}
         <div className="wrap footer-connect-section">
           <div className="footer-connect">
-            <span className="footer-connect-label">Connect with us</span>
+            <span className="footer-connect-label">
+              Connect with us
+            </span>
 
             <div className="footer-socials">
-              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+              <a
+                href="#"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener"
+              >
                 IG
               </a>
-              <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
+
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener"
+              >
                 in
               </a>
-              <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+
+              <a
+                href="#"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener"
+              >
                 FB
               </a>
-              <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener">
+
+              <a
+                href="#"
+                aria-label="WhatsApp"
+                target="_blank"
+                rel="noopener"
+              >
                 WA
               </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom section — certifications sit just above the copyright */}
+        {/* Certifications */}
         <div className="wrap footer-cert-section">
           <div className="footer-certs">
             <span>FSSAI</span>
@@ -160,6 +205,8 @@ export default function Layout() {
             <span>ISO 22000</span>
           </div>
         </div>
+
+        {/* Footer links and copyright */}
         <div className="wrap footer-bottom-group">
           <nav className="footer-links">
             <Link to="/about">About</Link>
@@ -168,8 +215,6 @@ export default function Layout() {
             <Link to="/certifications">Certifications</Link>
             <Link to="/contact">Contact</Link>
           </nav>
-
-        
 
           <span className="footer-copyright">
             &copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu
