@@ -338,15 +338,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 01 — Who we are */}
       <section className="section intro" id="about">
-        <div className="wrap intro-grid">
-          <div className="index-num reveal">01</div>
-          <div>
-            <div className="eyebrow kicker reveal">Who we are</div>
-            <h2 className="display text-reveal reveal" data-stagger><span>More than a supplier.</span><span>A route into India.</span></h2>
-            <p className="body-copy reveal">Sri Jothi Traders connects international wholesalers, distributors and private-label buyers with Indian products. We handle sourcing, customization, packaging and export preparation from one place.</p>
-            <Link className="btn light reveal" style={{ 'marginTop': '30px' }} to="/about">Our story &rarr;</Link>
+        <div className="wrap">
+          <div className="home-section-head">
+            <div className="section-number reveal">01</div>
+            <div className="eyebrow reveal">Who we are</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>More than a supplier.</span>{' '}
+              <span>A route into India.</span>
+            </h2>
           </div>
+          <p className="body-copy reveal">Sri Jothi Traders connects international wholesalers, distributors and private-label buyers with Indian products. We handle sourcing, customization, packaging and export preparation from one place.</p>
+          <Link className="btn light reveal" style={{ marginTop: '30px' }} to="/about">Our story &rarr;</Link>
         </div>
       </section>
 
@@ -357,11 +361,18 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* 02 — What we do */}
       <section className="section dark-section" id="export">
         <div className="wrap">
           <div className="home-section-head">
             <div className="section-number reveal">02</div>
-            <div className="eyebrow reveal">What we do</div><h2 className="display text-reveal reveal" data-stagger><span>From the first product brief</span><span>to the final shipment.</span></h2></div>
+            <div className="eyebrow reveal">What we do</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>From the first product brief</span>{' '}
+              <span>to the final shipment.</span>
+            </h2>
+          </div>
           <div className="cap-grid" data-stagger>
             {CAPS.map((c, i) => (
               <article
@@ -388,11 +399,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 03 — Our range */}
       <section className="section products-section" id="products">
         <div className="wrap">
           <div className="home-section-head">
             <div className="section-number reveal">03</div>
-            <div className="eyebrow reveal">Our range</div><h2 className="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
+            <div className="eyebrow reveal">Our range</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>Indian products, prepared</span>{' '}
+              <span>for your market.</span>
+            </h2>
+          </div>
 
           <div className="products-carousel reveal">
             <div className="products-track">
@@ -406,16 +423,22 @@ export default function Home() {
             </div>
           </div>
 
-          <Link className="btn dark reveal" style={{ 'marginTop': '28px' }} to="/products">See all seven categories &rarr;</Link>
+          <Link className="btn dark reveal" style={{ marginTop: '28px' }} to="/products">See all seven categories &rarr;</Link>
         </div>
       </section>
 
+      {/* 04 — Private label */}
       <section className="section statement">
-        <div className="wrap statement-inner">
-          <div className="section-number section-number-center reveal">04</div>
-          <div className="eyebrow reveal">Private label</div>
-          <h2 className="text-reveal reveal" data-stagger><span>Your brand.</span><span className="accent">Our sourcing.</span></h2>
-          <p className="reveal">Build a product around your brand, pack size and destination requirements without managing multiple suppliers in India.</p>
+        <div className="wrap">
+          <div className="home-section-head">
+            <div className="section-number reveal">04</div>
+            <div className="eyebrow reveal">Private label</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>Your brand.</span>{' '}
+              <span className="accent">Our sourcing.</span>
+            </h2>
+          </div>
+          <p className="body-copy reveal">Build a product around your brand, pack size and destination requirements without managing multiple suppliers in India.</p>
           <Link className="btn light reveal" to="/customization">How customization works &rarr;</Link>
         </div>
       </section>
@@ -446,11 +469,16 @@ export default function Home() {
         </div>
       </section> */}
 
+      {/* 05 — Where we go */}
       <section className="section markets" id="markets">
         <div className="wrap">
           <div className="home-section-head">
             <div className="section-number reveal">05</div>
-            <div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever you need it.</span></h2></div>
+            <div className="eyebrow reveal">Where we go</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>India to wherever you need it.</span>
+            </h2>
+          </div>
           <div className="markets-grid" data-stagger>
             {MARKETS.map((market) => (
               <div className="market-card blur-reveal" key={market.name}>
@@ -466,11 +494,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 06 — Contact */}
       <section className="section contact-section" id="contact">
         <div className="wrap">
-          <div className="section-number section-number-on-dark reveal">06</div>
-          <div className="eyebrow">Let's move something</div>
-          <h2 className="text-reveal reveal" data-stagger><span>Tell us what you need.</span><span><em>We'll take it from India.</em></span></h2>
+          <div className="home-section-head">
+            <div className="section-number reveal">06</div>
+            <div className="eyebrow reveal">Let's move something</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>Tell us what you need.</span>{' '}
+              <span><em>We'll take it from India.</em></span>
+            </h2>
+          </div>
           <div className="contact-row">
             <p className="reveal">For B2B supply, private label or a custom sourcing requirement, start a conversation with the Sri Jothi team.</p>
             <Link className="btn cta reveal" to="/contact">Start an enquiry &rarr;</Link>
@@ -478,12 +512,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 07 — Reviews */}
       <section className="section reviews" id="reviews">
         <div className="wrap">
           <div className="home-section-head">
             <div className="section-number reveal">07</div>
             <div className="eyebrow reveal">Reviews</div>
-            <h2 className="display text-reveal reveal" data-stagger><span>What buyers say</span><span>about working with us.</span></h2>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>What buyers say</span>{' '}
+              <span>about working with us.</span>
+            </h2>
           </div>
         </div>
         <div className="reviews-carousel">
@@ -499,10 +537,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 08 — Why Sri Jothi */}
       <section className="section why" id="why">
         <div className="wrap">
-          <div className="section-number reveal">08</div>
-          <div className="why-label reveal">Why Sri Jothi</div>
+          <div className="home-section-head">
+            <div className="section-number reveal">08</div>
+            <div className="eyebrow reveal">Why Sri Jothi</div>
+            <h2 className="display text-reveal reveal" data-stagger>
+              <span>Why buyers choose</span>{' '}
+              <span>Sri Jothi Traders.</span>
+            </h2>
+          </div>
           <div className="why-grid" data-stagger>
             {VALUE_POINTS.map((v, i) => (
               <article className="why-item reveal" key={v.title} style={{ '--i': i }}>
