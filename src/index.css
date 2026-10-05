@@ -3087,3 +3087,16 @@ html, body {
 
 /* 01 Intro: body copy sits directly under the header */
 .intro .body-copy { margin-top: 0; }
+
+
+/* number + label close together */
+.wrap .home-section-head {
+  grid-template-columns: auto 1fr !important;
+  column-gap: 40px;
+}
+.wrap .home-section-head > .eyebrow {
+  grid-column: 2 !important;
+  justify-self: start !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
