@@ -17,7 +17,7 @@ export default function Layout() {
     };
   }, [menuOpen]);
 
-  // Show the floating contact button only after the main nav
+  // Show floating contact button only after the main nav
   // has completely left the viewport.
   useEffect(() => {
     const nav = navRef.current;
@@ -46,11 +46,12 @@ export default function Layout() {
     { path: '/about', label: 'About' },
     { path: '/products', label: 'Products' },
     { path: '/customization', label: 'Customization' },
-    { path: '/certifications', label: 'Certifications' }
+    { path: '/certifications', label: 'Certifications' },
   ];
 
   return (
     <>
+      {/* NAVIGATION */}
       <nav className="nav" ref={navRef}>
         <Link
           className="logo"
@@ -103,6 +104,7 @@ export default function Layout() {
         </button>
       </nav>
 
+      {/* FLOATING CONTACT BUTTON */}
       <Link
         to="/contact"
         className={`float-enquire ${
@@ -115,6 +117,7 @@ export default function Layout() {
         Contact us <span aria-hidden="true">↗</span>
       </Link>
 
+      {/* MOBILE MENU */}
       <div
         className={`mobile-drawer ${menuOpen ? 'open' : ''}`}
         id="mobileDrawer"
@@ -149,8 +152,10 @@ export default function Layout() {
         <Outlet />
       </main>
 
+      {/* FOOTER */}
       <footer>
-        {/* Connect section */}
+
+        {/* CONNECT WITH US */}
         <div className="wrap footer-connect-section">
           <div className="footer-connect">
             <span className="footer-connect-label">
@@ -162,7 +167,7 @@ export default function Layout() {
                 href="#"
                 aria-label="Instagram"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 IG
               </a>
@@ -171,7 +176,7 @@ export default function Layout() {
                 href="#"
                 aria-label="LinkedIn"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 in
               </a>
@@ -180,7 +185,7 @@ export default function Layout() {
                 href="#"
                 aria-label="Facebook"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 FB
               </a>
@@ -189,7 +194,7 @@ export default function Layout() {
                 href="#"
                 aria-label="WhatsApp"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 WA
               </a>
@@ -197,7 +202,7 @@ export default function Layout() {
           </div>
         </div>
 
-        {/* Certifications */}
+        {/* CERTIFICATIONS */}
         <div className="wrap footer-cert-section">
           <div className="footer-certs">
             <span>FSSAI</span>
@@ -206,19 +211,35 @@ export default function Layout() {
           </div>
         </div>
 
-        {/* Footer links and copyright */}
+        {/* FOOTER LINKS + COPYRIGHT */}
         <div className="wrap footer-bottom-group">
+
           <nav className="footer-links">
             <Link to="/about">About</Link>
             <Link to="/products">Products</Link>
-            <Link to="/customization">Customization</Link>
-            <Link to="/certifications">Certifications</Link>
+            <Link to="/news-media">News &amp; Media</Link>
+            <Link to="/faq">FAQ</Link>
             <Link to="/contact">Contact</Link>
           </nav>
 
-          <span className="footer-copyright">
-            &copy; 2026 Sri Jothi Traders &middot; Dindigul, Tamil Nadu
-          </span>
+          <div className="footer-copyright">
+            <span>
+              © 2026 Sri Jothi Traders. All rights reserved.
+            </span>
+
+            <span className="footer-legal-links">
+              <Link to="/privacy-policy">Privacy Policy</Link>
+              <span aria-hidden="true">|</span>
+              <Link to="/terms-of-use">Terms of Use</Link>
+              <span aria-hidden="true">|</span>
+              <Link to="/cookie-policy">Cookie Policy</Link>
+            </span>
+
+            <a className="back-to-top" href="#top">
+              ↑ Back to top
+            </a>
+          </div>
+
         </div>
       </footer>
     </>
