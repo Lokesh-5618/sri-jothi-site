@@ -164,6 +164,52 @@ section { padding: var(--space-section) 0; }
   transform: translate3d(0, 0, 0);
 }
 
+
+/* ============================================================
+   HOMEPAGE SECTION NUMBERING
+   ============================================================ */
+
+.section-head {
+  position: relative;
+}
+
+.section-number {
+  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  color: var(--lime);
+  opacity: .9;
+  letter-spacing: -.04em;
+  margin-bottom: 18px;
+}
+
+.products-section .section-number,
+.reviews .section-number,
+.why .section-number,
+.markets .section-number {
+  color: var(--brown);
+}
+
+.section-number-center {
+  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  color: var(--brown);
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.section-number-on-dark {
+  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  color: var(--lime);
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .section-number,
+  .section-number-center,
+  .section-number-on-dark {
+    font-size: 42px;
+    margin-bottom: 14px;
+  }
+}
+
 /* ---------- nav ---------- */
 .nav {
   position: relative;
