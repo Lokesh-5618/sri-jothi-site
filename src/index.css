@@ -53,6 +53,81 @@ img { max-width: 100%; display: block; }
 button { font-family: inherit; }
 ::selection { background: var(--green); color: #fff; }
 :focus-visible { outline: 2px solid var(--brown); outline-offset: 3px; }
+/* FIX: section numbering must not become a third grid item.
+   The old .section-head grid made the number consume a grid cell,
+   which forced the actual heading into a tiny implicit column. */
+
+.section-head {
+  position: relative;
+  display: block;
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.section-head > .section-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  color: var(--lime);
+  opacity: .9;
+  letter-spacing: -.04em;
+}
+
+/* Keep the small section label centred independently of the number. */
+.section-head > .eyebrow {
+  padding-top: 0;
+  text-align: center;
+}
+
+/* Give the editorial headline a proper readable width instead of the
+   accidental narrow grid column seen in the broken version. */
+.section-head > .display {
+  width: min(100%, 620px);
+  margin: clamp(105px, 11vw, 155px) 0 0;
+}
+
+/* Section-specific number colours */
+.products-section .section-number,
+.reviews .section-number,
+.why .section-number,
+.markets .section-number {
+  color: var(--brown);
+}
+
+.section-number-center {
+  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  color: var(--brown);
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.section-number-on-dark {
+  font: 400 clamp(42px, 5vw, 68px)/.85 var(--serif);
+  color: var(--lime);
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .section-head > .section-number {
+    font-size: 42px;
+  }
+
+  .section-head > .display {
+    width: min(100%, 520px);
+    margin-top: 88px;
+  }
+
+  .section-head > .eyebrow {
+    text-align: center;
+  }
+
+  .section-number-center,
+  .section-number-on-dark {
+    font-size: 42px;
+    margin-bottom: 14px;
+  }
+}
 
 /* ---------- layout ---------- */
 .wrap { width: min(var(--max-w), calc(100% - 64px)); margin: auto; }
