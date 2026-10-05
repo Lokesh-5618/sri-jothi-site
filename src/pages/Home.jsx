@@ -359,7 +359,7 @@ export default function Home() {
       </div>
       <section className="section dark-section" id="export">
         <div className="wrap">
-          <div className="section-head">
+          <div className="home-section-head">
             <div className="section-number reveal">02</div>
             <div className="eyebrow reveal">What we do</div><h2 className="display text-reveal reveal" data-stagger><span>From the first product brief</span><span>to the final shipment.</span></h2></div>
           <div className="cap-grid" data-stagger>
@@ -390,7 +390,7 @@ export default function Home() {
 
       <section className="section products-section" id="products">
         <div className="wrap">
-          <div className="section-head">
+          <div className="home-section-head">
             <div className="section-number reveal">03</div>
             <div className="eyebrow reveal">Our range</div><h2 className="display text-reveal reveal" data-stagger><span>Indian products, prepared</span><span>for your market.</span></h2></div>
 
@@ -448,7 +448,7 @@ export default function Home() {
 
       <section className="section markets" id="markets">
         <div className="wrap">
-          <div className="section-head">
+          <div className="home-section-head">
             <div className="section-number reveal">05</div>
             <div className="eyebrow reveal">Where we go</div><h2 className="display text-reveal reveal" data-stagger><span>India to wherever you need it.</span></h2></div>
           <div className="markets-grid" data-stagger>
@@ -480,7 +480,7 @@ export default function Home() {
 
       <section className="section reviews" id="reviews">
         <div className="wrap">
-          <div className="section-head">
+          <div className="home-section-head">
             <div className="section-number reveal">07</div>
             <div className="eyebrow reveal">Reviews</div>
             <h2 className="display text-reveal reveal" data-stagger><span>What buyers say</span><span>about working with us.</span></h2>
