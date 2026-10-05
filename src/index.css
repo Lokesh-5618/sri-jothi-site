@@ -2786,3 +2786,31 @@ html, body {
     transition: none;
   }
 }
+
+/* Products page copy refinements */
+.page-hero .wrap > p.reveal:last-child {
+  max-width: 720px;
+}
+
+.callout h2 {
+  max-width: 26ch;
+  line-height: 1.12;
+}
+
+.callout p {
+  max-width: 68ch;
+}
+
+.callout .btn.cta {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .callout h2 {
+    max-width: 100%;
+  }
+
+  .callout .btn.cta {
+    white-space: normal;
+  }
+}
