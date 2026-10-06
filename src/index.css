@@ -213,7 +213,10 @@ section { padding: var(--space-section) 0; }
 
 /* ---------- nav ---------- */
 .nav {
-  position: relative;
+   
+ position: fixed;
+top: 0;
+left: 0;
   z-index: 200;
   width: 100%;
   height: 64px;
@@ -221,10 +224,10 @@ section { padding: var(--space-section) 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(251, 250, 246, .92);
+  background: rgba(251, 250, 246, .35);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(32, 35, 31, .09);
-  isolation: isolate;
+border-bottom: 1px solid transparent;
+   isolation: isolate;
 }
 .logo {
   font: 22px var(--serif);
