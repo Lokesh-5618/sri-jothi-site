@@ -212,7 +212,6 @@ section { padding: var(--space-section) 0; }
 }
 
 /* ---------- nav ---------- */
-/* ---------- nav ---------- */
 .nav {
   position: relative;
   z-index: 200;
@@ -1008,11 +1007,11 @@ body:before {
 
 /* statement */
 .statement { background: var(--cream); padding-top: clamp(110px, 13vw, 180px); padding-bottom: clamp(110px, 13vw, 180px); }
-.statement-inner { max-width: 1120px; margin: auto; display: flex; flex-direction: column; align-items: flex-start; }.statement h2 { font: 400 clamp(56px, 8vw, 112px)/.9 var(--serif); letter-spacing: -.05em; color: var(--green); margin: 0; }
+.statement-inner { max-width: 1120px; margin: auto; display: flex; flex-direction: column; align-items: flex-start; }
+.statement h2 { font: 400 clamp(56px, 8vw, 112px)/.9 var(--serif); letter-spacing: -.05em; color: var(--green); margin: 0; }
 .statement h2 .accent { color: var(--brown); }
-.statement p { margin: 40px 0 0; max-width: 500px; }/* journey */
+.statement p { margin: 40px 0 0; max-width: 500px; }
 /* statement ambient visual */
-/* statement visual */
 .statement {
   position: relative;
   overflow: hidden;
@@ -3015,7 +3014,7 @@ html, body {
 
 
 /* ============================================================
-   UNIFIED SECTION HEADERS (01–08)  — KEEP THIS BLOCK LAST
+   UNIFIED SECTION HEADERS (01–08)
    Every homepage section uses the same pattern:
    number (left) · eyebrow (centre) · heading underneath.
    Size, gap and colour come from the variables below, so
@@ -4065,463 +4064,263 @@ html, body {
     margin-top: 42px;
   }
 }
+
+
 /* ============================================================
-   SRI JOTHI TRADERS — ABOUT PAGE EDITORIAL REDESIGN
-   Overrides the older About-page rules without affecting other pages.
+   ABOUT PAGE — scoped under .about-page (won't affect other pages)
+   One container width, one section rhythm, one heading style.
    ============================================================ */
 
-/* About hero: stronger editorial hierarchy */
-.page-hero {
-  min-height: min(680px, 72vh);
-  padding: 150px 0 100px;
+.about-page { --about-gutter: 64px; }
+@media (max-width: 768px) { .about-page { --about-gutter: 44px; } }
+@media (max-width: 640px) { .about-page { --about-gutter: 36px; } }
+@media (max-width: 390px) { .about-page { --about-gutter: 28px; } }
+
+/* ---- one container width everywhere ---- */
+.about-page .wrap,
+.about-page .wrap.facts,
+.about-page .wrap.story,
+.about-page .page-hero .wrap {
+  width: min(var(--max-w), calc(100% - var(--about-gutter)));
+  max-width: none;
+  margin: 0 auto;
 }
 
-.page-hero .wrap {
-  width: min(var(--max-w), calc(100% - 96px));
+/* ---- consistent type ---- */
+.about-page .eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: .18em;
+  line-height: 1.4;
+  color: var(--brown);
+}
+.about-page .story > h2,
+.about-page .team h2,
+.about-page .mission h2 {
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: var(--green);
 }
 
-.page-hero .eyebrow {
-  margin-bottom: 28px;
-}
+/* ---- section rhythm ---- */
+.about-page section { padding: clamp(56px, 6vw, 88px) 0; }
+.about-page .about-story  { padding-bottom: clamp(40px, 4vw, 56px); }
+.about-page .about-facts  { padding-top: 0; padding-bottom: clamp(40px, 4vw, 56px); }
+.about-page .about-values { padding-top: 0; }
+.about-page .about-quality { background: var(--cream); }
+.about-page .about-journey { padding-top: 0; }
 
-.page-hero h1 {
-  max-width: 980px;
-  font-size: clamp(52px, 6.8vw, 92px);
-  line-height: .94;
-  letter-spacing: -.055em;
+/* ---- hero ---- */
+.about-page .page-hero {
+  min-height: clamp(460px, 60vh, 620px);
+  padding: clamp(120px, 12vw, 160px) 0 clamp(56px, 6vw, 88px);
+  align-items: flex-end;
 }
-
-.page-hero .wrap > p.reveal:last-child {
-  max-width: 610px;
-  margin-top: 30px;
+.about-page .page-hero .wrap { margin: 0 auto; }
+.about-page .page-hero .eyebrow { color: var(--lime); }
+.about-page .page-hero h1 {
+  max-width: 920px;
+  margin-top: 20px;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: .96;
+  letter-spacing: -.05em;
+}
+.about-page .page-hero .wrap > p:last-child {
+  max-width: 600px;
+  margin-top: 24px;
   font-size: 16px;
   line-height: 1.8;
 }
 
-/* Give About sections a consistent editorial rhythm */
-.page-hero + section,
-.page-hero ~ section {
-  scroll-margin-top: 20px;
+/* ---- story / quality / journey: label left, content right ---- */
+.about-page .story {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  column-gap: clamp(32px, 5vw, 72px);
+  row-gap: 0;
+  align-items: start;
 }
-
-/* Story sections */
-.story {
-  width: min(100%, 1040px);
-  max-width: 1040px;
-  margin: 0 auto;
-}
-
-.story .eyebrow {
-  margin-bottom: 34px;
-}
-
-.story > p {
-  max-width: 720px;
-  margin-left: 220px;
-  font-size: 17px;
-  line-height: 1.85;
+.about-page .story > .eyebrow { grid-column: 1; padding-top: 8px; }
+.about-page .story > :not(.eyebrow) { grid-column: 2; max-width: 700px; }
+.about-page .story > h2 { margin: 0 0 28px; }
+.about-page .story > p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.8;
   color: var(--ink-soft);
 }
+.about-page .story > p + p { margin-top: 22px; }
 
-.story > p + p {
-  margin-top: 26px;
+/* ---- facts / mission-vision-values: seamless bordered grid ---- */
+.about-page .facts > .eyebrow { margin-bottom: 24px; }
+.about-page .facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  background: rgba(23, 70, 53, .16);
+  border: 1px solid rgba(23, 70, 53, .16);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.about-page .fact {
+  min-height: 0;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  background: var(--paper);
+  border: 0;
+  transition: background .3s var(--ease);
+}
+.about-page .fact:hover { transform: none; box-shadow: none; background: #fff; }
+.about-page .fact b {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--green);
+}
+.about-page .fact span {
+  max-width: 30ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
 }
 
-.story > h2 {
-  max-width: 760px;
-  margin-left: 220px;
-  margin-bottom: 30px;
-  font-size: clamp(40px, 5vw, 68px);
-  line-height: .98;
+.about-page .about-values .fact { min-height: 200px; gap: 16px; }
+.about-page .about-values .fact b {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+.about-page .about-values .fact span {
+  max-width: none;
+  font: 22px/1.35 var(--serif);
   color: var(--green);
 }
 
-.story > .eyebrow {
-  position: relative;
-  margin-left: 0;
-  font-size: 11px;
-  letter-spacing: .18em;
-}
-
-.story > .eyebrow::after {
-  content: '';
-  display: inline-block;
-  width: 58px;
-  height: 1px;
-  margin: 0 0 4px 16px;
-  background: var(--brown);
-  opacity: .55;
-}
-
-/* At a glance */
-.facts {
-  width: min(100%, var(--max-w));
-  margin: 0 auto;
-}
-
-.facts > .eyebrow {
-  margin-bottom: 30px;
-  font-size: 11px;
-  letter-spacing: .18em;
-}
-
-.facts-grid {
+/* ---- team ---- */
+.about-page .team { background: var(--paper); }
+.about-page .team h2 { max-width: 20ch; margin: 16px 0 40px; }
+.about-page .team-grid {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 0;
+  gap: 20px;
+}
+.about-page .team-card {
+  padding: 0;
   background: transparent;
   border: 0;
-  border-top: 1px solid rgba(23,70,53,.18);
-  border-bottom: 1px solid rgba(23,70,53,.18);
   border-radius: 0;
-}
-
-.fact {
-  min-height: 190px;
-  padding: 34px 30px 36px;
-  background: transparent;
-  border-right: 1px solid rgba(23,70,53,.14);
-  border-radius: 0;
-  justify-content: flex-start;
-  gap: 24px;
-}
-
-.fact:nth-child(3n) {
-  border-right: 0;
-}
-
-.fact:hover {
-  transform: none;
   box-shadow: none;
-  background: rgba(219,233,210,.28);
+  text-align: left;
 }
-
-.fact b {
-  font-size: clamp(28px, 3.2vw, 44px);
-  line-height: .95;
-  color: var(--green);
+.about-page .team-card:hover { transform: none; box-shadow: none; }
+.about-page .team-avatar {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin: 0 0 20px;
+  border: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, var(--lime), #e7dfd4);
 }
-
-.fact span {
-  max-width: 24ch;
-  font-size: 13px;
+.about-page .team-card h3 { margin: 0; font-size: 22px; color: var(--green); }
+.about-page .team-card > span {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+.about-page .team-card > p {
+  max-width: 34ch;
+  margin-top: 12px;
+  font-size: 14px;
   line-height: 1.65;
   color: var(--muted);
 }
 
-/* Mission / Vision / Values: use the existing generic section structure */
-.mission-values,
-.about-values {
-  padding-top: 0;
+/* ---- journey ---- */
+.about-page .about-journey .story {
+  padding-top: clamp(48px, 5vw, 72px);
+  border-top: 1px solid var(--line);
 }
-
-/* The third section after facts is mission/vision/values in this About JSX */
-.facts + section .facts-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid rgba(23,70,53,.18);
-  border-bottom: 1px solid rgba(23,70,53,.18);
+.about-page .journey-list { max-width: 760px; }
+.about-page .journey-item {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 32px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
 }
-
-.facts + section .fact {
-  min-height: 220px;
-  padding: 38px 34px;
-}
-
-.facts + section .fact b {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .16em;
-  color: var(--brown);
-}
-
-.facts + section .fact span {
-  max-width: 34ch;
-  font-family: var(--serif);
-  font-size: clamp(20px, 2vw, 25px);
-  line-height: 1.3;
+.about-page .journey-item:last-child { border-bottom: 1px solid var(--line); }
+.about-page .journey-item strong {
+  font: 400 20px/1.3 var(--serif);
   color: var(--green);
 }
-
-/* Quality: cream editorial band */
-.facts + section + section {
-  background: var(--cream);
-}
-
-/* Team */
-.team {
-  background: var(--paper);
-  padding-top: clamp(100px, 11vw, 160px);
-}
-
-.team > .wrap {
-  width: min(var(--max-w), calc(100% - 64px));
-}
-
-.team > .wrap > .eyebrow {
-  margin-bottom: 22px;
-  font-size: 11px;
-  letter-spacing: .18em;
-}
-
-.team > .wrap > h2 {
-  max-width: 720px !important;
-  margin-bottom: 58px !important;
-  font-size: clamp(46px, 5.8vw, 76px);
-  line-height: .94;
-}
-
-.team-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.team-card {
-  padding: 0 0 30px;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  text-align: left;
-  box-shadow: none;
-}
-
-.team-card:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-.team-avatar {
-  width: 100%;
-  aspect-ratio: 4 / 4.7;
-  margin: 0 0 24px;
-  border: 0;
-  border-radius: 4px;
-  background: linear-gradient(145deg, var(--lime), #e7dfd4);
-}
-
-.team-avatar::after {
-  width: 120px;
-  height: 120px;
-  border-color: rgba(137,107,75,.22);
-}
-
-.team-card h3 {
+.about-page .journey-item p {
   margin: 0;
-  font-size: 24px;
-  color: var(--green);
+  max-width: 60ch;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-soft);
 }
 
-.team-card > span {
-  margin-top: 7px;
-  font-size: 10px;
-  letter-spacing: .12em;
-}
-
-.team-card > p {
-  max-width: 34ch;
-  margin-top: 14px;
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
-}
-
-/* Journey section */
-.team + section .story > p strong {
-  display: inline-block;
-  min-width: 150px;
-  color: var(--green);
-  font-family: var(--sans);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-}
-
-/* Destination / mission section */
-.mission {
-  padding: clamp(90px, 10vw, 140px) 0;
-  background: var(--green);
-  color: #fff;
-}
-
-.mission .wrap {
-  width: min(var(--max-w), calc(100% - 64px));
-}
-
-.mission h2 {
-  max-width: 800px;
-  font-size: clamp(52px, 7vw, 92px);
-  line-height: .9;
-  color: #fff;
-}
-
-.mission p {
-  max-width: 650px;
-  margin-top: 30px;
+/* ---- where we're headed ---- */
+.about-page .mission { background: var(--lime); }
+.about-page .mission h2 { max-width: 18ch; }
+.about-page .mission p {
+  max-width: 62ch;
+  margin-top: 20px;
   font-size: 16px;
   line-height: 1.8;
-  color: rgba(255,255,255,.66);
+  color: var(--ink-soft);
 }
 
-.mission::after {
-  width: 600px;
-  height: 600px;
-  right: -300px;
-  top: -260px;
-  border-color: rgba(219,233,210,.10);
+/* ---- closing CTA ---- */
+.about-page .callout { background: var(--green); }
+.about-page .callout .wrap { max-width: none; }
+.about-page .callout h2 {
+  max-width: 16ch;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: .98;
+  color: #fff;
 }
-
-/* Closing CTA */
-.callout {
-  background: var(--cream);
-  padding: clamp(90px, 10vw, 150px) 0;
-}
-
-.callout .wrap {
-  width: min(100%, var(--max-w));
-  max-width: var(--max-w);
-}
-
-.callout h2 {
-  max-width: 850px;
-  font-size: clamp(50px, 7vw, 92px);
-  line-height: .92;
-  color: var(--green);
-}
-
-.cta-group {
-  margin-top: 42px;
+.about-page .cta-group {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 32px;
 }
+.about-page .callout .btn { margin-top: 0; min-height: 48px; }
 
-.callout .btn {
-  min-height: 48px;
+/* ---- responsive ---- */
+@media (max-width: 900px) {
+  .about-page .story { grid-template-columns: 1fr; }
+  .about-page .story > .eyebrow { grid-column: 1; padding-top: 0; margin-bottom: 18px; }
+  .about-page .story > :not(.eyebrow) { grid-column: 1; }
+  .about-page .facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-page .about-values .facts-grid { grid-template-columns: 1fr; }
+  .about-page .about-values .fact { min-height: 0; }
 }
-
-/* About page responsive */
-@media (max-width: 1000px) {
-  .page-hero .wrap,
-  .team > .wrap,
-  .mission .wrap,
-  .callout .wrap {
-    width: min(100% - 48px, 860px);
-  }
-
-  .story {
-    width: min(100% - 48px, 860px);
-  }
-
-  .story > p,
-  .story > h2 {
-    margin-left: 120px;
-  }
-
-  .facts-grid,
-  .facts + section .facts-grid,
-  .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .fact:nth-child(3n) {
-    border-right: 1px solid rgba(23,70,53,.14);
-  }
-
-  .fact:nth-child(2n) {
-    border-right: 0;
-  }
+@media (max-width: 700px) {
+  .about-page .team-grid { grid-template-columns: 1fr; gap: 28px; }
 }
-
-@media (max-width: 768px) {
-  .page-hero {
-    min-height: 560px;
-    padding: 125px 0 70px;
-  }
-
-  .page-hero .wrap,
-  .team > .wrap,
-  .mission .wrap,
-  .callout .wrap,
-  .story {
-    width: calc(100% - 44px);
-  }
-
-  .page-hero h1 {
-    font-size: clamp(44px, 11vw, 66px);
-  }
-
-  .page-hero .wrap > p.reveal:last-child {
-    font-size: 14px;
-  }
-
-  .story > p,
-  .story > h2 {
-    margin-left: 0;
-  }
-
-  .story > p {
-    font-size: 15px;
-  }
-
-  .facts-grid,
-  .facts + section .facts-grid,
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .fact,
-  .facts + section .fact {
-    min-height: 0;
-    padding: 28px 24px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(23,70,53,.14);
-  }
-
-  .fact:last-child {
-    border-bottom: 0;
-  }
-
-  .team > .wrap > h2 {
-    margin-bottom: 38px !important;
-  }
-
-  .team-card {
-    padding-bottom: 36px;
-  }
-
-  .team-avatar {
-    aspect-ratio: 16 / 11;
-  }
-
-  .mission h2,
-  .callout h2 {
-    font-size: clamp(44px, 12vw, 64px);
-  }
-}
-
 @media (max-width: 640px) {
-  .page-hero {
-    min-height: 520px;
-  }
-
-  .page-hero .wrap,
-  .team > .wrap,
-  .mission .wrap,
-  .callout .wrap,
-  .story {
-    width: calc(100% - 36px);
-  }
-
-  .story > .eyebrow::after {
-    width: 36px;
-  }
-
-  .callout .cta-group {
-    flex-direction: column;
-  }
-
-  .callout .cta-group .btn {
-    width: 100%;
-  }
+  .about-page .page-hero { min-height: 0; }
+  .about-page .page-hero .wrap > p:last-child { font-size: 14px; }
+  .about-page .story > p { font-size: 15px; }
+  .about-page .journey-item { grid-template-columns: 1fr; gap: 6px; }
+  .about-page .cta-group { flex-direction: column; }
+  .about-page .cta-group .btn { width: 100%; }
+}
+@media (max-width: 560px) {
+  .about-page .facts-grid { grid-template-columns: 1fr; }
 }
