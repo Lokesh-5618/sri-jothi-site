@@ -214,9 +214,7 @@ section { padding: var(--space-section) 0; }
 /* ---------- nav ---------- */
 /* ---------- nav ---------- */
 .nav {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   z-index: 200;
   width: 100%;
   height: 64px;
@@ -224,18 +222,15 @@ section { padding: var(--space-section) 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* translucent warm tint so the image beneath remains visible */
-  background: rgba(23, 70, 53, .30);
-  backdrop-filter: blur(18px) saturate(120%);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
-  border-bottom: 1px solid rgba(255, 255, 255, .18);
-  box-shadow: 0 4px 24px rgba(16, 56, 42, .06);
+  background: rgba(251, 250, 246, .92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(32, 35, 31, .09);
   isolation: isolate;
 }
 .logo {
   font: 22px var(--serif);
   letter-spacing: -.02em;
-  color: #fff;
+  color: var(--green);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -256,8 +251,7 @@ section { padding: var(--space-section) 0; }
 }
 .navlinks { display: flex; gap: 26px; font-size: 15px; align-items: center; }
 .navlinks a {
-  color: rgba(255, 255, 255, .78);
-  opacity: 1;
+  opacity: .62;
   transition: opacity .25s;
   position: relative;
   padding: 4px 0;
@@ -271,9 +265,9 @@ section { padding: var(--space-section) 0; }
   background: var(--brown);
   transition: width .3s var(--ease);
 }
-.navlinks a:hover { opacity: 1; color: #fff; }
+.navlinks a:hover { opacity: 1; }
 .navlinks a:hover:after, .navlinks a.active:after { width: 100%; }
-.navlinks a.active { opacity: 1; color: #fff; font-weight: 600; }
+.navlinks a.active { opacity: 1; color: var(--green); font-weight: 600; }
 .navcta {
   background: var(--green);
   color: #fff;
@@ -309,7 +303,7 @@ section { padding: var(--space-section) 0; }
   padding: 6px;
   flex-shrink: 0;
 }
-.hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--green); border-radius: 2px; transition: transform .3s var(--ease), opacity .2s; }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -805,7 +799,6 @@ body:before {
   .wrap { width: calc(100% - 36px); }
   section { padding: 60px 0; }
   .nav { height: 54px; padding: 0 16px; }
-  .hero { min-height: 100svh; padding: 92px 0 55px; }
   .logo { font-size: 18px; }
   .navcta { padding: 8px 14px; font-size: 10px; min-height: 36px; }
   .mobile-drawer { padding: 0 28px; gap: 22px; }
@@ -823,7 +816,6 @@ body:before {
 @media (max-width: 390px) {
   .wrap { width: calc(100% - 28px); }
   .nav { padding: 0 12px; }
-  .hero { padding-top: 84px; }
   .logo { font-size: 16px; }
   .page-hero h1 { font-size: clamp(30px, 8.5vw, 44px); }
   .display { font-size: clamp(28px, 8vw, 42px); }
@@ -846,11 +838,11 @@ body:before {
 
 /* hero */
 .hero {
-  min-height: 100svh;
+  min-height: calc(100svh - 64px);
   background: var(--cream);
   position: relative;
   overflow: hidden;
-  padding: clamp(120px, 11vw, 150px) 0 56px;
+  padding: clamp(72px, 7.5vw, 100px) 0 56px;
   display: flex;
   align-items: flex-start;
 }
@@ -1206,7 +1198,7 @@ body:before {
 /* ===== Homepage responsive ===== */
 @media (max-width: 1050px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero { padding: 120px 0 55px; align-items: flex-start; }
+  .hero { padding: 90px 0 55px; align-items: flex-start; }
   .hero-copy { max-width: 720px; }
   .hero-visual { min-height: 470px; margin-top: -10px; }
   .hero-transport { width: 520px; right: -90px; top: 40%; }
@@ -4071,5 +4063,465 @@ html, body {
 
   .how-it-works-grid {
     margin-top: 42px;
+  }
+}
+/* ============================================================
+   SRI JOTHI TRADERS — ABOUT PAGE EDITORIAL REDESIGN
+   Overrides the older About-page rules without affecting other pages.
+   ============================================================ */
+
+/* About hero: stronger editorial hierarchy */
+.page-hero {
+  min-height: min(680px, 72vh);
+  padding: 150px 0 100px;
+}
+
+.page-hero .wrap {
+  width: min(var(--max-w), calc(100% - 96px));
+}
+
+.page-hero .eyebrow {
+  margin-bottom: 28px;
+}
+
+.page-hero h1 {
+  max-width: 980px;
+  font-size: clamp(52px, 6.8vw, 92px);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+.page-hero .wrap > p.reveal:last-child {
+  max-width: 610px;
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Give About sections a consistent editorial rhythm */
+.page-hero + section,
+.page-hero ~ section {
+  scroll-margin-top: 20px;
+}
+
+/* Story sections */
+.story {
+  width: min(100%, 1040px);
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.story .eyebrow {
+  margin-bottom: 34px;
+}
+
+.story > p {
+  max-width: 720px;
+  margin-left: 220px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+}
+
+.story > p + p {
+  margin-top: 26px;
+}
+
+.story > h2 {
+  max-width: 760px;
+  margin-left: 220px;
+  margin-bottom: 30px;
+  font-size: clamp(40px, 5vw, 68px);
+  line-height: .98;
+  color: var(--green);
+}
+
+.story > .eyebrow {
+  position: relative;
+  margin-left: 0;
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+
+.story > .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 58px;
+  height: 1px;
+  margin: 0 0 4px 16px;
+  background: var(--brown);
+  opacity: .55;
+}
+
+/* At a glance */
+.facts {
+  width: min(100%, var(--max-w));
+  margin: 0 auto;
+}
+
+.facts > .eyebrow {
+  margin-bottom: 30px;
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+
+.facts-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(23,70,53,.18);
+  border-bottom: 1px solid rgba(23,70,53,.18);
+  border-radius: 0;
+}
+
+.fact {
+  min-height: 190px;
+  padding: 34px 30px 36px;
+  background: transparent;
+  border-right: 1px solid rgba(23,70,53,.14);
+  border-radius: 0;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.fact:nth-child(3n) {
+  border-right: 0;
+}
+
+.fact:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(219,233,210,.28);
+}
+
+.fact b {
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: .95;
+  color: var(--green);
+}
+
+.fact span {
+  max-width: 24ch;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* Mission / Vision / Values: use the existing generic section structure */
+.mission-values,
+.about-values {
+  padding-top: 0;
+}
+
+/* The third section after facts is mission/vision/values in this About JSX */
+.facts + section .facts-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(23,70,53,.18);
+  border-bottom: 1px solid rgba(23,70,53,.18);
+}
+
+.facts + section .fact {
+  min-height: 220px;
+  padding: 38px 34px;
+}
+
+.facts + section .fact b {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--brown);
+}
+
+.facts + section .fact span {
+  max-width: 34ch;
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 25px);
+  line-height: 1.3;
+  color: var(--green);
+}
+
+/* Quality: cream editorial band */
+.facts + section + section {
+  background: var(--cream);
+}
+
+/* Team */
+.team {
+  background: var(--paper);
+  padding-top: clamp(100px, 11vw, 160px);
+}
+
+.team > .wrap {
+  width: min(var(--max-w), calc(100% - 64px));
+}
+
+.team > .wrap > .eyebrow {
+  margin-bottom: 22px;
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+
+.team > .wrap > h2 {
+  max-width: 720px !important;
+  margin-bottom: 58px !important;
+  font-size: clamp(46px, 5.8vw, 76px);
+  line-height: .94;
+}
+
+.team-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.team-card {
+  padding: 0 0 30px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: none;
+}
+
+.team-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.team-avatar {
+  width: 100%;
+  aspect-ratio: 4 / 4.7;
+  margin: 0 0 24px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(145deg, var(--lime), #e7dfd4);
+}
+
+.team-avatar::after {
+  width: 120px;
+  height: 120px;
+  border-color: rgba(137,107,75,.22);
+}
+
+.team-card h3 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--green);
+}
+
+.team-card > span {
+  margin-top: 7px;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.team-card > p {
+  max-width: 34ch;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* Journey section */
+.team + section .story > p strong {
+  display: inline-block;
+  min-width: 150px;
+  color: var(--green);
+  font-family: var(--sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* Destination / mission section */
+.mission {
+  padding: clamp(90px, 10vw, 140px) 0;
+  background: var(--green);
+  color: #fff;
+}
+
+.mission .wrap {
+  width: min(var(--max-w), calc(100% - 64px));
+}
+
+.mission h2 {
+  max-width: 800px;
+  font-size: clamp(52px, 7vw, 92px);
+  line-height: .9;
+  color: #fff;
+}
+
+.mission p {
+  max-width: 650px;
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255,255,255,.66);
+}
+
+.mission::after {
+  width: 600px;
+  height: 600px;
+  right: -300px;
+  top: -260px;
+  border-color: rgba(219,233,210,.10);
+}
+
+/* Closing CTA */
+.callout {
+  background: var(--cream);
+  padding: clamp(90px, 10vw, 150px) 0;
+}
+
+.callout .wrap {
+  width: min(100%, var(--max-w));
+  max-width: var(--max-w);
+}
+
+.callout h2 {
+  max-width: 850px;
+  font-size: clamp(50px, 7vw, 92px);
+  line-height: .92;
+  color: var(--green);
+}
+
+.cta-group {
+  margin-top: 42px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.callout .btn {
+  min-height: 48px;
+}
+
+/* About page responsive */
+@media (max-width: 1000px) {
+  .page-hero .wrap,
+  .team > .wrap,
+  .mission .wrap,
+  .callout .wrap {
+    width: min(100% - 48px, 860px);
+  }
+
+  .story {
+    width: min(100% - 48px, 860px);
+  }
+
+  .story > p,
+  .story > h2 {
+    margin-left: 120px;
+  }
+
+  .facts-grid,
+  .facts + section .facts-grid,
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fact:nth-child(3n) {
+    border-right: 1px solid rgba(23,70,53,.14);
+  }
+
+  .fact:nth-child(2n) {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    min-height: 560px;
+    padding: 125px 0 70px;
+  }
+
+  .page-hero .wrap,
+  .team > .wrap,
+  .mission .wrap,
+  .callout .wrap,
+  .story {
+    width: calc(100% - 44px);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(44px, 11vw, 66px);
+  }
+
+  .page-hero .wrap > p.reveal:last-child {
+    font-size: 14px;
+  }
+
+  .story > p,
+  .story > h2 {
+    margin-left: 0;
+  }
+
+  .story > p {
+    font-size: 15px;
+  }
+
+  .facts-grid,
+  .facts + section .facts-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fact,
+  .facts + section .fact {
+    min-height: 0;
+    padding: 28px 24px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(23,70,53,.14);
+  }
+
+  .fact:last-child {
+    border-bottom: 0;
+  }
+
+  .team > .wrap > h2 {
+    margin-bottom: 38px !important;
+  }
+
+  .team-card {
+    padding-bottom: 36px;
+  }
+
+  .team-avatar {
+    aspect-ratio: 16 / 11;
+  }
+
+  .mission h2,
+  .callout h2 {
+    font-size: clamp(44px, 12vw, 64px);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-hero {
+    min-height: 520px;
+  }
+
+  .page-hero .wrap,
+  .team > .wrap,
+  .mission .wrap,
+  .callout .wrap,
+  .story {
+    width: calc(100% - 36px);
+  }
+
+  .story > .eyebrow::after {
+    width: 36px;
+  }
+
+  .callout .cta-group {
+    flex-direction: column;
+  }
+
+  .callout .cta-group .btn {
+    width: 100%;
   }
 }
