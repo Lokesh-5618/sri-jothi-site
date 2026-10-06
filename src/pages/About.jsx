@@ -7,7 +7,7 @@ export default function About() {
   useScrollReveal();
 
   return (
-    <>
+    <div className="about-page">
       {/* HERO */}
       <section className="page-hero">
         <HeroBgSlider />
@@ -30,7 +30,7 @@ export default function About() {
       </section>
 
       {/* OUR STORY */}
-      <section>
+      <section className="about-story">
         <div className="wrap story">
           <p className="eyebrow reveal">Our story</p>
 
@@ -56,7 +56,7 @@ export default function About() {
       </section>
 
       {/* AT A GLANCE */}
-      <section>
+      <section className="about-facts">
         <div className="wrap facts">
           <p className="eyebrow reveal">At a glance</p>
 
@@ -65,37 +65,32 @@ export default function About() {
               <b>2015</b>
               <span>Founded in Dindigul, Tamil Nadu</span>
             </div>
-
             <div className="fact reveal">
               <b>10,000 sq ft</b>
               <span>Warehouse and preparation facility</span>
             </div>
-
             <div className="fact reveal">
               <b>192</b>
               <span>Countries served</span>
             </div>
-
             <div className="fact reveal">
               <b>9</b>
               <span>Certifications and registrations</span>
             </div>
-
             <div className="fact reveal">
               <b>7</b>
               <span>Product categories</span>
             </div>
-
             <div className="fact reveal">
-              <b>—</b>
-              <span>To be updated</span>
+              <b>UK &amp; Gulf</b>
+              <span>Where our first buyers came from</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* MISSION / VISION / VALUES */}
-      <section>
+      <section className="about-values">
         <div className="wrap">
           <div className="facts-grid reveal-stagger">
             <div className="fact reveal">
@@ -106,7 +101,6 @@ export default function About() {
                 on.
               </span>
             </div>
-
             <div className="fact reveal">
               <b>Vision</b>
               <span>
@@ -114,25 +108,20 @@ export default function About() {
                 across the globe.
               </span>
             </div>
-
             <div className="fact reveal">
               <b>Values</b>
-              <span>
-                Reliability · Quality · Customization · Transparency
-              </span>
+              <span>Reliability · Quality · Customization · Transparency</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* QUALITY */}
-      <section>
+      <section className="about-quality">
         <div className="wrap story">
           <p className="eyebrow reveal">Our commitment to quality</p>
 
-          <h2 className="reveal">
-            Standards built into every shipment.
-          </h2>
+          <h2 className="reveal">Standards built into every shipment.</h2>
 
           <p className="reveal">
             Every order goes through quality checks, export documentation and
@@ -151,12 +140,7 @@ export default function About() {
         <div className="wrap">
           <p className="eyebrow reveal">Our team</p>
 
-          <h2
-            className="reveal"
-            style={{ marginBottom: '36px', maxWidth: '22ch' }}
-          >
-            The people behind every shipment.
-          </h2>
+          <h2 className="reveal">The people behind every shipment.</h2>
 
           <div className="team-grid reveal-stagger">
             <div className="team-card reveal">
@@ -187,34 +171,43 @@ export default function About() {
       </section>
 
       {/* OUR JOURNEY */}
-      <section>
+      <section className="about-journey">
         <div className="wrap story">
           <p className="eyebrow reveal">Our journey</p>
 
           <h2 className="reveal">Built on trust. Growing through it.</h2>
 
-          <p className="reveal">
-            <strong>2015: Founded in Dindigul</strong>
-          </p>
+          <div className="journey-list">
+            <div className="journey-item reveal">
+              <strong>2015</strong>
+              <p>Founded in Dindigul, Tamil Nadu.</p>
+            </div>
 
-          <p className="reveal">
-            <strong>Early years:</strong> Our first clients in the UK and Gulf
-            placed their trust in us, recommended us to other buyers, and
-            returned with repeat orders. That word-of-mouth growth, built on
-            reliability, became the foundation of the business.
-          </p>
+            <div className="journey-item reveal">
+              <strong>Early years</strong>
+              <p>
+                Our first clients in the UK and Gulf placed their trust in us,
+                recommended us to other buyers, and returned with repeat
+                orders. That word-of-mouth growth, built on reliability,
+                became the foundation of the business.
+              </p>
+            </div>
 
-          <p className="reveal">
-            <strong>Today:</strong> 10,000 sq ft warehouse and full export
-            certifications.
-          </p>
+            <div className="journey-item reveal">
+              <strong>Today</strong>
+              <p>10,000 sq ft warehouse and full export certifications.</p>
+            </div>
 
-          <p className="reveal">
-            <strong>Next:</strong> We are expanding our reach to new markets
-            across the globe, starting with the USA, Canada and Australia, to
-            bring the same trusted, customized service to more grocery
-            businesses everywhere.
-          </p>
+            <div className="journey-item reveal">
+              <strong>Next</strong>
+              <p>
+                We are expanding our reach to new markets across the globe,
+                starting with the USA, Canada and Australia, to bring the same
+                trusted, customized service to more grocery businesses
+                everywhere.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -235,25 +228,21 @@ export default function About() {
       {/* CLOSING CTA */}
       <section className="callout">
         <div className="wrap">
-          <h2 className="reveal">
-            Let’s build a trusted supply partnership.
-          </h2>
+          <h2 className="reveal">Let’s build a trusted supply partnership.</h2>
 
           <div className="cta-group reveal">
-            <Link to="/company-profile" className="btn">
+            <Link to="/company-profile" className="btn on-dark">
               Download Company Profile
             </Link>
-
-            <Link to="/products" className="btn">
+            <Link to="/products" className="btn on-dark">
               Company Catalogue
             </Link>
-
             <Link to="/contact" className="btn cta">
               Enquire Now →
             </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
