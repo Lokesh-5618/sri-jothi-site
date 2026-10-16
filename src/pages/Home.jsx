@@ -308,6 +308,13 @@ export default function Home() {
     <>
 
       <section className="hero">
+        <div className="wrap hero-copy">
+          <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
+          <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
+          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
+          <div className="hero-actions"><Link className="btn dark" to="/contact">Contact us</Link><a className="btn light" href="#products">Explore products</a></div>
+        </div>
+
         <div className="hero-slider" aria-roledescription="carousel">
           <div className="hero-slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
             {HERO_SLIDES.map((s, i) => (
@@ -316,13 +323,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="wrap hero-copy">
-          <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
-          <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
-          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
-          <div className="hero-actions"><Link className="btn dark" to="/contact">Contact us</Link><a className="btn light" href="#products">Explore products</a></div>
         </div>
       </section>
 
