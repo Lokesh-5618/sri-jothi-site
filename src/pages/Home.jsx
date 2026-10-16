@@ -94,7 +94,6 @@ export default function Home() {
   useScrollReveal();
 
   const [slide, setSlide] = useState(0);
-  const [activeCap, setActiveCap] = useState(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -102,17 +101,6 @@ export default function Home() {
     const id = setInterval(() => setSlide((s) => (s + 1) % HERO_SLIDES.length), 4000);
     return () => clearInterval(id);
   }, []);
-
-  useEffect(() => {
-    if (activeCap === null) return;
-    const onKey = (e) => { if (e.key === 'Escape') setActiveCap(null); };
-    window.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [activeCap]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -378,21 +366,21 @@ export default function Home() {
               <article
                 className="cap reveal"
                 key={c.num}
-                role="button"
                 tabIndex={0}
-                onClick={() => setActiveCap(i)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setActiveCap(i);
-                  }
-                }}
+                style={{ '--i': i }}
+                aria-label={`${c.title}: ${c.short}`}
               >
                 <span className="cap-num">{c.num}</span>
                 <div className="cap-icon"><svg viewBox="0 0 24 24">{c.icon}</svg></div>
                 <h3>{c.title}</h3>
-                <p>{c.short}</p>
-                <div className="cap-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
+                <p className="cap-short">{c.short}</p>
+                <div className="cap-details">
+                  <p>{c.more}</p>
+                  <Link className="cap-detail-link" to={c.link}>
+                    {c.linkLabel} <span aria-hidden="true">↗</span>
+                  </Link>
+                </div>
+                <div className="cap-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
               </article>
             ))}
           </div>
@@ -560,25 +548,7 @@ export default function Home() {
         </div>
       </section>
 
-      {activeCap !== null && (
-        <div className="cap-modal-overlay" onClick={() => setActiveCap(null)}>
-          <div
-            className="cap-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="capModalTitle"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button type="button" className="cap-modal-close" aria-label="Close" onClick={() => setActiveCap(null)}>&times;</button>
-            <span className="cap-modal-num">{CAPS[activeCap].num}</span>
-            <h3 id="capModalTitle">{CAPS[activeCap].title}</h3>
-            <p>{CAPS[activeCap].more}</p>
-            <Link className="btn dark" to={CAPS[activeCap].link} onClick={() => setActiveCap(null)}>
-              {CAPS[activeCap].linkLabel} &rarr;
-            </Link>
-          </div>
-        </div>
-      )}
+
 
     </>
   );
