@@ -4374,9 +4374,11 @@ html, body {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(18px, 2.5vw, 34px);
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 0;
+  align-items: stretch;
 }
 
 .about-timeline .timeline-track::before,
@@ -4384,8 +4386,8 @@ html, body {
   content: "";
   position: absolute;
   top: 16px;
-  left: 16px;
-  right: 16px;
+  left: calc(12.5% - 1px);
+  right: calc(12.5% - 1px);
   height: 2px;
   border-radius: 99px;
 }
@@ -4393,8 +4395,8 @@ html, body {
   background: linear-gradient(to right, var(--brown-light), var(--line), var(--brown-light));
 }
 .about-timeline .timeline-track::after {
-  right: auto;
-  width: calc(100% - 32px);
+  right: calc(12.5% - 1px);
+  width: auto;
   background: linear-gradient(90deg, var(--brown), var(--green), var(--brown-light));
   transform: scaleX(0);
   transform-origin: left center;
@@ -4429,7 +4431,8 @@ html, body {
   flex: 0 0 auto;
   width: 34px;
   height: 34px;
-  margin-bottom: 24px;
+  margin: 0 auto 24px;
+  align-self: center;
   transform: scale(.8);
   display: grid;
   place-items: center;
@@ -4488,7 +4491,8 @@ html, body {
   line-height: 1.5;
 }
 .about-timeline .timeline-content h3 {
-  max-width: 300px;
+  max-width: 13ch;
+  min-height: 2.24em;
   font-size: clamp(22px, 2.2vw, 30px);
   line-height: 1.12;
   color: var(--green);
@@ -4496,7 +4500,7 @@ html, body {
   transition: transform .4s cubic-bezier(.2,.8,.2,1), color .3s ease;
 }
 .about-timeline .timeline-content p {
-  max-width: 300px;
+  max-width: 34ch;
   margin-top: 14px;
   font-size: 13px;
   line-height: 1.85;
@@ -4549,6 +4553,7 @@ html, body {
     width: 31px;
     height: 31px;
     margin: 0;
+    align-self: auto;
     transform: translateX(-50%) scale(.8);
   }
   .about-timeline .timeline-entry.timeline-active .timeline-marker { transform: translateX(-50%) scale(1); }
@@ -4561,7 +4566,7 @@ html, body {
     font-size: 24px;
   }
   .about-timeline .timeline-content { padding: 0 0 24px; }
-  .about-timeline .timeline-content h3 { max-width: 580px; font-size: clamp(25px, 5vw, 34px); }
+  .about-timeline .timeline-content h3 { max-width: 580px; min-height: 0; font-size: clamp(25px, 5vw, 34px); }
   .about-timeline .timeline-content p { max-width: 570px; font-size: 14px; line-height: 1.8; }
 }
 
