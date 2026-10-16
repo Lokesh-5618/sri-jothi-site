@@ -4594,35 +4594,29 @@ html, body {
 }
 
 
-
-
-/* ===== What we do: compact hover-expand cards (no fullscreen modal) ===== */
+/* ===== What we do: anchored floating detail cards ===== */
 .dark-section .cap-grid {
   overflow: visible;
   isolation: isolate;
 }
 
 .dark-section .cap {
+  position: relative;
   min-width: 0;
   overflow: visible;
   z-index: 0;
   cursor: default;
-  transform-origin: center top;
-  transition:
-    opacity .8s var(--ease),
-    transform .35s var(--ease),
-    filter .9s var(--ease),
-    background .3s var(--ease),
-    box-shadow .3s var(--ease);
+  transform: none;
+  transition: opacity .8s var(--ease), filter .9s var(--ease), background .25s ease, box-shadow .25s ease;
 }
 
+/* Keep the original tile in place; only raise its stacking order on hover. */
 .dark-section .cap:hover,
 .dark-section .cap:focus-within,
 .dark-section .cap:focus-visible {
-  z-index: 5;
+  z-index: 10;
   background: #193f31;
-  transform: translateY(-6px) scale(1.025);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, .22);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .16);
   outline: none;
 }
 
@@ -4633,24 +4627,37 @@ html, body {
 
 .dark-section .cap .cap-short {
   margin-bottom: 0;
-  transition: color .25s ease;
 }
 
+/* A distinct pop-out panel floats beside the tile, rather than extending it. */
 .dark-section .cap-details {
   position: absolute;
-  top: calc(100% - 1px);
-  left: 0;
-  right: 0;
-  padding: 0 28px 24px;
+  top: 50%;
+  left: calc(100% - 18px);
+  right: auto;
+  width: min(340px, 34vw);
+  box-sizing: border-box;
+  padding: 24px 26px;
   background: #193f31;
-  border: 1px solid rgba(219, 233, 210, .14);
-  border-top: 0;
-  box-shadow: 0 18px 30px rgba(0, 0, 0, .2);
+  border: 1px solid rgba(219, 233, 210, .2);
+  border-radius: 3px;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, .3);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px);
-  transition: opacity .22s ease, transform .22s ease, visibility .22s;
+  transform: translate(12px, -50%) scale(.97);
+  transform-origin: left center;
+  transition: opacity .2s ease, transform .24s ease, visibility .2s;
+  z-index: 20;
+}
+
+/* Keep pop-outs inside the section: the two right-hand tiles open to the left. */
+.dark-section .cap:nth-child(3) .cap-details,
+.dark-section .cap:nth-child(4) .cap-details {
+  left: auto;
+  right: calc(100% - 18px);
+  transform: translate(-12px, -50%) scale(.97);
+  transform-origin: right center;
 }
 
 .dark-section .cap:hover .cap-details,
@@ -4658,7 +4665,14 @@ html, body {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translate(0, -50%) scale(1);
+}
+
+.dark-section .cap:nth-child(3):hover .cap-details,
+.dark-section .cap:nth-child(4):hover .cap-details,
+.dark-section .cap:nth-child(3):focus-within .cap-details,
+.dark-section .cap:nth-child(4):focus-within .cap-details {
+  transform: translate(0, -50%) scale(1);
 }
 
 .dark-section .cap-details p {
@@ -4686,69 +4700,52 @@ html, body {
   transition: transform .2s ease;
 }
 
-.dark-section .cap-detail-link:hover span {
-  transform: translate(3px, -3px);
-}
-
-.dark-section .cap-arrow {
-  transition: opacity .25s ease, transform .25s ease;
-}
-
+.dark-section .cap-detail-link:hover span { transform: translate(3px, -3px); }
+.dark-section .cap-arrow { transition: opacity .25s ease, transform .25s ease; }
 .dark-section .cap:hover .cap-arrow,
-.dark-section .cap:focus-within .cap-arrow {
-  opacity: 1;
-  transform: translateY(0);
-}
+.dark-section .cap:focus-within .cap-arrow { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 1050px) {
-  .dark-section .cap-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 1px;
-  }
-
-  .dark-section .cap {
-    min-height: 300px;
-  }
+  .dark-section .cap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1px; }
+  .dark-section .cap { min-height: 300px; }
+  .dark-section .cap-details { width: min(320px, 40vw); }
+  /* In a two-column layout, each card opens toward the centre of the grid. */
+  .dark-section .cap:nth-child(3) .cap-details { left: calc(100% - 18px); right: auto; transform: translate(12px, -50%) scale(.97); transform-origin: left center; }
+  .dark-section .cap:nth-child(3):hover .cap-details,
+  .dark-section .cap:nth-child(3):focus-within .cap-details { transform: translate(0, -50%) scale(1); }
 }
 
 @media (max-width: 640px) {
-  .dark-section .cap-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dark-section .cap {
-    min-height: 0;
-    padding: 26px 24px 54px;
-  }
-
-  /* Touch screens have no hover: reveal details on keyboard focus or tap focus. */
+  .dark-section .cap-grid { grid-template-columns: 1fr; }
+  .dark-section .cap { min-height: 0; padding: 26px 24px 54px; }
+  /* Touch layout: reveal the details below the tile, since there is no hover. */
   .dark-section .cap-details {
     position: static;
     display: none;
+    width: 100%;
+    margin-top: 18px;
     padding: 18px 0 0;
     background: transparent;
     border: 0;
+    border-top: 1px solid rgba(219, 233, 210, .2);
+    border-radius: 0;
     box-shadow: none;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transform: none;
   }
-
+  .dark-section .cap:nth-child(3) .cap-details,
+  .dark-section .cap:nth-child(4) .cap-details { left: auto; right: auto; transform: none; }
   .dark-section .cap:hover .cap-details,
-  .dark-section .cap:focus-within .cap-details {
-    display: block;
-  }
-
+  .dark-section .cap:focus-within .cap-details { display: block; transform: none; }
   .dark-section .cap:hover,
-  .dark-section .cap:focus-within {
-    transform: none;
-  }
+  .dark-section .cap:focus-within { box-shadow: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dark-section .cap,
   .dark-section .cap-details,
-  .dark-section .cap-detail-link span {
-    transition: none !important;
-  }
+  .dark-section .cap-detail-link span { transition: none !important; }
 }
+
