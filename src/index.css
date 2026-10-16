@@ -4867,3 +4867,33 @@ html, body {
   }
 }
 
+
+
+/* Market flag JPG placeholders — replace each placeholder with its matching image later. */
+.market-flag-placeholder {
+  width: 58px;
+  height: 38px;
+  flex: 0 0 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 1px dashed rgba(137, 107, 75, .55);
+  border-radius: 4px;
+  background: rgba(244, 240, 231, .72);
+  color: var(--brown);
+  overflow: hidden;
+}
+.market-flag-code {
+  font: 600 12px/1 var(--sans);
+  letter-spacing: .08em;
+}
+.market-flag-label {
+  font: 7px/1 var(--sans);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+@media (max-width: 640px) {
+  .market-flag-placeholder { width: 50px; height: 33px; flex-basis: 50px; }
+}
