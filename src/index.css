@@ -4327,3 +4327,158 @@ html, body {
 @media (max-width: 560px) {
   .about-page .facts-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   ABOUT PAGE — STORY & JOURNEY TIMELINE
+   ============================================================ */
+.about-timeline {
+  background: var(--paper);
+  padding: clamp(76px, 9vw, 130px) 0;
+  overflow: hidden;
+}
+
+.about-timeline .timeline-heading {
+  max-width: 760px;
+  margin-bottom: clamp(55px, 8vw, 100px);
+}
+
+.about-timeline .timeline-heading h2 {
+  margin-top: 24px;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1;
+  color: var(--green);
+  letter-spacing: -.045em;
+}
+
+.about-timeline .timeline-heading h2 span { color: var(--brown); }
+
+.about-timeline .timeline-intro {
+  max-width: 570px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.about-timeline .timeline-track {
+  position: relative;
+  max-width: 1000px;
+  margin-left: auto;
+}
+
+.about-timeline .timeline-track::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 28px;
+  left: 164px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--brown-light), var(--line), var(--brown-light));
+}
+
+.about-timeline .timeline-entry {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  column-gap: 70px;
+  position: relative;
+  padding-bottom: 76px;
+}
+
+.about-timeline .timeline-entry:last-child { padding-bottom: 0; }
+
+.about-timeline .timeline-marker {
+  position: absolute;
+  left: 164px;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--brown-light);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--brown);
+  z-index: 2;
+  transition: background .3s ease, color .3s ease, transform .3s ease;
+}
+
+.about-timeline .timeline-marker span { font-size: 10px; font-weight: 700; }
+
+.about-timeline .timeline-entry:hover .timeline-marker {
+  background: var(--green);
+  color: var(--lime);
+  transform: translateX(-50%) scale(1.08);
+}
+
+.about-timeline .timeline-year {
+  padding-top: 5px;
+  text-align: right;
+  font-family: var(--serif);
+  font-size: clamp(21px, 2.2vw, 29px);
+  line-height: 1.2;
+  color: var(--green);
+  letter-spacing: -.025em;
+}
+
+.about-timeline .timeline-content {
+  padding: 0 0 30px 36px;
+  border-bottom: 1px solid var(--line);
+  transition: border-color .3s ease;
+}
+
+.about-timeline .timeline-entry:last-child .timeline-content { border-bottom: 0; }
+
+.about-timeline .timeline-label {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: var(--brown);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+
+.about-timeline .timeline-content h3 {
+  max-width: 580px;
+  font-size: clamp(25px, 3vw, 38px);
+  line-height: 1.12;
+  color: var(--green);
+  letter-spacing: -.035em;
+}
+
+.about-timeline .timeline-content p {
+  max-width: 570px;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+.about-timeline .timeline-entry:hover .timeline-content { border-color: var(--brown-light); }
+
+@media (max-width: 768px) {
+  .about-timeline { padding: 72px 0; }
+  .about-timeline .timeline-heading { margin-bottom: 60px; }
+  .about-timeline .timeline-track { margin-left: 0; }
+  .about-timeline .timeline-track::before { left: 15px; }
+  .about-timeline .timeline-entry {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 0 48px 46px;
+  }
+  .about-timeline .timeline-marker { left: 15px; width: 31px; height: 31px; }
+  .about-timeline .timeline-year { text-align: left; padding-top: 0; font-size: 24px; }
+  .about-timeline .timeline-content { padding: 0 0 24px; }
+  .about-timeline .timeline-content h3 { font-size: clamp(25px, 5vw, 34px); }
+  .about-timeline .timeline-content p { font-size: 14px; line-height: 1.8; }
+}
+
+@media (max-width: 390px) {
+  .about-timeline .timeline-heading h2 { font-size: 38px; }
+  .about-timeline .timeline-entry { padding-left: 40px; padding-bottom: 38px; }
+  .about-timeline .timeline-track::before { left: 13px; }
+  .about-timeline .timeline-marker { left: 13px; width: 27px; height: 27px; }
+  .about-timeline .timeline-year { font-size: 21px; }
+  .about-timeline .timeline-content h3 { font-size: 25px; }
+}
