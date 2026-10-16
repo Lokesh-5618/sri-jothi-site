@@ -4594,91 +4594,51 @@ html, body {
 }
 
 
-/* ===== What we do: anchored floating detail cards ===== */
+/* ===== What we do: reveal details inside the SAME capability card ===== */
 .dark-section .cap-grid {
   overflow: visible;
   isolation: isolate;
+  align-items: stretch;
 }
 
 .dark-section .cap {
   position: relative;
-  min-width: 0;
-  overflow: visible;
   z-index: 0;
-  cursor: default;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
   transform: none;
-  transition: opacity .8s var(--ease), filter .9s var(--ease), background .25s ease, box-shadow .25s ease;
+  transform-origin: center center;
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
 }
 
-/* Keep the original tile in place; only raise its stacking order on hover. */
-.dark-section .cap:hover,
-.dark-section .cap:focus-within,
-.dark-section .cap:focus-visible {
-  z-index: 10;
-  background: #193f31;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .16);
-  outline: none;
-}
-
-.dark-section .cap:focus-visible {
-  outline: 2px solid var(--lime);
-  outline-offset: 3px;
-}
-
-.dark-section .cap .cap-short {
-  margin-bottom: 0;
-}
-
-/* A distinct pop-out panel floats beside the tile, rather than extending it. */
-.dark-section .cap-details {
-  position: absolute;
-  top: 50%;
-  left: calc(100% - 18px);
-  right: auto;
-  width: min(340px, 34vw);
+/* The detail copy is part of each card, hidden until that card is active. */
+.dark-section .cap .cap-details {
+  position: static;
+  display: block;
   box-sizing: border-box;
-  padding: 24px 26px;
-  background: #193f31;
-  border: 1px solid rgba(219, 233, 210, .2);
-  border-radius: 3px;
-  box-shadow: 0 22px 48px rgba(0, 0, 0, .3);
+  width: 100%;
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(12px, -50%) scale(.97);
-  transform-origin: left center;
-  transition: opacity .2s ease, transform .24s ease, visibility .2s;
-  z-index: 20;
+  transform: none;
+  transition: max-height .32s ease, margin-top .25s ease, padding-top .25s ease, opacity .2s ease, visibility .2s ease;
 }
 
-/* Keep pop-outs inside the section: the two right-hand tiles open to the left. */
-.dark-section .cap:nth-child(3) .cap-details,
-.dark-section .cap:nth-child(4) .cap-details {
-  left: auto;
-  right: calc(100% - 18px);
-  transform: translate(-12px, -50%) scale(.97);
-  transform-origin: right center;
-}
-
-.dark-section .cap:hover .cap-details,
-.dark-section .cap:focus-within .cap-details {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translate(0, -50%) scale(1);
-}
-
-.dark-section .cap:nth-child(3):hover .cap-details,
-.dark-section .cap:nth-child(4):hover .cap-details,
-.dark-section .cap:nth-child(3):focus-within .cap-details,
-.dark-section .cap:nth-child(4):focus-within .cap-details {
-  transform: translate(0, -50%) scale(1);
-}
-
-.dark-section .cap-details p {
+.dark-section .cap .cap-details p {
   max-width: none;
-  margin: 0 0 18px;
-  color: rgba(255, 255, 255, .78);
+  margin: 0 0 16px;
+  color: rgba(255,255,255,.78);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -4695,123 +4655,20 @@ html, body {
   text-decoration: none;
 }
 
-.dark-section .cap-detail-link span {
-  font-size: 16px;
-  transition: transform .2s ease;
-}
-
+.dark-section .cap-detail-link span { transition: transform .2s ease; }
 .dark-section .cap-detail-link:hover span { transform: translate(3px, -3px); }
-.dark-section .cap-arrow { transition: opacity .25s ease, transform .25s ease; }
-.dark-section .cap:hover .cap-arrow,
-.dark-section .cap:focus-within .cap-arrow { opacity: 1; transform: translateY(0); }
-
-@media (max-width: 1050px) {
-  .dark-section .cap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1px; }
-  .dark-section .cap { min-height: 300px; }
-  .dark-section .cap-details { width: min(320px, 40vw); }
-  /* In a two-column layout, each card opens toward the centre of the grid. */
-  .dark-section .cap:nth-child(3) .cap-details { left: calc(100% - 18px); right: auto; transform: translate(12px, -50%) scale(.97); transform-origin: left center; }
-  .dark-section .cap:nth-child(3):hover .cap-details,
-  .dark-section .cap:nth-child(3):focus-within .cap-details { transform: translate(0, -50%) scale(1); }
-}
-
-@media (max-width: 640px) {
-  .dark-section .cap-grid { grid-template-columns: 1fr; }
-  .dark-section .cap { min-height: 0; padding: 26px 24px 54px; }
-  /* Touch layout: reveal the details below the tile, since there is no hover. */
-  .dark-section .cap-details {
-    position: static;
-    display: none;
-    width: 100%;
-    margin-top: 18px;
-    padding: 18px 0 0;
-    background: transparent;
-    border: 0;
-    border-top: 1px solid rgba(219, 233, 210, .2);
-    border-radius: 0;
-    box-shadow: none;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: none;
-  }
-  .dark-section .cap:nth-child(3) .cap-details,
-  .dark-section .cap:nth-child(4) .cap-details { left: auto; right: auto; transform: none; }
-  .dark-section .cap:hover .cap-details,
-  .dark-section .cap:focus-within .cap-details { display: block; transform: none; }
-  .dark-section .cap:hover,
-  .dark-section .cap:focus-within { box-shadow: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dark-section .cap,
-  .dark-section .cap-details,
-  .dark-section .cap-detail-link span { transition: none !important; }
-}
-
-
-/* ===== What we do: expand the existing card itself on hover ===== */
-.dark-section .cap-grid {
-  align-items: stretch;
-  overflow: visible;
-  isolation: isolate;
-}
-
-.dark-section .cap {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-  transform: scale(1);
-  transform-origin: center center;
-  transition:
-    transform .28s cubic-bezier(.2,.7,.2,1),
-    background-color .25s ease,
-    box-shadow .28s ease,
-    border-color .25s ease;
-}
-
-/* Details stay inside the original card and are revealed by expanding it. */
-.dark-section .cap .cap-details {
-  position: static;
-  width: auto;
-  max-height: 0;
-  margin-top: 0;
-  padding: 0;
-  overflow: hidden;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: none;
-  transition:
-    max-height .32s ease,
-    margin-top .28s ease,
-    padding-top .28s ease,
-    opacity .2s ease,
-    visibility .2s ease;
-}
-
-.dark-section .cap .cap-details p {
-  margin: 0 0 18px;
-  color: rgba(255,255,255,.78);
-  font-size: 13px;
-  line-height: 1.7;
-}
 
 .dark-section .cap:hover,
 .dark-section .cap:focus-within,
 .dark-section .cap:focus-visible {
   z-index: 5;
-  transform: scale(1.035);
+  overflow: hidden;
   background: #193f31;
   box-shadow: 0 18px 38px rgba(0,0,0,.24);
-  overflow: visible;
+  outline: none;
 }
+
+.dark-section .cap:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
 
 .dark-section .cap:hover .cap-details,
 .dark-section .cap:focus-within .cap-details {
@@ -4824,46 +4681,46 @@ html, body {
   pointer-events: auto;
 }
 
-.dark-section .cap:nth-child(3) .cap-details,
-.dark-section .cap:nth-child(4) .cap-details {
-  left: auto;
-  right: auto;
-  transform: none;
-}
-
-@media (max-width: 1050px) {
-  .dark-section .cap { transform-origin: center top; }
-  .dark-section .cap:hover,
-  .dark-section .cap:focus-within,
-  .dark-section .cap:focus-visible { transform: scale(1.02); }
-}
-
 @media (max-width: 640px) {
   .dark-section .cap,
   .dark-section .cap:hover,
   .dark-section .cap:focus-within,
   .dark-section .cap:focus-visible {
     transform: none;
-    overflow: hidden;
     box-shadow: none;
   }
-  .dark-section .cap .cap-details {
-    display: block;
-    max-height: 0;
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
-  }
+  .dark-section .cap .cap-details { max-height: 0; }
   .dark-section .cap:hover .cap-details,
-  .dark-section .cap:focus-within .cap-details {
-    max-height: 280px;
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(219,233,210,.2);
-  }
+  .dark-section .cap:focus-within .cap-details { max-height: 320px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dark-section .cap,
-  .dark-section .cap .cap-details { transition: none !important; }
+  .dark-section .cap .cap-details,
+  .dark-section .cap-detail-link span { transition: none !important; }
+}
+
+/* FIX: when a capability card is active, replace its teaser with the full detail copy.
+   Keep the heading/icon/number; never render the short and long descriptions together. */
+.dark-section .cap > p {
+  transition: opacity .16s ease, max-height .22s ease, margin .22s ease;
+  max-height: 140px;
+  opacity: 1;
+  overflow: hidden;
+}
+.dark-section .cap:hover > p,
+.dark-section .cap:focus-within > p,
+.dark-section .cap:focus-visible > p {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.dark-section .cap .cap-details {
+  flex: 0 0 auto;
+}
+.dark-section .cap:hover .cap-details,
+.dark-section .cap:focus-within .cap-details,
+.dark-section .cap:focus-visible .cap-details {
+  max-height: 320px;
 }
