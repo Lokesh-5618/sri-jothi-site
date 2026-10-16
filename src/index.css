@@ -4700,27 +4700,52 @@ html, body {
   .dark-section .cap-detail-link span { transition: none !important; }
 }
 
-/* FIX: when a capability card is active, replace its teaser with the full detail copy.
-   Keep the heading/icon/number; never render the short and long descriptions together. */
-.dark-section .cap > p {
+/* FINAL What we do interaction: the active card lifts and pops forward,
+   overlapping its neighbours while revealing the long copy inside itself. */
+.dark-section .cap {
+  overflow: visible;
+  transform: translateY(0) scale(1);
+  transform-origin: center center;
+  z-index: 0;
+  transition: transform .28s cubic-bezier(.2,.75,.25,1),
+              background-color .25s ease, box-shadow .28s ease;
+}
+.dark-section .cap:nth-child(1) { transform-origin: left center; }
+.dark-section .cap:nth-child(4) { transform-origin: right center; }
+.dark-section .cap:hover,
+.dark-section .cap:focus-within,
+.dark-section .cap:focus-visible {
+  z-index: 20;
+  transform: translateY(-10px) scale(1.08);
+  overflow: visible;
+  background: #193f31;
+  box-shadow: 0 24px 55px rgba(0,0,0,.32), 0 0 0 1px rgba(219,233,210,.22);
+}
+.dark-section .cap > .cap-short {
   transition: opacity .16s ease, max-height .22s ease, margin .22s ease;
   max-height: 140px;
   opacity: 1;
   overflow: hidden;
 }
-.dark-section .cap:hover > p,
-.dark-section .cap:focus-within > p,
-.dark-section .cap:focus-visible > p {
+.dark-section .cap:hover > .cap-short,
+.dark-section .cap:focus-within > .cap-short,
+.dark-section .cap:focus-visible > .cap-short {
   max-height: 0;
   opacity: 0;
   margin-top: 0;
   margin-bottom: 0;
 }
-.dark-section .cap .cap-details {
-  flex: 0 0 auto;
-}
+.dark-section .cap .cap-details { flex: 0 0 auto; }
 .dark-section .cap:hover .cap-details,
 .dark-section .cap:focus-within .cap-details,
-.dark-section .cap:focus-visible .cap-details {
-  max-height: 320px;
+.dark-section .cap:focus-visible .cap-details { max-height: 320px; }
+@media (max-width: 1050px) {
+  .dark-section .cap:hover,
+  .dark-section .cap:focus-within,
+  .dark-section .cap:focus-visible { transform: translateY(-5px) scale(1.025); }
+}
+@media (max-width: 640px) {
+  .dark-section .cap:hover,
+  .dark-section .cap:focus-within,
+  .dark-section .cap:focus-visible { transform: none; }
 }
