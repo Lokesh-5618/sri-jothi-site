@@ -5207,3 +5207,56 @@ html, body {
   .hero > .hero-copy h1 { font-size: clamp(40px, 9vw, 60px) !important; }
   .hero > .hero-copy .hero-intro { font-size: 13px !important; }
 }
+
+
+/* CONTINUOUS HERO MARQUEES: dynamic, seamless movement instead of slide-by-slide snapping */
+.hero > .hero-slider-top,
+.hero > .hero-slider-bottom {
+  overflow: hidden !important;
+  isolation: isolate;
+}
+.hero > .hero-slider-top .hero-slider-track,
+.hero > .hero-slider-bottom .hero-slider-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  height: 100% !important;
+  transform: none !important;
+  transition: none !important;
+  will-change: transform;
+}
+.hero > .hero-slider-top .hero-slider-track {
+  animation: heroMarqueeLeft 34s linear infinite !important;
+}
+.hero > .hero-slider-bottom .hero-slider-track {
+  animation: heroMarqueeRight 42s linear infinite !important;
+}
+.hero .hero-slide {
+  flex: 0 0 clamp(280px, 34vw, 560px) !important;
+  width: clamp(280px, 34vw, 560px) !important;
+  max-width: none !important;
+  height: 100% !important;
+}
+.hero .hero-slide:nth-child(4n + 1) { background: linear-gradient(110deg, #b7aa91, #87907c); }
+.hero .hero-slide:nth-child(4n + 2) { background: linear-gradient(110deg, #87907c, #536c58); }
+.hero .hero-slide:nth-child(4n + 3) { background: linear-gradient(110deg, #536c58, #294b3b); }
+.hero .hero-slide:nth-child(4n) { background: linear-gradient(110deg, #9b9b7e, #536c58); }
+@keyframes heroMarqueeLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes heroMarqueeRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.hero-slider:hover .hero-slider-track { animation-play-state: paused !important; }
+@media (max-width: 640px) {
+  .hero .hero-slide { flex-basis: 78vw !important; width: 78vw !important; }
+  .hero > .hero-slider-top .hero-slider-track { animation-duration: 28s !important; }
+  .hero > .hero-slider-bottom .hero-slider-track { animation-duration: 34s !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero > .hero-slider-top .hero-slider-track,
+  .hero > .hero-slider-bottom .hero-slider-track { animation: none !important; }
+}
