@@ -10,11 +10,11 @@ const RANGE_PRODUCTS = [
 ];
 
 const MARKETS = [
-  { name: 'United Kingdom', flag: '🇬🇧', status: 'Established', ports: 'Felixstowe · Southampton · London Gateway' },
-  { name: 'Gulf', flag: '🇦🇪', status: 'Established', ports: 'Jebel Ali · Sohar · Hamad' },
-  { name: 'United States', flag: '🇺🇸', status: 'Priority', ports: 'Los Angeles · New York · Savannah' },
-  { name: 'Canada', flag: '🇨🇦', status: 'Expansion', ports: 'Vancouver · Montreal · Halifax' },
-  { name: 'Australia', flag: '🇦🇺', status: 'Expansion', ports: 'Sydney · Melbourne · Brisbane' },
+  { name: 'United Kingdom', flagCode: 'GB', flagFile: 'gb.jpg', status: 'Established', ports: 'Felixstowe · Southampton · London Gateway' },
+  { name: 'Gulf', flagCode: 'AE', flagFile: 'ae.jpg', status: 'Established', ports: 'Jebel Ali · Sohar · Hamad' },
+  { name: 'United States', flagCode: 'US', flagFile: 'us.jpg', status: 'Priority', ports: 'Los Angeles · New York · Savannah' },
+  { name: 'Canada', flagCode: 'CA', flagFile: 'ca.jpg', status: 'Expansion', ports: 'Vancouver · Montreal · Halifax' },
+  { name: 'Australia', flagCode: 'AU', flagFile: 'au.jpg', status: 'Expansion', ports: 'Sydney · Melbourne · Brisbane' },
 ];
 
 // Duplicated so the CSS marquee loop is seamless (it scrolls exactly one
@@ -471,7 +471,10 @@ export default function Home() {
             {MARKETS.map((market) => (
               <div className="market-card blur-reveal" key={market.name}>
                 <div className="market-card-top">
-                  <span className="market-flag" aria-hidden="true">{market.flag}</span>
+                  <div className="market-flag-placeholder" role="img" aria-label={`${market.name} flag image placeholder`} data-flag-file={market.flagFile}>
+                    <span className="market-flag-code">{market.flagCode}</span>
+                    <span className="market-flag-label">{market.flagFile}</span>
+                  </div>
                   <span className="market-status">{market.status}</span>
                 </div>
                 <h3>{market.name}</h3>
@@ -482,23 +485,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — Contact */}
-      <section className="section contact-section" id="contact">
+      {/* 06 — Why Sri Jothi */}
+      <section className="section why" id="why">
         <div className="wrap">
           <div className="home-section-head">
             <div className="section-number reveal">06</div>
-            <div className="eyebrow reveal">Let's move something</div>
+            <div className="eyebrow reveal">Why Sri Jothi</div>
             <h2 className="display text-reveal reveal" data-stagger>
-              <span>Tell us what you need.</span>{' '}
-              <span><em>We'll take it from India.</em></span>
+              <span>Why buyers choose</span>{' '}
+              <span>Sri Jothi Traders.</span>
             </h2>
           </div>
-          <div className="contact-row">
-            <p className="reveal">For B2B supply, private label or a custom sourcing requirement, start a conversation with the Sri Jothi team.</p>
-            <Link className="btn cta reveal" to="/contact">Start an enquiry &rarr;</Link>
+          <div className="why-grid" data-stagger>
+            {VALUE_POINTS.map((v, i) => (
+              <article className="why-item reveal" key={v.title} style={{ '--i': i }}>
+                <span className="why-num">0{i + 1}</span>
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
+
 
       {/* 07 — Reviews */}
       <section className="section reviews" id="reviews">
@@ -525,28 +534,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 08 — Why Sri Jothi */}
-      <section className="section why" id="why">
+
+
+      {/* 08 — Contact */}
+      <section className="section contact-section" id="contact">
         <div className="wrap">
           <div className="home-section-head">
             <div className="section-number reveal">08</div>
-            <div className="eyebrow reveal">Why Sri Jothi</div>
+            <div className="eyebrow reveal">Let's move something</div>
             <h2 className="display text-reveal reveal" data-stagger>
-              <span>Why buyers choose</span>{' '}
-              <span>Sri Jothi Traders.</span>
+              <span>Tell us what you need.</span>{' '}
+              <span><em>We'll take it from India.</em></span>
             </h2>
           </div>
-          <div className="why-grid" data-stagger>
-            {VALUE_POINTS.map((v, i) => (
-              <article className="why-item reveal" key={v.title} style={{ '--i': i }}>
-                <span className="why-num">0{i + 1}</span>
-                <h3>{v.title}</h3>
-                <p>{v.text}</p>
-              </article>
-            ))}
+          <div className="contact-row">
+            <p className="reveal">For B2B supply, private label or a custom sourcing requirement, start a conversation with the Sri Jothi team.</p>
+            <Link className="btn cta reveal" to="/contact">Start an enquiry &rarr;</Link>
           </div>
         </div>
       </section>
+
 
 
 
