@@ -5350,3 +5350,124 @@ html, body {
   .hero > .hero-slider-top .hero-slider-track,
   .hero > .hero-slider-bottom .hero-slider-track { animation: none !important; }
 }
+
+/* ============================================================
+   FINAL MOBILE PASS — site-wide layout and touch targets
+   Keep this block last so it wins over legacy page styles.
+   ============================================================ */
+@media (max-width: 768px) {
+  html, body { max-width: 100%; overflow-x: clip; }
+  .wrap { width: calc(100% - 40px) !important; }
+  section { scroll-margin-top: 58px; }
+
+  /* Navigation */
+  .nav { height: 56px !important; padding: 0 20px !important; }
+  .logo { gap: 8px; min-width: 0; }
+  .logo-mark { width: 30px; height: 30px; }
+  .hamburger { padding: 10px 4px; }
+  .mobile-drawer { padding: 76px 28px 32px !important; gap: 20px !important; }
+  .mobile-drawer a { font-size: clamp(25px, 7vw, 34px) !important; }
+  .float-enquire { right: 14px !important; bottom: 14px !important; min-height: 42px; padding: 12px 17px !important; }
+
+  /* Typography and section rhythm */
+  .eyebrow { font-size: 10px !important; letter-spacing: .14em !important; line-height: 1.5; }
+  .display { font-size: clamp(34px, 8.5vw, 56px) !important; line-height: .98 !important; }
+  .body-copy { font-size: 14px !important; line-height: 1.7 !important; margin-top: 18px !important; }
+  .section-head { min-height: 0 !important; margin-bottom: 34px !important; }
+  .section-head > .section-number { position: static !important; display: block; margin-bottom: 16px !important; font-size: 42px !important; }
+  .section-head > .eyebrow { position: static !important; display: block; transform: none !important; text-align: left !important; white-space: normal !important; margin-bottom: 18px !important; }
+  .section-head > .display { width: 100% !important; margin: 0 !important; }
+  .section-head .eyebrow { padding: 0 !important; }
+  .section-number-center, .section-number-on-dark { font-size: 42px !important; }
+
+  /* Homepage hero: equal, full-width scrolling belts around compact copy */
+  .hero {
+    height: auto !important;
+    min-height: max(100svh, 680px) !important;
+    max-height: none !important;
+    grid-template-rows: minmax(150px, 1fr) auto minmax(150px, 1fr) !important;
+    overflow: hidden !important;
+  }
+  .hero > .hero-slider-top,
+  .hero > .hero-slider-bottom { min-height: 150px !important; }
+  .hero .hero-slide { flex-basis: 78vw !important; width: 78vw !important; }
+  .hero > .hero-copy { width: calc(100% - 40px) !important; padding: 24px 0 !important; }
+  .hero > .hero-copy h1 { font-size: clamp(39px, 9.2vw, 60px) !important; line-height: .94 !important; margin-top: 12px !important; }
+  .hero > .hero-copy .hero-intro { max-width: 48ch; font-size: 13px !important; line-height: 1.65 !important; margin-top: 16px !important; }
+  .hero > .hero-copy .hero-actions { display: flex; justify-content: center !important; gap: 10px; margin-top: 18px !important; }
+  .hero .hero-actions .btn { min-height: 44px; padding: 0 17px; }
+
+  /* Inner-page hero and common layouts */
+  .page-hero { min-height: 0 !important; padding: 118px 0 56px !important; }
+  .page-hero h1 { max-width: 14ch !important; font-size: clamp(42px, 10vw, 66px) !important; line-height: .98 !important; }
+  .page-hero p { font-size: 14px !important; line-height: 1.7 !important; }
+  .grid-2, .intro-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .cap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .cap { min-height: 260px !important; padding: 22px 18px !important; }
+  .cap h3 { font-size: clamp(24px, 5vw, 30px) !important; }
+  .cap p { font-size: 12px !important; }
+  .tile { padding: 22px !important; }
+
+  /* Product cards / horizontal product belt */
+  .products-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .product { min-height: 360px !important; padding: 24px !important; }
+  .product.small { min-height: 300px !important; }
+  .product h3 { font-size: clamp(34px, 8vw, 46px) !important; }
+  .product p { left: 24px !important; bottom: 22px !important; right: 24px; }
+  .product-art { width: 150px !important; right: 28px !important; top: 82px !important; }
+  .products-track { gap: 12px !important; }
+  .products-track .product { min-width: min(78vw, 300px) !important; max-width: min(78vw, 300px) !important; min-height: 300px !important; padding: 22px !important; }
+
+  /* Markets, reviews, trust cards and other grids */
+  .markets-grid, .market-grid, .reviews-grid, .review-grid, .why-grid, .cert-grid, .channels-grid,
+  .stats-grid, .benefits-grid, .contact-grid, .locations-grid { grid-template-columns: 1fr !important; }
+  .market-card, .review-card, .why-card, .cert-card, .channel, .stat-card, .benefit-card, .location-card { min-width: 0; }
+  .marquee { padding: 14px 0 !important; }
+  .marquee span { font-size: 22px !important; padding: 0 20px !important; }
+
+  /* Forms and buttons */
+  input, select, textarea { max-width: 100%; font-size: 16px !important; }
+  .btn, .navcta, .mob-cta { min-height: 44px; }
+  .hero-actions, .cta-actions { flex-wrap: wrap; }
+
+  /* Footer */
+  .footer-connect-section { padding: 36px 0 28px !important; }
+  .footer-connect-label { white-space: normal !important; font-size: clamp(34px, 8vw, 44px) !important; line-height: 1.05 !important; }
+  .footer-socials { gap: 10px !important; flex-wrap: wrap; }
+  .footer-socials a { width: 46px !important; height: 46px !important; }
+  .footer-certs { justify-content: center !important; gap: 14px 20px !important; flex-wrap: wrap; }
+  .footer-certs span { font-size: 11px !important; }
+  .footer-links { gap: 14px 20px !important; padding-bottom: 18px !important; }
+  .footer-links a { white-space: normal !important; }
+  .footer-copyright { white-space: normal !important; line-height: 1.6; }
+}
+
+@media (max-width: 480px) {
+  .wrap { width: calc(100% - 32px) !important; }
+  section { padding: 54px 0 !important; }
+  .nav { padding: 0 16px !important; }
+  .logo { font-size: 17px !important; }
+  .logo-mark { width: 28px; height: 28px; }
+  .hero { min-height: max(100svh, 650px) !important; grid-template-rows: minmax(132px, 1fr) auto minmax(132px, 1fr) !important; }
+  .hero > .hero-slider-top, .hero > .hero-slider-bottom { min-height: 132px !important; }
+  .hero > .hero-copy { width: calc(100% - 32px) !important; padding: 20px 0 !important; }
+  .hero > .hero-copy h1 { font-size: clamp(35px, 9.4vw, 46px) !important; }
+  .hero > .hero-copy .hero-intro { font-size: 12.5px !important; }
+  .hero > .hero-copy .hero-actions { gap: 8px !important; }
+  .hero .hero-actions .btn { padding: 0 14px !important; font-size: 11px !important; }
+  .hero .hero-slide { flex-basis: 82vw !important; width: 82vw !important; }
+  .cap-grid { grid-template-columns: 1fr !important; }
+  .cap { min-height: 220px !important; }
+  .page-hero { padding-top: 106px !important; }
+  .page-hero h1 { font-size: clamp(36px, 10vw, 48px) !important; }
+  .section-head > .display { font-size: clamp(32px, 9vw, 44px) !important; }
+  .product { min-height: 320px !important; }
+  .products-track .product { min-width: 82vw !important; max-width: 82vw !important; }
+  .footer-connect-label { font-size: 34px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero > .hero-slider-top .hero-slider-track,
+  .hero > .hero-slider-bottom .hero-slider-track,
+  .products-track, .marquee-track { animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
+}
