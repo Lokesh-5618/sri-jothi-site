@@ -5209,52 +5209,142 @@ html, body {
 }
 
 
-/* CONTINUOUS HERO MARQUEES: dynamic, seamless movement instead of slide-by-slide snapping */
+
+
+/* HERO IMAGE BELTS — continuous marquee, like the About-page reference */
+.hero {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+  height: 100svh !important;
+  min-height: 620px !important;
+  max-height: 100svh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
 .hero > .hero-slider-top,
 .hero > .hero-slider-bottom {
+  position: relative !important;
+  grid-column: 1 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   overflow: hidden !important;
   isolation: isolate;
 }
+.hero > .hero-slider-top { grid-row: 1 !important; }
+.hero > .hero-copy {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  position: relative !important;
+  z-index: 3 !important;
+  width: min(100% - 48px, 900px) !important;
+  max-width: 900px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  padding: clamp(18px, 2.4vh, 28px) 0 !important;
+  align-self: center !important;
+  text-align: center !important;
+}
+.hero > .hero-slider-bottom { grid-row: 3 !important; }
 .hero > .hero-slider-top .hero-slider-track,
 .hero > .hero-slider-bottom .hero-slider-track {
   display: flex !important;
-  flex-wrap: nowrap !important;
+  flex-flow: row nowrap !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
   width: max-content !important;
   min-width: max-content !important;
   height: 100% !important;
-  transform: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  transform: translate3d(0, 0, 0);
   transition: none !important;
   will-change: transform;
 }
 .hero > .hero-slider-top .hero-slider-track {
-  animation: heroMarqueeLeft 34s linear infinite !important;
+  animation: heroBeltLeft 32s linear infinite !important;
 }
 .hero > .hero-slider-bottom .hero-slider-track {
-  animation: heroMarqueeRight 42s linear infinite !important;
+  animation: heroBeltRight 38s linear infinite !important;
 }
 .hero .hero-slide {
-  flex: 0 0 clamp(280px, 34vw, 560px) !important;
-  width: clamp(280px, 34vw, 560px) !important;
+  position: relative !important;
+  flex: 0 0 clamp(420px, 48vw, 760px) !important;
+  width: clamp(420px, 48vw, 760px) !important;
   max-width: none !important;
   height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  border-right: 1px solid rgba(244, 240, 231, .12) !important;
 }
-.hero .hero-slide:nth-child(4n + 1) { background: linear-gradient(110deg, #b7aa91, #87907c); }
-.hero .hero-slide:nth-child(4n + 2) { background: linear-gradient(110deg, #87907c, #536c58); }
-.hero .hero-slide:nth-child(4n + 3) { background: linear-gradient(110deg, #536c58, #294b3b); }
-.hero .hero-slide:nth-child(4n) { background: linear-gradient(110deg, #9b9b7e, #536c58); }
-@keyframes heroMarqueeLeft {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.hero .hero-slide span {
+  position: relative;
+  z-index: 1;
+  color: rgba(244, 240, 231, .56) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .16em !important;
+  text-transform: uppercase !important;
 }
-@keyframes heroMarqueeRight {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+.hero .hero-slide:nth-child(4n + 1) { background: linear-gradient(115deg, #a99a7f, #727c68) !important; }
+.hero .hero-slide:nth-child(4n + 2) { background: linear-gradient(115deg, #697a68, #385a48) !important; }
+.hero .hero-slide:nth-child(4n + 3) { background: linear-gradient(115deg, #385a48, #1d4032) !important; }
+.hero .hero-slide:nth-child(4n) { background: linear-gradient(115deg, #8d9076, #536b58) !important; }
+.hero > .hero-copy h1 {
+  margin-top: 10px !important;
+  font-size: clamp(44px, 5.8vw, 82px) !important;
+  line-height: .92 !important;
+}
+.hero > .hero-copy .hero-intro { margin: 14px auto 0 !important; line-height: 1.55 !important; }
+.hero > .hero-copy .hero-actions { justify-content: center !important; margin-top: 16px !important; }
+@keyframes heroBeltLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes heroBeltRight {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
 }
 .hero-slider:hover .hero-slider-track { animation-play-state: paused !important; }
-@media (max-width: 640px) {
-  .hero .hero-slide { flex-basis: 78vw !important; width: 78vw !important; }
-  .hero > .hero-slider-top .hero-slider-track { animation-duration: 28s !important; }
-  .hero > .hero-slider-bottom .hero-slider-track { animation-duration: 34s !important; }
+@media (max-height: 760px) and (min-width: 769px) {
+  .hero { min-height: 0 !important; }
+  .hero > .hero-copy { padding: 10px 0 !important; }
+  .hero > .hero-copy h1 { font-size: clamp(40px, 5vw, 68px) !important; }
+  .hero > .hero-copy .hero-intro { margin-top: 9px !important; }
+  .hero > .hero-copy .hero-actions { margin-top: 10px !important; }
+}
+@media (max-width: 768px) {
+  .hero {
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    grid-template-rows: minmax(140px, 1fr) auto minmax(140px, 1fr) !important;
+  }
+  .hero > .hero-copy { width: calc(100% - 36px) !important; padding: 22px 0 !important; }
+  .hero > .hero-copy h1 { font-size: clamp(40px, 9vw, 60px) !important; }
+  .hero > .hero-copy .hero-intro { font-size: 13px !important; }
+  .hero .hero-slide { flex-basis: 82vw !important; width: 82vw !important; }
+  .hero > .hero-slider-top .hero-slider-track { animation-duration: 26s !important; }
+  .hero > .hero-slider-bottom .hero-slider-track { animation-duration: 32s !important; }
+}
+@media (max-width: 390px) {
+  .hero { grid-template-rows: minmax(110px, 1fr) auto minmax(110px, 1fr) !important; }
+  .hero > .hero-copy { padding: 18px 0 !important; }
+  .hero > .hero-copy h1 { font-size: clamp(36px, 10vw, 44px) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero > .hero-slider-top .hero-slider-track,
