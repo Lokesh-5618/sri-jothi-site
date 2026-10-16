@@ -1,50 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 import HeroBgSlider from '../components/HeroBgSlider';
 
 export default function About() {
   useScrollReveal();
-  const timelineRef = useRef(null);
-
-  useEffect(() => {
-    const timeline = timelineRef.current;
-    if (!timeline) return undefined;
-
-    const entries = Array.from(timeline.querySelectorAll('.timeline-entry'));
-    if (!(window.IntersectionObserver)) {
-      timeline.classList.add('timeline-in-view');
-      entries.forEach((entry) => entry.classList.add('timeline-active'));
-      return undefined;
-    }
-
-    const sectionObserver = new IntersectionObserver((observations) => {
-      observations.forEach((observation) => {
-        if (observation.isIntersecting) {
-          timeline.classList.add('timeline-in-view');
-          sectionObserver.unobserve(observation.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    sectionObserver.observe(timeline);
-
-    const entryObserver = new IntersectionObserver((observations) => {
-      observations.forEach((observation) => {
-        if (observation.isIntersecting) {
-          observation.target.classList.add('timeline-active');
-          entryObserver.unobserve(observation.target);
-        }
-      });
-    }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
-
-    entries.forEach((entry) => entryObserver.observe(entry));
-
-    return () => {
-      sectionObserver.disconnect();
-      entryObserver.disconnect();
-    };
-  }, []);
 
   return (
     <div className="about-page">
@@ -66,7 +26,7 @@ export default function About() {
       </section>
 
       {/* OUR STORY & JOURNEY — COMBINED TIMELINE */}
-      <section className="about-timeline" ref={timelineRef}>
+      <section className="about-timeline">
         <div className="wrap">
           <div className="timeline-heading">
             <p className="eyebrow reveal">Our story &amp; journey</p>
