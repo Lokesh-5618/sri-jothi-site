@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 
@@ -93,14 +93,6 @@ const VALUE_POINTS = [
 export default function Home() {
   useScrollReveal();
 
-  const [slide, setSlide] = useState(0);
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
-    const id = setInterval(() => setSlide((s) => (s + 1) % HERO_SLIDES.length), 4000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -309,9 +301,9 @@ export default function Home() {
 
       <section className="hero">
         <div className="hero-slider hero-slider-top" aria-roledescription="carousel" aria-label="Export product imagery">
-          <div className="hero-slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
-            {HERO_SLIDES.map((s, i) => (
-              <div className="hero-slide" key={i} aria-hidden={i !== slide}>
+          <div className="hero-slider-track hero-slider-track-top">
+            {[...HERO_SLIDES, ...HERO_SLIDES].map((s, i) => (
+              <div className="hero-slide" key={i} aria-hidden={i >= HERO_SLIDES.length}>
                 <span>{s.label} · placeholder</span>
               </div>
             ))}
@@ -326,9 +318,9 @@ export default function Home() {
         </div>
 
         <div className="hero-slider hero-slider-bottom" aria-roledescription="carousel" aria-label="Export product imagery">
-          <div className="hero-slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
-            {HERO_SLIDES.map((s, i) => (
-              <div className="hero-slide" key={i} aria-hidden={i !== slide}>
+          <div className="hero-slider-track hero-slider-track-bottom">
+            {[...HERO_SLIDES, ...HERO_SLIDES].map((s, i) => (
+              <div className="hero-slide" key={i} aria-hidden={i >= HERO_SLIDES.length}>
                 <span>{s.label} · placeholder</span>
               </div>
             ))}
