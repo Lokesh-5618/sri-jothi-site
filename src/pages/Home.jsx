@@ -308,6 +308,16 @@ export default function Home() {
     <>
 
       <section className="hero">
+        <div className="hero-slider hero-slider-top" aria-roledescription="carousel" aria-label="Export product imagery">
+          <div className="hero-slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
+            {HERO_SLIDES.map((s, i) => (
+              <div className="hero-slide" key={i} aria-hidden={i !== slide}>
+                <span>{s.label} · placeholder</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="wrap hero-copy">
           <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
           <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
@@ -315,7 +325,7 @@ export default function Home() {
           <div className="hero-actions"><Link className="btn dark" to="/contact">Contact us</Link><a className="btn light" href="#products">Explore products</a></div>
         </div>
 
-        <div className="hero-slider" aria-roledescription="carousel">
+        <div className="hero-slider hero-slider-bottom" aria-roledescription="carousel" aria-label="Export product imagery">
           <div className="hero-slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>
             {HERO_SLIDES.map((s, i) => (
               <div className="hero-slide" key={i} aria-hidden={i !== slide}>
