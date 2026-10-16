@@ -4750,3 +4750,38 @@ html, body {
   .dark-section .cap:focus-within,
   .dark-section .cap:focus-visible { transform: none; }
 }
+
+/* ===== Header scroll behavior + floating Contact Us CTA =====
+   Header stays at the top of the page and scrolls away naturally.
+   Only the Contact Us action remains fixed at bottom-right. */
+.nav {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f3f0e8;
+  box-shadow: none;
+}
+
+.nav .navcta {
+  position: fixed !important;
+  right: clamp(18px, 3vw, 32px);
+  bottom: clamp(18px, 3vw, 30px);
+  top: auto;
+  z-index: 1000;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(23, 70, 53, .2);
+}
+
+@media (max-width: 768px) {
+  .nav .navcta {
+    display: inline-flex !important;
+    right: 16px;
+    bottom: 16px;
+    min-height: 44px;
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+}
