@@ -4952,3 +4952,64 @@ html, body {
   .hero > .hero-slider { height: clamp(105px, 30vw, 170px); }
   .hero > .hero-copy { width: calc(100% - 36px); padding-top: 30px; padding-bottom: 30px; }
 }
+
+/* Final hero fit: keep both image strips and the copy inside one viewport */
+.hero {
+  box-sizing: border-box;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+}
+.hero > .hero-slider-top,
+.hero > .hero-slider-bottom {
+  flex: 0 0 clamp(100px, 16svh, 150px);
+  height: clamp(100px, 16svh, 150px);
+  min-height: 0;
+  width: 100%;
+  margin: 0;
+}
+.hero > .hero-copy {
+  order: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: min(100% - 48px, 900px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(14px, 2.5svh, 28px) 0;
+  box-sizing: border-box;
+}
+.hero > .hero-copy .hero-eyebrow { margin: 0; }
+.hero > .hero-copy h1 {
+  font-size: clamp(46px, 5.4vw, 78px);
+  line-height: .94;
+  margin-top: clamp(12px, 2svh, 20px);
+}
+.hero > .hero-copy .hero-intro {
+  margin-top: clamp(12px, 2svh, 20px);
+  max-width: 700px;
+}
+.hero > .hero-copy .hero-actions { margin-top: clamp(16px, 2.5svh, 24px); }
+.hero > .hero-slider-bottom { order: 3; }
+@media (max-height: 720px) and (min-width: 641px) {
+  .hero { min-height: 560px; }
+  .hero > .hero-slider-top,
+  .hero > .hero-slider-bottom { flex-basis: 100px; height: 100px; }
+  .hero > .hero-copy h1 { font-size: clamp(44px, 5vw, 66px); }
+  .hero > .hero-copy .hero-intro { margin-top: 10px; }
+  .hero > .hero-copy .hero-actions { margin-top: 14px; }
+}
+@media (max-width: 640px) {
+  .hero { height: auto; min-height: 100svh; overflow: visible; }
+  .hero > .hero-slider-top,
+  .hero > .hero-slider-bottom { flex: 0 0 clamp(90px, 17svh, 135px); height: clamp(90px, 17svh, 135px); }
+  .hero > .hero-copy { flex: 0 0 auto; width: calc(100% - 36px); padding: 28px 0; }
+  .hero > .hero-copy h1 { font-size: clamp(42px, 11vw, 60px); }
+  .hero > .hero-copy .hero-intro { font-size: 14px; line-height: 1.65; }
+}
