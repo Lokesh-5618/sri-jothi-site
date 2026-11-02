@@ -10,17 +10,14 @@ const RANGE_PRODUCTS = [
 ];
 
 const MARKETS = [
-  { name: 'United Kingdom', flagCode: 'GB', flagFile: 'gb.jpg', status: 'Established', ports: 'Felixstowe · Southampton · London Gateway' },
-  { name: 'Gulf', flagCode: 'AE', flagFile: 'ae.jpg', status: 'Established', ports: 'Jebel Ali · Sohar · Hamad' },
-  { name: 'United States', flagCode: 'US', flagFile: 'us.jpg', status: 'Priority', ports: 'Los Angeles · New York · Savannah' },
-  { name: 'Canada', flagCode: 'CA', flagFile: 'ca.jpg', status: 'Expansion', ports: 'Vancouver · Montreal · Halifax' },
-  { name: 'Australia', flagCode: 'AU', flagFile: 'au.jpg', status: 'Expansion', ports: 'Sydney · Melbourne · Brisbane' },
+  { name: 'United Kingdom', flagCode: 'GB', flagFile: 'gb.jpg', flagUrl: 'https://flagcdn.com/w160/gb.jpg', status: 'Established', ports: 'Felixstowe · Southampton · London Gateway' },
+  { name: 'Gulf', flagCode: 'AE', flagFile: 'ae.jpg', flagUrl: 'https://flagcdn.com/w160/ae.jpg', status: 'Established', ports: 'Jebel Ali · Sohar · Hamad' },
+  { name: 'United States', flagCode: 'US', flagFile: 'us.jpg', flagUrl: 'https://flagcdn.com/w160/us.jpg', status: 'Priority', ports: 'Los Angeles · New York · Savannah' },
+  { name: 'Canada', flagCode: 'CA', flagFile: 'ca.jpg', flagUrl: 'https://flagcdn.com/w160/ca.jpg', status: 'Expansion', ports: 'Vancouver · Montreal · Halifax' },
+  { name: 'Australia', flagCode: 'AU', flagFile: 'au.jpg', flagUrl: 'https://flagcdn.com/w160/au.jpg', status: 'Expansion', ports: 'Sydney · Melbourne · Brisbane' },
 ];
 
-// Duplicated so the CSS marquee loop is seamless (it scrolls exactly one
-// copy's width, then the second identical copy picks up invisibly).
 const LOOPED_RANGE_PRODUCTS = [...RANGE_PRODUCTS, ...RANGE_PRODUCTS];
-
 
 const HERO_SLIDES = [
   { label: 'Image 1' },
@@ -93,17 +90,9 @@ const VALUE_POINTS = [
 export default function Home() {
   useScrollReveal();
 
-
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Journey Scroll Animation — real scroll-jacking.
-    // Desktop: page scroll is frozen the instant the journey box reaches the
-    // top of the viewport. Wheel/touch/keyboard input then drives the story
-    // progress directly (no page movement at all) until it hits 0% or 100%,
-    // at which point scroll is released and the page continues normally.
-    // Small screens keep the old lightweight pass-through animation, since
-    // hard-locking scroll on touch devices is a bad, janky experience there.
     const jpath = document.getElementById('jpath');
     const journeyScroll = document.querySelector('.journey-scroll');
     const jtruck = document.getElementById('jtruck');
@@ -158,7 +147,6 @@ export default function Home() {
       if (reduceMotion) {
         render(1);
       } else if (window.innerWidth <= 1050) {
-        // --- Small screens: simple pass-through, no locking ---
         let ticking = false;
         const updatePassThrough = () => {
           const rect = journeyScroll.getBoundingClientRect();
@@ -171,7 +159,10 @@ export default function Home() {
           ticking = false;
         };
         const onScroll = () => {
-          if (!ticking) { requestAnimationFrame(updatePassThrough); ticking = true; }
+          if (!ticking) {
+            requestAnimationFrame(updatePassThrough);
+            ticking = true;
+          }
         };
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', updatePassThrough);
@@ -181,7 +172,6 @@ export default function Home() {
           window.removeEventListener('resize', updatePassThrough);
         };
       } else {
-        // --- Desktop: hard scroll-lock ---
         let progress = 0;
         let locked = false;
         let lastScrollY = window.scrollY;
@@ -251,10 +241,6 @@ export default function Home() {
           const curTop = rect.top;
           lastTop = curTop;
 
-          // Detect the boundary being crossed between the last frame and this
-          // one, rather than requiring the scroll to land inside a tiny pixel
-          // window — normal/fast scrolling easily jumps past a fixed-pixel
-          // check in a single frame, which silently skipped the lock before.
           const crossedDown = prevTop > 0 && curTop <= 0;
           const crossedUp = prevTop < 0 && curTop >= 0;
           const atBoundary = Math.abs(curTop) < 1;
@@ -270,7 +256,10 @@ export default function Home() {
 
         const onScroll = () => {
           if (rafId) return;
-          rafId = requestAnimationFrame(() => { checkEntry(); rafId = null; });
+          rafId = requestAnimationFrame(() => {
+            checkEntry();
+            rafId = null;
+          });
         };
 
         window.addEventListener('scroll', onScroll, { passive: true });
@@ -291,14 +280,11 @@ export default function Home() {
       }
     }
 
-    return () => {
-      cleanupJourney();
-    };
+    return () => cleanupJourney();
   }, []);
 
   return (
     <>
-
       <section className="hero">
         <div className="hero-slider hero-slider-top" aria-roledescription="carousel" aria-label="Export product imagery">
           <div className="hero-slider-track hero-slider-track-top">
@@ -328,7 +314,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 01 — Who we are */}
       <section className="section intro" id="about">
         <div className="wrap">
           <div className="home-section-head">
@@ -352,7 +337,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 02 — What we do */}
       <section className="section dark-section" id="export">
         <div className="wrap">
           <div className="home-section-head">
@@ -365,22 +349,14 @@ export default function Home() {
           </div>
           <div className="cap-grid" data-stagger>
             {CAPS.map((c, i) => (
-              <article
-                className="cap reveal"
-                key={c.num}
-                tabIndex={0}
-                style={{ '--i': i }}
-                aria-label={`${c.title}: ${c.short}`}
-              >
+              <article className="cap reveal" key={c.num} tabIndex={0} style={{ '--i': i }} aria-label={`${c.title}: ${c.short}`}>
                 <span className="cap-num">{c.num}</span>
                 <div className="cap-icon"><svg viewBox="0 0 24 24">{c.icon}</svg></div>
                 <h3>{c.title}</h3>
                 <p className="cap-short">{c.short}</p>
                 <div className="cap-details">
                   <p>{c.more}</p>
-                  <Link className="cap-detail-link" to={c.link}>
-                    {c.linkLabel} <span aria-hidden="true">↗</span>
-                  </Link>
+                  <Link className="cap-detail-link" to={c.link}>{c.linkLabel} <span aria-hidden="true">↗</span></Link>
                 </div>
                 <div className="cap-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg></div>
               </article>
@@ -389,7 +365,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 03 — Our range */}
       <section className="section products-section" id="products">
         <div className="wrap">
           <div className="home-section-head">
@@ -400,7 +375,6 @@ export default function Home() {
               <span>for your market.</span>
             </h2>
           </div>
-
           <div className="products-carousel reveal">
             <div className="products-track">
               {LOOPED_RANGE_PRODUCTS.map((p, i) => (
@@ -412,12 +386,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-
           <Link className="btn dark reveal" style={{ marginTop: '28px' }} to="/products">See all seven categories &rarr;</Link>
         </div>
       </section>
 
-      {/* 04 — Private label */}
       <section className="section statement">
         <div className="wrap">
           <div className="home-section-head">
@@ -433,33 +405,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <section className="section journey" id="journey">
-        <div className="wrap journey-copy">
-          <div><div className="eyebrow reveal">Export in motion</div><h2 className="display text-reveal reveal" data-stagger><span>Watch the shipment</span><span>move to your market.</span></h2></div>
-        </div>
-        <div className="journey-scroll">
-          <div className="journey-pin">
-            <div className="wrap">
-              <div className="journey-visual">
-                <div className="jstatus" id="jstatus">Dindigul<b>Ready to dispatch</b></div>
-                <svg className="journey-svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid meet">
-                  <path className="jline-glow" d="M100 330 C300 190 420 370 610 260 S900 110 1090 220" />
-                  <path id="jpath" className="jline" d="M100 330 C300 190 420 370 610 260 S900 110 1090 220" />
-                  <circle className="jdot" cx="100" cy="330" r="7" /><circle className="jdot" cx="610" cy="260" r="6" /><circle className="jdot" cx="1090" cy="220" r="6" />
-                  <g id="jtruck"><rect className="jtruck" x="-28" y="-14" width="38" height="20" rx="3" /><path className="jtruck" d="M10 -8h14l9 9v5H10z" /><circle cx="-17" cy="8" r="4" fill="#171a18" /><circle cx="20" cy="8" r="4" fill="#171a18" /></g>
-                  <g id="jship" opacity="0"><path className="jship" d="M-55 5h100l-12 18h-72z" /><rect className="jtruck" x="-35" y="-15" width="22" height="18" /><rect className="jtruck" x="-9" y="-15" width="22" height="18" /><rect className="jtruck" x="17" y="-15" width="22" height="18" /></g>
-                  <text className="jlabel" x="85" y="365">DINDIGUL</text><text className="jlabel" x="580" y="295">PORT</text><text className="jlabel" x="1040" y="185">YOUR MARKET</text>
-                </svg>
-                <div className="journey-stage" id="journeyStage">01 · Source</div>
-                <div className="journey-progress-track"><div className="journey-progress-fill" id="journeyProgressFill"></div></div>
-              </div>
-              <div className="journey-words"><div className="journey-word active">Source</div><div className="journey-word">Prepare</div><div className="journey-word">Ship</div><div className="journey-word">Deliver</div></div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* 05 — Where we go */}
       <section className="section markets" id="markets">
         <div className="wrap">
           <div className="home-section-head">
@@ -473,9 +418,14 @@ export default function Home() {
             {MARKETS.map((market) => (
               <div className="market-card blur-reveal" key={market.name}>
                 <div className="market-card-top">
-                  <div className="market-flag-placeholder" role="img" aria-label={`${market.name} flag image placeholder`} data-flag-file={market.flagFile}>
-                    <span className="market-flag-code">{market.flagCode}</span>
-                    <span className="market-flag-label">{market.flagFile}</span>
+                  <div className="market-flag" role="img" aria-label={`${market.name} flag`}>
+                    <img
+                      src={market.flagUrl}
+                      alt=""
+                      loading="lazy"
+                      width="160"
+                      height="96"
+                    />
                   </div>
                   <span className="market-status">{market.status}</span>
                 </div>
@@ -487,7 +437,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — Why Sri Jothi */}
       <section className="section why" id="why">
         <div className="wrap">
           <div className="home-section-head">
@@ -510,8 +459,6 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* 07 — Reviews */}
       <section className="section reviews" id="reviews">
         <div className="wrap">
           <div className="home-section-head">
@@ -536,9 +483,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
-      {/* 08 — Contact */}
       <section className="section contact-section" id="contact">
         <div className="wrap">
           <div className="home-section-head">
@@ -555,10 +499,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
-
-
     </>
   );
 }
