@@ -3,6 +3,33 @@ import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 import HeroBgSlider from '../components/HeroBgSlider';
 
+function CrownIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M5 13l10 8 9-14 9 14 10-8-5 25H10L5 13Z" />
+      <path d="M10 38h28" />
+    </svg>
+  );
+}
+
+function BriefcaseIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <rect x="7" y="15" width="34" height="25" rx="4" />
+      <path d="M17 15v-4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 25h34M21 25v4h6v-4" />
+    </svg>
+  );
+}
+
+function ScaleIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M24 7v33M14 12h20M10 14l-7 15h14L10 14ZM38 14l-7 15h14l-7-15ZM17 40h14" />
+      <path d="M24 7l-4 4h8l-4-4Z" />
+    </svg>
+  );
+}
+
 export default function About() {
   useScrollReveal();
 
@@ -11,7 +38,6 @@ export default function About() {
       {/* HERO */}
       <section className="page-hero">
         <HeroBgSlider />
-
         <div className="wrap" data-stagger>
           <p className="eyebrow reveal">About us</p>
           <h1 className="text-reveal reveal">
@@ -25,7 +51,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* OUR STORY & JOURNEY — COMBINED TIMELINE */}
+      {/* OUR STORY & JOURNEY */}
       <section className="about-timeline">
         <div className="wrap">
           <div className="timeline-heading">
@@ -151,29 +177,37 @@ export default function About() {
         </div>
       </section>
 
-      {/* TEAM */}
-      <section className="team">
-        <div className="wrap">
-          <p className="eyebrow reveal">Our team</p>
-          <h2 className="reveal">The people behind every shipment.</h2>
-          <div className="team-grid reveal-stagger">
-            <div className="team-card reveal">
-              <div className="team-avatar" aria-hidden="true"></div>
-              <h3>Sritharan Perumal</h3>
-              <span>Founder &amp; Managing Director</span>
-              <p>Founded Sri Jothi Traders in 2015 and leads the company’s export operations.</p>
-            </div>
-            <div className="team-card reveal">
-              <div className="team-avatar" aria-hidden="true"></div>
-              <h3>Gowtham</h3>
-              <span>[Your role]</span>
-              <p>[One line on what you handle.]</p>
-            </div>
-            <div className="team-card reveal">
-              <div className="team-avatar" aria-hidden="true"></div>
-              <h3>[Brother’s name]</h3>
-              <span>[His role]</span>
-              <p>[One line on what he handles.]</p>
+      {/* LEADERSHIP & GOVERNANCE */}
+      <section className="leadership-section">
+        <div className="leadership-shell">
+          <header className="leadership-heading">
+            <p className="leadership-eyebrow">Our company</p>
+            <h2>Leadership &amp; Governance</h2>
+            <p>Leadership built on vision, responsibility<br className="desktop-break" /> and trust.</p>
+          </header>
+
+          <div className="leadership-cards">
+            <article className="leader-card leader-card-chair">
+              <div className="leader-icon leader-icon-gold"><CrownIcon /></div>
+              <h3>Mr. Sritharan</h3>
+              <p className="leader-role">Chairman &amp; Founder</p>
+              <p className="leader-description">Vision, strategic direction and overall leadership.</p>
+            </article>
+
+            <div className="leadership-supporting">
+              <article className="leader-card">
+                <div className="leader-icon"><BriefcaseIcon /></div>
+                <h3>Dr. Gowtham</h3>
+                <p className="leader-role">Chief Executive Officer</p>
+                <p className="leader-description">Business strategy, management and growth.</p>
+              </article>
+
+              <article className="leader-card">
+                <div className="leader-icon"><ScaleIcon /></div>
+                <h3>Mr. Nandha Kishore</h3>
+                <p className="leader-role">Chief Legal Officer</p>
+                <p className="leader-description">Legal affairs, contracts and compliance.</p>
+              </article>
             </div>
           </div>
         </div>
