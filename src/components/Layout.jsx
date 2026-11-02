@@ -1,29 +1,13 @@
-import { Outlet, Link, NavLink, useLocation } from 'react-router-dom';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
 const NAV_LINKS = [
-  { path: '/', label: 'Home', end: true },
+  { path: '/', label: 'Home' },
   { path: '/about', label: 'About' },
   { path: '/products', label: 'Products' },
   { path: '/customization', label: 'Customization' },
   { path: '/certifications', label: 'Certifications' },
 ];
-
-const FOOTER_LINKS = [
-  { path: '/about', label: 'About' },
-  { path: '/products', label: 'Products' },
-  { path: '/news-media', label: 'News & Media' },
-  { path: '/faq', label: 'FAQ' },
-  { path: '/contact', label: 'Contact' },
-];
-
-function ArrowIcon() {
-  return (
-    <svg className="cta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M7 17L17 7M17 7H7M17 7v10" />
-    </svg>
-  );
-}
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,195 +15,167 @@ export default function Layout() {
   const location = useLocation();
   const navRef = useRef(null);
   const footerRef = useRef(null);
-  const menuButtonRef = useRef(null);
 
-  const closeMenu = useCallback((restoreFocus = false) => {
-    setMenuOpen(false);
-    if (restoreFocus) {
-      requestAnimationFrame(() => menuButtonRef.current?.focus());
-    }
-  }, []);
+  const closeMenu = () => setMenuOpen(false);
 
-  // Close the mobile menu on route changes and return the page to its top.
-  useEffect(() => {
-    setMenuOpen(false);
-    setShowFloatEnquire(false);
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
-  // Lock background scrolling while the mobile drawer is open.
+  // Lock background scrolling while the mobile menu is open.
   useEffect(() => {
     if (!menuOpen) return undefined;
 
     const previousOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') closeMenu(true);
+      if (event.key === 'Escape') closeMenu();
     };
-
     window.addEventListener('keydown', onKeyDown);
+
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [menuOpen, closeMenu]);
+  }, [menuOpen]);
 
-  // Show the floating contact link after the main navigation leaves view,
-  // but keep it hidden while the footer is visible.
+  // Show the floating contact link only after the header has left the viewport.
   useEffect(() => {
     const nav = navRef.current;
-    const footer = footerRef.current;
     if (!nav) return undefined;
 
-    let navIsVisible = true;
-    let footerIsVisible = false;
-
-    const updateVisibility = () => {
-      setShowFloatEnquire(!navIsVisible && !footerIsVisible && window.scrollY > 120);
-    };
-
-    const navObserver = new IntersectionObserver(
-      ([entry]) => {
-        navIsVisible = entry.isIntersecting;
-        updateVisibility();
-      },
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowFloatEnquire(!entry.isIntersecting),
       { threshold: 0 }
     );
 
-    navObserver.observe(nav);
-
-    let footerObserver;
-    if (footer) {
-      footerObserver = new IntersectionObserver(
-        ([entry]) => {
-          footerIsVisible = entry.isIntersecting;
-          updateVisibility();
-        },
-        { threshold: 0.01 }
-      );
-      footerObserver.observe(footer);
-    }
-
-    const onScroll = () => updateVisibility();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    return () => {
-      navObserver.disconnect();
-      footerObserver?.disconnect();
-      window.removeEventListener('scroll', onScroll);
-    };
+    observer.observe(nav);
+    return () => observer.disconnect();
   }, [location.pathname]);
 
-  const handleNavClick = () => closeMenu(false);
+  // Keep the floating CTA out of the way when the footer CTA is visible.
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowFloatEnquire(false);
+        } else if (
+          window.scrollY > 120 &&
+          navRef.current &&
+          navRef.current.getBoundingClientRect().bottom < 0
+        ) {
+          setShowFloatEnquire(true);
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Reset route-specific UI after navigation.
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    setShowFloatEnquire(false);
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
-      <header className="site-header">
-        <nav className="nav" ref={navRef} aria-label="Main navigation">
-          <Link className="logo" to="/" aria-label="Sri Jothi Traders home" onClick={handleNavClick}>
-            <img
-              className="logo-mark"
-              src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg"
-              alt=""
-              width="42"
-              height="42"
-            />
-            <span>SRI JOTHI TRADERS</span>
-          </Link>
+      <nav className="nav" ref={navRef} aria-label="Main navigation">
+        <Link className="logo" to="/" aria-label="Sri Jothi Traders home">
+          <img
+            className="logo-mark"
+            src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg"
+            alt=""
+          />
+          <span>SRI JOTHI TRADERS</span>
+        </Link>
 
-          <div className="navlinks">
-            {NAV_LINKS.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                end={item.end}
-                className={({ isActive }) => (isActive ? 'active' : '')}
+        <div className="navlinks">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={location.pathname === link.path ? 'active' : ''}
+              aria-current={location.pathname === link.path ? 'page' : undefined}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <Link className="navcta" to="/contact">
+          Contact us
+          <svg className="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </Link>
+
+        <button
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          type="button"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="site-mobile-menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </nav>
+
+      <div
+        className={`site-mobile-menu ${menuOpen ? 'is-open' : ''}`}
+        id="site-mobile-menu"
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
+      >
+        <div className="site-mobile-menu-inner">
+          <div className="site-mobile-menu-kicker">Explore Sri Jothi</div>
+
+          <nav className="site-mobile-menu-links" aria-label="Mobile navigation">
+            {NAV_LINKS.map((link, index) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={closeMenu}
+                aria-current={location.pathname === link.path ? 'page' : undefined}
               >
-                {item.label}
-              </NavLink>
+                <span className="site-mobile-menu-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{link.label}</span>
+                <span className="site-mobile-menu-arrow" aria-hidden="true">↗</span>
+              </Link>
             ))}
-          </div>
+          </nav>
 
-          <Link className="navcta" to="/contact">
-            <span>Contact us</span>
-            <ArrowIcon />
+          <Link className="site-mobile-menu-cta" to="/contact" onClick={closeMenu}>
+            Start a conversation
+            <span aria-hidden="true">↗</span>
           </Link>
 
-          <button
-            ref={menuButtonRef}
-            className={`hamburger${menuOpen ? ' open' : ''}`}
-            type="button"
-            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={menuOpen}
-            aria-controls="mobileDrawer"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </nav>
-      </header>
+          <p className="site-mobile-menu-note">
+            Indian products. Prepared with care. Delivered worldwide.
+          </p>
+        </div>
+      </div>
 
       <Link
         to="/contact"
-        className={`float-enquire${showFloatEnquire ? ' is-visible' : ''}`}
-        aria-label="Contact Sri Jothi Traders"
-        aria-hidden={!showFloatEnquire}
-        tabIndex={showFloatEnquire ? 0 : -1}
+        className={`float-enquire ${showFloatEnquire && !menuOpen ? 'is-visible' : ''}`}
+        aria-label="Contact us"
+        aria-hidden={!showFloatEnquire || menuOpen}
+        tabIndex={showFloatEnquire && !menuOpen ? 0 : -1}
       >
         Contact us <span aria-hidden="true">↗</span>
       </Link>
-
-      <div
-        className={`mobile-menu-backdrop${menuOpen ? ' is-open' : ''}`}
-        aria-hidden="true"
-        onClick={() => closeMenu(false)}
-      />
-
-      <aside
-        className={`mobile-drawer${menuOpen ? ' open' : ''}`}
-        id="mobileDrawer"
-        aria-label="Mobile navigation"
-        aria-hidden={!menuOpen}
-      >
-        <div className="mobile-drawer-head">
-          <Link className="mobile-drawer-logo" to="/" onClick={handleNavClick}>
-            <img src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg" alt="" width="34" height="34" />
-            <span>SRI JOTHI TRADERS</span>
-          </Link>
-          <button
-            className="mobile-drawer-close"
-            type="button"
-            aria-label="Close navigation menu"
-            onClick={() => closeMenu(true)}
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-
-        <nav className="mobile-drawer-links" aria-label="Mobile navigation links">
-          {NAV_LINKS.map((item, index) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.end}
-              onClick={handleNavClick}
-              className={({ isActive }) => `mobile-nav-link${isActive ? ' active' : ''}`}
-            >
-              <span className="mobile-nav-number">0{index + 1}</span>
-              <span>{item.label}</span>
-              <span className="mobile-nav-arrow" aria-hidden="true">↗</span>
-            </NavLink>
-          ))}
-        </nav>
-
-        <Link to="/contact" className="mob-cta" onClick={handleNavClick}>
-          Start a conversation <ArrowIcon />
-        </Link>
-        <p className="mobile-drawer-note">Indian products. Prepared with care. Delivered worldwide.</p>
-      </aside>
 
       <main id="top">
         <Outlet />
@@ -229,7 +185,7 @@ export default function Layout() {
         <div className="site-footer-inner">
           <div className="site-footer-brandline">
             <Link className="site-footer-logo" to="/" aria-label="Sri Jothi Traders home">
-              <img src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg" alt="" width="38" height="38" />
+              <img src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg" alt="" />
               <span>SRI JOTHI TRADERS</span>
             </Link>
           </div>
@@ -257,14 +213,16 @@ export default function Layout() {
 
           <div className="site-footer-bottom">
             <nav className="site-footer-links" aria-label="Footer navigation">
-              {FOOTER_LINKS.map((item) => (
-                <Link key={item.path} to={item.path}>{item.label}</Link>
-              ))}
+              <Link to="/about">About</Link>
+              <Link to="/products">Products</Link>
+              <Link to="/news-media">News &amp; Media</Link>
+              <Link to="/faq">FAQ</Link>
+              <Link to="/contact">Contact</Link>
             </nav>
 
             <div className="site-footer-meta">
               <span className="site-footer-copyright">
-                © {new Date().getFullYear()} Sri Jothi Traders. All rights reserved.
+                © 2026 Sri Jothi Traders. All rights reserved.
               </span>
               <div className="site-footer-legal">
                 <Link to="/privacy-policy">Privacy Policy</Link>
