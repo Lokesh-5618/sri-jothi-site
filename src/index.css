@@ -7115,3 +7115,35 @@ img, svg, video, canvas { max-width:100%; }
 @media (prefers-reduced-motion:reduce) {
   .site-mobile-menu,.site-mobile-menu-links a,.site-mobile-menu-cta { transition:none !important; }
 }
+
+
+/* ============================================================
+   FINAL HERO SPACING FIX — remove the blank strip below the nav
+   The image belt begins directly after the navigation area.
+   ============================================================ */
+main,
+#top {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  row-gap: 0 !important;
+}
+
+.hero > .hero-slider-top {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  align-self: stretch !important;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    min-height: 100svh !important;
+  }
+}
