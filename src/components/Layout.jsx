@@ -16,7 +16,6 @@ export default function Layout() {
     };
   }, [menuOpen]);
 
-  // Reveal the separate floating CTA only after the header leaves the viewport.
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
@@ -30,7 +29,6 @@ export default function Layout() {
     return () => observer.disconnect();
   }, [location.pathname]);
 
-  // Reset the page and floating CTA when navigating to another route.
   useEffect(() => {
     window.scrollTo(0, 0);
     setShowFloatEnquire(false);
@@ -47,7 +45,6 @@ export default function Layout() {
 
   return (
     <>
-      {/* NAVIGATION */}
       <nav className="nav" ref={navRef}>
         <Link className="logo" to="/" aria-label="Sri Jothi Traders home">
           <img
@@ -88,7 +85,6 @@ export default function Layout() {
         </button>
       </nav>
 
-      {/* Separate floating CTA appears only after the header scrolls away. */}
       <Link
         to="/contact"
         className={`float-enquire ${showFloatEnquire ? 'is-visible' : ''}`}
@@ -99,7 +95,6 @@ export default function Layout() {
         Contact us <span aria-hidden="true">↗</span>
       </Link>
 
-      {/* MOBILE MENU */}
       <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`} id="mobileDrawer">
         {navLinks.map((link) => (
           <Link key={link.path} to={link.path} onClick={closeMenu}>
@@ -118,45 +113,62 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {/* FOOTER */}
-      <footer>
-        <div className="wrap footer-connect-section">
-          <div className="footer-connect">
-            <span className="footer-connect-label">Connect with us</span>
-            <div className="footer-socials">
-              <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">IG</a>
-              <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-              <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">FB</a>
-              <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">WA</a>
+      <footer className="site-footer">
+        <div className="wrap site-footer-inner">
+          <div className="site-footer-top">
+            <div className="site-footer-brand">
+              <Link className="site-footer-logo" to="/" aria-label="Sri Jothi Traders home">
+                <img src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg" alt="" />
+                <span>SRI JOTHI TRADERS</span>
+              </Link>
+              <p>Indian products. Prepared with care. Delivered worldwide.</p>
+            </div>
+
+            <div className="site-footer-connect">
+              <span className="site-footer-label">Connect with us</span>
+              <div className="site-footer-socials">
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">IG</a>
+                <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">FB</a>
+                <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">WA</a>
+              </div>
+            </div>
+
+            <div className="site-footer-certifications">
+              <span className="site-footer-label">Certifications</span>
+              <div className="site-footer-certs">
+                <span>FSSAI</span>
+                <span>APEDA</span>
+                <span>ISO 22000</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="wrap footer-cert-section">
-          <div className="footer-certs">
-            <span>FSSAI</span><span>APEDA</span><span>ISO 22000</span>
+          <div className="site-footer-divider" />
+
+          <div className="site-footer-middle">
+            <nav className="site-footer-links" aria-label="Footer navigation">
+              <Link to="/about">About</Link>
+              <Link to="/products">Products</Link>
+              <Link to="/news-media">News &amp; Media</Link>
+              <Link to="/faq">FAQ</Link>
+              <Link to="/contact">Contact</Link>
+            </nav>
+            <Link className="site-footer-contact" to="/contact">
+              Start a conversation <span aria-hidden="true">↗</span>
+            </Link>
           </div>
-        </div>
 
-        <div className="wrap footer-bottom-group">
-          <nav className="footer-links">
-            <Link to="/about">About</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/news-media">News &amp; Media</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/contact">Contact</Link>
-          </nav>
-
-          <div className="footer-copyright">
+          <div className="site-footer-bottom">
             <span>© 2026 Sri Jothi Traders. All rights reserved.</span>
-            <span className="footer-legal-links">
+            <div className="site-footer-legal">
               <Link to="/privacy-policy">Privacy Policy</Link>
-              <span aria-hidden="true">|</span>
+              <span aria-hidden="true">·</span>
               <Link to="/terms-of-use">Terms of Use</Link>
-              <span aria-hidden="true">|</span>
+              <span aria-hidden="true">·</span>
               <Link to="/cookie-policy">Cookie Policy</Link>
-            </span>
-            <a className="back-to-top" href="#top">↑ Back to top</a>
+            </div>
+            <a className="site-footer-toplink" href="#top">Back to top ↑</a>
           </div>
         </div>
       </footer>
