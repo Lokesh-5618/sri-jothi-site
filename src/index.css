@@ -5733,3 +5733,121 @@ html, body {
     transition: none;
   }
 }
+
+/* ============================================================
+   ABOUT PAGE — FINAL SPACING + SRI JOTHI BRAND ALIGNMENT
+   ============================================================ */
+
+/* Keep the timeline content visible even if its optional scroll observer
+   has not added the active class yet. This prevents a large empty section. */
+.about-page .about-timeline {
+  padding-top: clamp(52px, 6vw, 82px);
+  padding-bottom: clamp(28px, 3vw, 42px);
+}
+.about-page .about-timeline .timeline-heading {
+  margin-bottom: clamp(38px, 5vw, 58px);
+}
+.about-page .about-timeline .timeline-entry {
+  opacity: 1;
+  transform: none;
+}
+.about-page .about-timeline .timeline-entry.timeline-active {
+  opacity: 1;
+  transform: none;
+}
+.about-page .about-timeline .timeline-track {
+  min-height: 0;
+}
+.about-page .about-facts {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Leadership & Governance — use the same forest green, cream, paper and
+   warm brown palette as the rest of Sri Jothi Traders. */
+.about-page .leadership-section {
+  padding: clamp(42px, 5vw, 68px) 24px;
+  background: var(--cream);
+}
+.about-page .leadership-shell {
+  width: min(1120px, 100%);
+  border: 1px solid rgba(23, 70, 53, .16);
+  border-radius: 24px;
+  background: var(--paper);
+  box-shadow: 0 18px 50px rgba(23, 70, 53, .055);
+}
+.about-page .leadership-heading {
+  padding: clamp(34px, 4.5vw, 54px) 30px clamp(30px, 4vw, 46px);
+  color: #fff;
+  background: var(--green);
+}
+.about-page .leadership-eyebrow {
+  color: var(--lime);
+  margin-bottom: 18px;
+}
+.about-page .leadership-heading h2 {
+  color: #fff;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.7vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+.about-page .leadership-heading > p:last-child {
+  color: rgba(255,255,255,.76);
+  font: 400 clamp(16px, 2vw, 23px)/1.45 var(--sans);
+  margin-top: 16px;
+}
+.about-page .leadership-cards {
+  padding: clamp(18px, 3vw, 30px);
+  gap: 18px;
+  background: var(--paper);
+}
+.about-page .leader-card {
+  border: 1px solid rgba(23, 70, 53, .17);
+  border-radius: 18px;
+  background: #fffefa;
+  box-shadow: none;
+}
+.about-page .leader-card:hover {
+  border-color: var(--brown-light);
+  box-shadow: 0 12px 28px rgba(23, 70, 53, .08);
+}
+.about-page .leader-card-chair {
+  background: #f0eee6;
+  border-color: rgba(137, 107, 75, .16);
+}
+.about-page .leader-icon { color: var(--green); }
+.about-page .leader-icon-gold { color: var(--brown); }
+.about-page .leader-card h3 { color: var(--green-deep); }
+.about-page .leader-role { color: var(--brown); }
+.about-page .leader-card:not(.leader-card-chair) .leader-role { color: var(--brown); }
+.about-page .leader-description { color: var(--ink-soft); }
+
+@media (max-width: 768px) {
+  .about-page .about-timeline {
+    padding-top: 48px;
+    padding-bottom: 26px;
+  }
+  .about-page .about-timeline .timeline-heading {
+    margin-bottom: 38px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-page .leadership-section {
+    padding: 34px 14px;
+  }
+  .about-page .leadership-shell { border-radius: 18px; }
+  .about-page .leadership-heading {
+    padding: 30px 18px 28px;
+  }
+  .about-page .leadership-heading h2 {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+  .about-page .leadership-cards {
+    padding: 12px;
+    gap: 12px;
+  }
+  .about-page .leader-card { border-radius: 15px; }
+}
