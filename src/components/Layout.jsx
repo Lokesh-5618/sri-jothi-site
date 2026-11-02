@@ -6,6 +6,7 @@ export default function Layout() {
   const [showFloatEnquire, setShowFloatEnquire] = useState(false);
   const location = useLocation();
   const navRef = useRef(null);
+  const footerRef = useRef(null);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -26,6 +27,27 @@ export default function Layout() {
     );
 
     observer.observe(nav);
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Hide the floating CTA while the footer's own CTA is on screen.
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowFloatEnquire(false);
+        } else if (window.scrollY > 120 && navRef.current &&
+                   navRef.current.getBoundingClientRect().bottom < 0) {
+          setShowFloatEnquire(true);
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    observer.observe(footer);
     return () => observer.disconnect();
   }, [location.pathname]);
 
@@ -113,26 +135,23 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="site-footer">
-        <div className="wrap site-footer-inner">
-          <div className="site-footer-top">
-            <div className="site-footer-brand">
-              <Link className="site-footer-logo" to="/" aria-label="Sri Jothi Traders home">
-                <img src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg" alt="" />
-                <span>SRI JOTHI TRADERS</span>
-              </Link>
-              <p>Indian products. Prepared with care. Delivered worldwide.</p>
-            </div>
+      <footer className="site-footer" ref={footerRef}>
+        <div className="site-footer-inner">
+          <div className="site-footer-brandline">
+            <Link className="site-footer-logo" to="/" aria-label="Sri Jothi Traders home">
+              <img src="/Sri_Jothi_Traders_SYMBOL_MASTER.svg" alt="" />
+              <span>SRI JOTHI TRADERS</span>
+            </Link>
+          </div>
 
-            <div className="site-footer-connect">
-              <span className="site-footer-label">Connect with us</span>
-              <div className="site-footer-socials">
-                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">IG</a>
-                <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-                <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">FB</a>
-                <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">WA</a>
-              </div>
-            </div>
+          <h2 className="site-footer-statement">
+            Indian products. Prepared with care. Delivered worldwide.
+          </h2>
+
+          <div className="site-footer-action-row">
+            <Link className="site-footer-contact" to="/contact">
+              Start a conversation <span aria-hidden="true">↗</span>
+            </Link>
 
             <div className="site-footer-certifications">
               <span className="site-footer-label">Certifications</span>
@@ -146,7 +165,7 @@ export default function Layout() {
 
           <div className="site-footer-divider" />
 
-          <div className="site-footer-middle">
+          <div className="site-footer-bottom">
             <nav className="site-footer-links" aria-label="Footer navigation">
               <Link to="/about">About</Link>
               <Link to="/products">Products</Link>
@@ -154,21 +173,17 @@ export default function Layout() {
               <Link to="/faq">FAQ</Link>
               <Link to="/contact">Contact</Link>
             </nav>
-            <Link className="site-footer-contact" to="/contact">
-              Start a conversation <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
 
-          <div className="site-footer-bottom">
-            <span>© 2026 Sri Jothi Traders. All rights reserved.</span>
-            <div className="site-footer-legal">
-              <Link to="/privacy-policy">Privacy Policy</Link>
-              <span aria-hidden="true">·</span>
-              <Link to="/terms-of-use">Terms of Use</Link>
-              <span aria-hidden="true">·</span>
-              <Link to="/cookie-policy">Cookie Policy</Link>
+            <div className="site-footer-meta">
+              <span className="site-footer-copyright">
+                © 2026 Sri Jothi Traders. All rights reserved.
+              </span>
+              <div className="site-footer-legal">
+                <Link to="/privacy-policy">Privacy Policy</Link>
+                <Link to="/terms-of-use">Terms of Use</Link>
+                <Link to="/cookie-policy">Cookie Policy</Link>
+              </div>
             </div>
-            <a className="site-footer-toplink" href="#top">Back to top ↑</a>
           </div>
         </div>
       </footer>
