@@ -5853,83 +5853,40 @@ html, body {
 }
 
 
-/* ============================================================
-   ABOUT PAGE — WIDE, BALANCED CLOSING CTA
-   Spread the headline and action links across the full section.
-   ============================================================ */
-.about-page .callout {
-  padding-block: clamp(76px, 8vw, 124px);
-}
-
+/* ABOUT PAGE CTA — buttons below headline, distributed across the row */
 .about-page .callout .wrap {
-  width: min(1480px, calc(100% - clamp(40px, 12vw, 240px)));
-  max-width: 1480px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(420px, .85fr);
-  align-items: end;
-  column-gap: clamp(48px, 8vw, 150px);
-  row-gap: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(28px, 3.5vw, 48px);
 }
 
 .about-page .callout h2 {
-  max-width: 13ch;
-  margin: 0;
-  font-size: clamp(42px, 5.2vw, 76px);
-  line-height: .98;
-  letter-spacing: -.045em;
+  max-width: 15ch;
+  width: 100%;
 }
 
 .about-page .callout .cta-group {
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  justify-content: stretch;
   align-items: center;
-  gap: 12px;
-  margin: 0 0 4px;
+  gap: 16px;
+  margin: 0;
 }
 
 .about-page .callout .cta-group .btn {
+  width: 100%;
+  min-width: 0;
+  justify-content: center;
+  text-align: center;
   white-space: nowrap;
 }
 
-@media (max-width: 1000px) {
-  .about-page .callout .wrap {
-    width: min(calc(100% - 64px), 900px);
+@media (max-width: 760px) {
+  .about-page .callout .cta-group {
     grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .about-page .callout h2 {
-    max-width: 16ch;
-  }
-
-  .about-page .callout .cta-group {
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 640px) {
-  .about-page .callout {
-    padding-block: 58px;
-  }
-
-  .about-page .callout .wrap {
-    width: calc(100% - 40px);
-    gap: 26px;
-  }
-
-  .about-page .callout h2 {
-    font-size: clamp(38px, 10vw, 52px);
-    max-width: 13ch;
-  }
-
-  .about-page .callout .cta-group {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-
-  .about-page .callout .cta-group .btn {
-    width: 100%;
-    text-align: center;
+    gap: 12px;
   }
 }
