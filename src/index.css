@@ -7148,27 +7148,22 @@ main,
   }
 }
 
-/* ===== Auto-scrolling markets carousel ===== */
+
+/* ===== Markets carousel — same continuous strip behaviour as products ===== */
 .markets-carousel {
-  --market-gap: 20px;
-  width: 100%;
   overflow: hidden;
   margin-top: 55px;
-  position: relative;
+  border-radius: 12px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 
 .markets-carousel-track {
   display: flex;
   width: max-content;
-  gap: 0;
-  animation: marketsAutoScroll 32s linear infinite;
+  gap: 14px;
+  animation: marketsScroll 34s linear infinite;
   will-change: transform;
-}
-
-.markets-carousel-card {
-  flex: 0 0 calc((min(1200px, 100vw - 64px) - 40px) / 3);
-  min-width: 0;
-  margin-right: var(--market-gap);
 }
 
 .markets-carousel:hover .markets-carousel-track,
@@ -7176,31 +7171,43 @@ main,
   animation-play-state: paused;
 }
 
-@keyframes marketsAutoScroll {
-  from { transform: translateX(0); }
+.markets-carousel-track .markets-carousel-card {
+  flex: 0 0 300px;
+  width: 300px;
+  min-height: 260px;
+  margin: 0;
+}
+
+.markets-carousel-card .market-flag img {
+  width: 160px;
+  height: 96px;
+  object-fit: cover;
+}
+
+@keyframes marketsScroll {
   to { transform: translateX(-50%); }
 }
 
-/* Tablet: 2 visible cards */
-@media (max-width: 1000px) {
-  .markets-carousel-card {
-    flex-basis: calc((min(860px, 100vw - 48px) - 14px) / 2);
-  }
-}
-
-/* Mobile: 1 visible card */
 @media (max-width: 640px) {
   .markets-carousel {
     margin-top: 32px;
-    --market-gap: 14px;
   }
 
-  .markets-carousel-card {
-    flex-basis: calc(100vw - 36px);
+  .markets-carousel-track .markets-carousel-card {
+    flex-basis: 260px;
+    width: 260px;
+    min-height: 250px;
     padding: 23px 20px;
+  }
+
+  .markets-carousel-card .market-flag img {
+    width: 130px;
+    height: 78px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .markets-carousel-track { animation: none; }
+  .markets-carousel-track {
+    animation: none;
+  }
 }
