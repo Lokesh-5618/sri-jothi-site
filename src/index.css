@@ -7261,3 +7261,134 @@ main,
   .markets-carousel-card .market-flag { width: 130px; height: 78px; }
   .markets-carousel-card h3 { font-size: 25px; }
 }
+
+
+/* ===== Country market cards: reference-matched layout ===== */
+.markets-carousel {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 55px;
+  border-radius: 12px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+}
+
+.markets-carousel-track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  animation: marketsScroll 34s linear infinite;
+  will-change: transform;
+}
+
+.markets-carousel:hover .markets-carousel-track,
+.markets-carousel:focus-within .markets-carousel-track {
+  animation-play-state: paused;
+}
+
+.country-market-card {
+  box-sizing: border-box;
+  flex: 0 0 300px;
+  width: 300px;
+  min-height: 258px;
+  margin: 0;
+  padding: 20px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  overflow: hidden;
+  background: #fbfaf6;
+  border: 1px solid rgba(126, 103, 77, .16);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(48, 43, 34, .035);
+  transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+
+.country-market-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(126, 103, 77, .4);
+  box-shadow: 0 12px 28px rgba(23, 70, 53, .08);
+}
+
+.country-market-flag {
+  width: 142px;
+  height: 86px;
+  margin: 0 auto 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.country-market-flag img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.country-market-title {
+  width: 100%;
+  margin: 0;
+  color: var(--green);
+  font: 400 27px/1.12 var(--serif);
+  letter-spacing: -.035em;
+  text-align: center;
+}
+
+.country-market-ports-label {
+  margin: 13px 0 7px;
+  color: var(--brown);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.country-market-ports-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  text-align: left;
+}
+
+.country-market-ship {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  color: var(--brown);
+}
+
+.country-market-ports {
+  flex: 1;
+  margin: 0;
+  color: #55564f;
+  font-size: 12.5px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+@keyframes marketsScroll {
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .markets-carousel { margin-top: 32px; }
+  .country-market-card {
+    flex-basis: 280px;
+    width: 280px;
+    min-height: 250px;
+    padding: 19px 20px 21px;
+  }
+  .country-market-flag { width: 130px; height: 78px; }
+  .country-market-title { font-size: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markets-carousel-track { animation: none; }
+}
