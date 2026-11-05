@@ -414,25 +414,31 @@ export default function Home() {
               <span>India to wherever you need it.</span>
             </h2>
           </div>
-          <div className="markets-grid" data-stagger>
-            {MARKETS.map((market) => (
-              <div className="market-card blur-reveal" key={market.name}>
-                <div className="market-card-top">
-                  <div className="market-flag" role="img" aria-label={`${market.name} flag`}>
-                    <img
-                      src={market.flagUrl}
-                      alt=""
-                      loading="lazy"
-                      width="160"
-                      height="96"
-                    />
+          <div className="markets-carousel reveal" aria-label="Our international markets">
+            <div className="markets-carousel-track">
+              {[...MARKETS, ...MARKETS].map((market, index) => (
+                <div
+                  className="market-card markets-carousel-card"
+                  key={`${market.name}-${index}`}
+                  aria-hidden={index >= MARKETS.length}
+                >
+                  <div className="market-card-top">
+                    <div className="market-flag" role="img" aria-label={`${market.name} flag`}>
+                      <img
+                        src={market.flagUrl}
+                        alt=""
+                        loading="lazy"
+                        width="160"
+                        height="96"
+                      />
+                    </div>
+                    <span className="market-status">{market.status}</span>
                   </div>
-                  <span className="market-status">{market.status}</span>
+                  <h3>{market.name}</h3>
+                  <p className="market-ports">{market.ports}</p>
                 </div>
-                <h3>{market.name}</h3>
-                <p className="market-ports">{market.ports}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
