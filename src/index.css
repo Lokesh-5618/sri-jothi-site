@@ -9232,3 +9232,340 @@ main,
     max-height: 280px !important;
   }
 }
+
+
+/* ============================================================
+   MOBILE HERO — SIMPLIFIED STABLE COMPOSITION
+   Desktop is not modified.
+   Image → compact overlapping panel → normal page flow.
+   Avoid viewport-filling panels and excessive blank image height.
+   ============================================================ */
+
+@media screen and (max-width: 1000px) {
+  .hero {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #f5f1e8 !important;
+  }
+
+  /* Compact visual area: responsive, but never a full-screen blank block. */
+  .hero > .hero-slider {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: clamp(220px, 31svh, 300px) !important;
+    min-height: 220px !important;
+    max-height: 300px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+  }
+
+  .hero > .hero-slider .hero-slider-track,
+  .hero > .hero-slider .hero-slide {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero > .hero-slider .hero-slide::before {
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  .hero > .hero-slider .hero-slide-label {
+    position: absolute !important;
+    inset: 50% 16px auto !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    transform: translateY(-50%) !important;
+    color: rgba(255, 250, 240, .8) !important;
+    font-size: 9px !important;
+    line-height: 1.5 !important;
+    letter-spacing: .13em !important;
+    text-align: center !important;
+  }
+
+  /* Keep the header inside the image area. */
+  body.home-page-active .nav {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    z-index: 20 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    margin: 0 !important;
+    padding: 0 16px !important;
+    background: linear-gradient(180deg, rgba(8,35,26,.42), transparent) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body.home-page-active .nav .logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: calc(100% - 54px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #fffaf0 !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    font-weight: 700 !important;
+    letter-spacing: .08em !important;
+    white-space: nowrap !important;
+  }
+
+  body.home-page-active .nav .logo-mark {
+    display: block !important;
+    width: 28px !important;
+    height: 28px !important;
+    flex: 0 0 28px !important;
+    filter: brightness(0) invert(1) !important;
+  }
+
+  body.home-page-active .nav .logo span {
+    display: inline-block !important;
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+  }
+
+  body.home-page-active .navlinks,
+  body.home-page-active .nav .navcta {
+    display: none !important;
+  }
+
+  body.home-page-active .nav .hamburger {
+    display: flex !important;
+    flex: 0 0 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255,250,240,.5) !important;
+    border-radius: 50% !important;
+    background: rgba(9,42,31,.3) !important;
+    box-shadow: none !important;
+  }
+
+  body.home-page-active .nav .hamburger span {
+    display: block !important;
+    width: 15px !important;
+    height: 1.5px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    background: #fffaf0 !important;
+  }
+
+  /* A simple content-led card; only its top edge overlaps the image. */
+  .hero > .hero-mobile-panel {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 5 !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    width: calc(100% - 24px) !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: -16px auto 0 !important;
+    padding: clamp(22px, 5.5vw, 28px) clamp(17px, 5vw, 24px) 22px !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 22px 22px 0 0 !important;
+    background:
+      radial-gradient(circle at 0 0, rgba(226,189,131,.17), transparent 42%),
+      linear-gradient(145deg, #194735 0%, #0b3024 92%) !important;
+    color: #fbf6ec !important;
+    box-shadow: 0 -7px 22px rgba(7,31,23,.12) !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-eyebrow {
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    margin: 0 0 11px !important;
+    padding: 0 !important;
+    color: #e8c58f !important;
+    font-size: clamp(9px, 2.6vw, 10px) !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    letter-spacing: .1em !important;
+  }
+
+  .hero > .hero-mobile-panel .live-dot {
+    flex: 0 0 6px !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #e8c58f !important;
+  }
+
+  .hero > .hero-mobile-panel h1 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 12ch !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #fbf6ec !important;
+    font-family: var(--serif) !important;
+    font-size: clamp(37px, 9.5vw, 46px) !important;
+    font-weight: 400 !important;
+    line-height: .96 !important;
+    letter-spacing: -.045em !important;
+    text-align: left !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-intro {
+    display: block !important;
+    width: 100% !important;
+    max-width: 52ch !important;
+    margin: 13px 0 0 !important;
+    padding: 0 !important;
+    color: rgba(251,246,236,.92) !important;
+    font-size: clamp(13px, 3.5vw, 14px) !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 17px 0 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-actions .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 6px !important;
+    border-radius: 999px !important;
+    font-size: clamp(9px, 2.7vw, 11px) !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  .hero > .hero-mobile-panel .btn.dark {
+    color: #173f30 !important;
+    background: #f5eee1 !important;
+    border: 1px solid #f5eee1 !important;
+  }
+
+  .hero > .hero-mobile-panel .btn.light {
+    color: #fbf6ec !important;
+    background: transparent !important;
+    border: 1px solid rgba(251,246,236,.8) !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-mobile-services {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    margin: 17px 0 0 !important;
+    padding: 13px 0 0 !important;
+    border-top: 1px solid rgba(251,246,236,.22) !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-mobile-services .hero-service {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    min-height: 74px !important;
+    margin: 0 !important;
+    padding: 4px 3px 0 !important;
+    color: rgba(251,246,236,.96) !important;
+    font-size: clamp(8px, 2.3vw, 9px) !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-mobile-services .hero-service + .hero-service {
+    border-left: 1px solid rgba(251,246,236,.23) !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-mobile-services .hero-service svg {
+    display: block !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-pagination,
+  .hero > .hero-desktop-pagination {
+    display: none !important;
+  }
+
+  .hero + .intro {
+    clear: both !important;
+    margin: 0 !important;
+    padding-top: 36px !important;
+  }
+}
+
+/* On very narrow phones, stack buttons rather than squeeze text. */
+@media screen and (max-width: 359px) {
+  .hero > .hero-mobile-panel .hero-actions {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .hero > .hero-mobile-panel .hero-actions .btn {
+    min-height: 43px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Landscape phones: shorter visual, same natural content flow. */
+@media screen and (max-width: 1000px) and (orientation: landscape) {
+  .hero > .hero-slider {
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+  }
+}
