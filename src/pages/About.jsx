@@ -186,7 +186,7 @@ export default function About() {
               <span className="shipping-route-line" />
               <span className="shipping-route-dot" />
               <span className="shipping-route-dot shipping-route-dot-end" />
-              <span className="shipping-route-label">DINDIGUL · WORLDWIDE</span>
+              <span className="shipping-route-label">DINDIGUL · <span className="shipping-route-worldwide">WORLDWIDE</span></span>
             </div>
           </div>
 
