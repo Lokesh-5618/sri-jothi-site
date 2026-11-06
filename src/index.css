@@ -9989,3 +9989,35 @@ main,
   .about-page .shipping-intro { font-size: 15px; }
   .about-page .shipping-detail { margin-top: 16px; }
 }
+
+/* Shipping section: keep the eyebrow on one line at every viewport. */
+.about-page .shipping-layout {
+  grid-template-columns: minmax(240px, 260px) minmax(0, 1fr);
+  column-gap: clamp(28px, 4.5vw, 64px);
+}
+.about-page .shipping-heading .eyebrow {
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+@media (max-width: 900px) {
+  .about-page .shipping-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .about-page .shipping-heading .eyebrow {
+    white-space: nowrap;
+    font-size: 10px;
+    letter-spacing: .14em;
+  }
+  .about-page .shipping-route-mark {
+    display: none !important;
+  }
+}
+@media (max-width: 360px) {
+  .about-page .shipping-heading .eyebrow {
+    font-size: 9px;
+    letter-spacing: .11em;
+  }
+}
