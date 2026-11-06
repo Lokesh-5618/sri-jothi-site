@@ -307,26 +307,22 @@ export default function Home() {
                 aria-hidden={index !== activeHeroSlide}
                 style={{ '--hero-image': `url("${slide.image}")` }}
               >
-                <span className="hero-slide-label">{slide.label}</span>
+                <span className="hero-slide-label">{slide.label} · placeholder</span>
               </div>
             ))}
           </div>
-        </div>
 
-        <div className="hero-footer">
-          <div className="hero-footer-main">
-            <div className="hero-footer-heading">
-              <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
-              <h1>Your gateway<br />to India.</h1>
-            </div>
+          <div className="hero-desktop-copy">
+            <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
+            <h1>Your gateway<br />to India.</h1>
             <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
             <div className="hero-actions">
-              <Link className="btn dark" to="/contact">Contact us <span aria-hidden="true">↗</span></Link>
+              <Link className="btn dark" to="/contact">Contact us</Link>
               <a className="btn light" href="#products">Explore products</a>
             </div>
           </div>
 
-          <div className="hero-services" aria-label="Our export services">
+          <div className="hero-desktop-services" aria-label="Our export services">
             <div className="hero-service">
               <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13L16 3Z"/><path d="m4.5 9.7 11.5 6.5 11.5-6.5M16 16.2V29M10 6.3l12 6.6"/></svg>
               <span>Sourcing from trusted Indian suppliers</span>
@@ -338,6 +334,31 @@ export default function Home() {
             <div className="hero-service">
               <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M3 16h26M16 3c4 4 6 8.5 6 13s-2 9-6 13c-4-4-6-8.5-6-13s2-9 6-13Z"/></svg>
               <span>Delivery to global buyers</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-mobile-panel">
+          <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
+          <h1>Your gateway<br />to India.</h1>
+          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
+          <div className="hero-actions">
+            <Link className="btn dark" to="/contact">Contact us <span aria-hidden="true">↗</span></Link>
+            <a className="btn light" href="#products">Explore products</a>
+          </div>
+
+          <div className="hero-mobile-services" aria-label="Our export services">
+            <div className="hero-service">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13L16 3Z"/><path d="m4.5 9.7 11.5 6.5 11.5-6.5M16 16.2V29M10 6.3l12 6.6"/></svg>
+              <span>Sourcing from<br />trusted suppliers</span>
+            </div>
+            <div className="hero-service">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8h17v15H3zM20 13h5l4 5v5h-9z"/><circle cx="9" cy="25" r="2.5"/><circle cx="24" cy="25" r="2.5"/></svg>
+              <span>Preparation &amp;<br />export, end to end</span>
+            </div>
+            <div className="hero-service">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M3 16h26M16 3c4 4 6 8.5 6 13s-2 9-6 13c-4-4-6-8.5-6-13s2-9 6-13Z"/></svg>
+              <span>Delivery to<br />global buyers</span>
             </div>
           </div>
 
@@ -353,6 +374,19 @@ export default function Home() {
               />
             ))}
           </div>
+        </div>
+
+        <div className="hero-desktop-pagination" role="group" aria-label="Choose hero slide">
+          {HERO_SLIDES.map((slide, index) => (
+            <button
+              className={index === activeHeroSlide ? 'is-active' : ''}
+              type="button"
+              key={slide.image}
+              aria-label={`Show slide ${index + 1}: ${slide.label}`}
+              aria-pressed={index === activeHeroSlide}
+              onClick={() => setActiveHeroSlide(index)}
+            />
+          ))}
         </div>
       </section>
 
