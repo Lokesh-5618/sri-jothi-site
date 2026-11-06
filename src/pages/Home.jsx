@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 
@@ -20,10 +20,9 @@ const MARKETS = [
 const LOOPED_RANGE_PRODUCTS = [...RANGE_PRODUCTS, ...RANGE_PRODUCTS];
 
 const HERO_SLIDES = [
-  { label: 'Image 1' },
-  { label: 'Image 2' },
-  { label: 'Image 3' },
-  { label: 'Image 4' },
+  { label: 'Export sourcing', image: '/images/hero-export-1.jpg' },
+  { label: 'Product preparation', image: '/images/hero-export-2.jpg' },
+  { label: 'Global delivery', image: '/images/hero-export-3.jpg' },
 ];
 
 const MARQUEE_ITEMS = [
@@ -89,6 +88,19 @@ const VALUE_POINTS = [
 
 export default function Home() {
   useScrollReveal();
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+  useEffect(() => {
+    document.body.classList.add('home-page-active');
+    return () => document.body.classList.remove('home-page-active');
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide((current) => (current + 1) % HERO_SLIDES.length);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -285,30 +297,60 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero">
-        <div className="hero-slider hero-slider-top" aria-roledescription="carousel" aria-label="Export product imagery">
-          <div className="hero-slider-track hero-slider-track-top">
-            {[...HERO_SLIDES, ...HERO_SLIDES].map((s, i) => (
-              <div className="hero-slide" key={i} aria-hidden={i >= HERO_SLIDES.length}>
-                <span>{s.label} · placeholder</span>
+      <section className="hero" aria-label="Sri Jothi Traders introduction">
+        <div className="hero-slider" aria-roledescription="carousel" aria-label="Export imagery">
+          <div className="hero-slider-track" style={{ transform: `translate3d(-${activeHeroSlide * 100}%, 0, 0)` }}>
+            {HERO_SLIDES.map((slide, index) => (
+              <div
+                className={`hero-slide${index === activeHeroSlide ? ' is-active' : ''}`}
+                key={slide.image}
+                aria-hidden={index !== activeHeroSlide}
+                style={{ '--hero-image': `url("${slide.image}")` }}
+              >
+                <span className="hero-slide-label">{slide.label}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="wrap hero-copy">
-          <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
-          <h1><span className="line"><span className="word">Your</span> <span className="word">gateway</span></span> <span className="line"><span className="word">to</span> <span className="word"><em>India.</em></span></span></h1>
-          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
-          <div className="hero-actions"><Link className="btn dark" to="/contact">Contact us</Link><a className="btn light" href="#products">Explore products</a></div>
-        </div>
+        <div className="hero-footer">
+          <div className="hero-footer-main">
+            <div className="hero-footer-heading">
+              <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
+              <h1>Your gateway<br />to India.</h1>
+            </div>
+            <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
+            <div className="hero-actions">
+              <Link className="btn dark" to="/contact">Contact us <span aria-hidden="true">↗</span></Link>
+              <a className="btn light" href="#products">Explore products</a>
+            </div>
+          </div>
 
-        <div className="hero-slider hero-slider-bottom" aria-roledescription="carousel" aria-label="Export product imagery">
-          <div className="hero-slider-track hero-slider-track-bottom">
-            {[...HERO_SLIDES, ...HERO_SLIDES].map((s, i) => (
-              <div className="hero-slide" key={i} aria-hidden={i >= HERO_SLIDES.length}>
-                <span>{s.label} · placeholder</span>
-              </div>
+          <div className="hero-services" aria-label="Our export services">
+            <div className="hero-service">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13L16 3Z"/><path d="m4.5 9.7 11.5 6.5 11.5-6.5M16 16.2V29M10 6.3l12 6.6"/></svg>
+              <span>Sourcing from trusted Indian suppliers</span>
+            </div>
+            <div className="hero-service">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8h17v15H3zM20 13h5l4 5v5h-9z"/><circle cx="9" cy="25" r="2.5"/><circle cx="24" cy="25" r="2.5"/></svg>
+              <span>Preparation &amp; export, end to end</span>
+            </div>
+            <div className="hero-service">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M3 16h26M16 3c4 4 6 8.5 6 13s-2 9-6 13c-4-4-6-8.5-6-13s2-9 6-13Z"/></svg>
+              <span>Delivery to global buyers</span>
+            </div>
+          </div>
+
+          <div className="hero-pagination" role="group" aria-label="Choose hero slide">
+            {HERO_SLIDES.map((slide, index) => (
+              <button
+                className={index === activeHeroSlide ? 'is-active' : ''}
+                type="button"
+                key={slide.image}
+                aria-label={`Show slide ${index + 1}: ${slide.label}`}
+                aria-pressed={index === activeHeroSlide}
+                onClick={() => setActiveHeroSlide(index)}
+              />
             ))}
           </div>
         </div>
