@@ -177,6 +177,79 @@ export default function About() {
         </div>
       </section>
 
+      {/* FLEXIBLE SHIPPING SOLUTIONS */}
+      <section className="shipping-solutions">
+        <div className="wrap shipping-layout">
+          <div className="shipping-heading">
+            <p className="eyebrow reveal">Getting your products there</p>
+            <h2 className="reveal">
+              Flexible shipping.<br />
+              <span>Reliable delivery.</span>
+            </h2>
+            <div className="shipping-route-mark reveal" aria-hidden="true">
+              <span className="shipping-route-line" />
+              <span className="shipping-route-dot" />
+              <span className="shipping-route-dot shipping-route-dot-end" />
+              <span className="shipping-route-label">DINDIGUL · WORLDWIDE</span>
+            </div>
+          </div>
+
+          <div className="shipping-content">
+            <p className="shipping-intro reveal">
+              At Sri Jothi Traders, we are committed to delivering your shipments
+              worldwide through reliable and flexible logistics solutions. We
+              primarily handle shipments via sea freight, while also offering air
+              cargo and temperature-controlled cold-chain transportation based
+              on customer requirements.
+            </p>
+            <p className="shipping-detail reveal">
+              Every shipment is carefully arranged according to the nature of the
+              goods, customer preferences, and the import regulations and
+              transportation facilities permitted by the destination country.
+              Our goal is to provide seamless, secure, and dependable shipping
+              solutions that connect your business to global markets.
+            </p>
+
+            <div className="shipping-modes reveal-stagger">
+              <article className="shipping-mode shipping-mode-primary reveal">
+                <span className="shipping-mode-number">01</span>
+                <span className="shipping-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48">
+                    <path d="M5 28h38l-5 10H13L5 28Z" />
+                    <path d="M13 28V14h22v14M18 14V8h12v6M4 42c4-3 7-3 11 0s7 3 11 0 7-3 11 0 7 3 11 0" />
+                  </svg>
+                </span>
+                <h3>Sea Freight</h3>
+                <p>Our primary mode of transportation for international shipments.</p>
+                <span className="shipping-mode-tag">Primary method</span>
+              </article>
+
+              <article className="shipping-mode reveal">
+                <span className="shipping-mode-number">02</span>
+                <span className="shipping-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48">
+                    <path d="m5 27 15-4 8-15c1-2 4-2 5 1l-4 14 10-3 5-5 3 1-4 9-16 8-9 10-3-1 4-10-11-2-3 2-3-1 3-4Z" />
+                  </svg>
+                </span>
+                <h3>Air Cargo</h3>
+                <p>An alternative shipping option arranged around customer requirements.</p>
+              </article>
+
+              <article className="shipping-mode reveal">
+                <span className="shipping-mode-number">03</span>
+                <span className="shipping-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48">
+                    <path d="M24 5v38M8 14l32 20M8 34l32-20M17 9l7 7 7-7M17 39l7-7 7 7M5 21l10-1-3-9M43 27l-10 1 3 9M5 27l10 1-3 9M43 21l-10-1 3-9" />
+                  </svg>
+                </span>
+                <h3>Cold Chain</h3>
+                <p>Temperature-controlled transportation for shipments that need it.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* LEADERSHIP & GOVERNANCE */}
       <section className="leadership-section">
         <div className="leadership-shell">
