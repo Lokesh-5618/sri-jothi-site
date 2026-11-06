@@ -7822,3 +7822,10 @@ main,
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none !important; }
 }
+
+
+/* Remove the unwanted gap between the hero pagination and the next section. */
+.hero + .intro {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
