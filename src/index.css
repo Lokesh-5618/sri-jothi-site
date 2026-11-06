@@ -9697,3 +9697,221 @@ main,
     max-height: none !important;
   }
 }
+
+
+
+/* ============================================================
+   ABOUT PAGE — FLEXIBLE SHIPPING SOLUTIONS
+   ============================================================ */
+.about-page .shipping-solutions {
+  background: var(--cream);
+  overflow: hidden;
+}
+.about-page .shipping-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, .78fr) minmax(0, 1.22fr);
+  gap: clamp(44px, 7vw, 100px);
+  align-items: start;
+}
+.about-page .shipping-heading {
+  position: sticky;
+  top: 110px;
+}
+.about-page .shipping-heading h2 {
+  color: var(--green);
+  font: 400 clamp(42px, 5vw, 68px)/.98 var(--serif);
+  letter-spacing: -.045em;
+  margin-top: 22px;
+}
+.about-page .shipping-heading h2 span {
+  color: var(--brown);
+}
+.about-page .shipping-route-mark {
+  position: relative;
+  width: min(100%, 270px);
+  height: 76px;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+}
+.about-page .shipping-route-line {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 23px;
+  border-top: 1px dashed rgba(23, 70, 53, .38);
+}
+.about-page .shipping-route-dot {
+  position: absolute;
+  top: 17px;
+  left: 4px;
+  width: 13px;
+  height: 13px;
+  border: 3px solid var(--cream);
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 1px var(--green);
+}
+.about-page .shipping-route-dot-end {
+  left: auto;
+  right: 4px;
+  background: var(--brown);
+  box-shadow: 0 0 0 1px var(--brown);
+}
+.about-page .shipping-route-label {
+  position: absolute;
+  top: 43px;
+  left: 0;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+.about-page .shipping-content {
+  min-width: 0;
+}
+.about-page .shipping-intro,
+.about-page .shipping-detail {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.85;
+}
+.about-page .shipping-intro {
+  color: var(--green-deep);
+  font-size: clamp(16px, 1.45vw, 19px);
+  line-height: 1.75;
+}
+.about-page .shipping-detail {
+  margin-top: 18px;
+}
+.about-page .shipping-modes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 38px;
+}
+.about-page .shipping-mode {
+  position: relative;
+  min-height: 250px;
+  padding: 22px 18px 20px;
+  border: 1px solid rgba(23, 70, 53, .15);
+  border-radius: 14px;
+  background: rgba(251, 250, 246, .78);
+  transition: transform .35s var(--ease), border-color .35s, background .35s;
+}
+.about-page .shipping-mode:hover {
+  transform: translateY(-5px);
+  border-color: var(--brown-light);
+  background: #fffefa;
+}
+.about-page .shipping-mode-primary {
+  background: var(--green);
+  border-color: var(--green);
+}
+.about-page .shipping-mode-primary:hover {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+}
+.about-page .shipping-mode-number {
+  display: block;
+  color: var(--brown);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+.about-page .shipping-mode-primary .shipping-mode-number {
+  color: var(--lime);
+}
+.about-page .shipping-mode-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-top: 22px;
+  border-radius: 11px;
+  color: var(--green);
+  background: var(--lime);
+}
+.about-page .shipping-mode-primary .shipping-mode-icon {
+  color: var(--green);
+  background: rgba(219, 233, 210, .95);
+}
+.about-page .shipping-mode-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.about-page .shipping-mode h3 {
+  margin-top: 18px;
+  color: var(--green);
+  font: 400 clamp(19px, 1.8vw, 24px)/1.1 var(--serif);
+  letter-spacing: -.02em;
+}
+.about-page .shipping-mode-primary h3 {
+  color: #fff;
+}
+.about-page .shipping-mode p {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.65;
+}
+.about-page .shipping-mode-primary p {
+  color: rgba(255, 255, 255, .7);
+}
+.about-page .shipping-mode-tag {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: var(--green);
+  background: var(--lime);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+@media (max-width: 900px) {
+  .about-page .shipping-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .about-page .shipping-heading {
+    position: static;
+  }
+  .about-page .shipping-heading h2 {
+    max-width: 14ch;
+  }
+  .about-page .shipping-route-mark {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .about-page .shipping-modes {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .about-page .shipping-mode {
+    min-height: 0;
+    padding: 20px;
+  }
+  .about-page .shipping-mode-icon {
+    margin-top: 16px;
+  }
+  .about-page .shipping-mode h3 {
+    margin-top: 14px;
+    font-size: 23px;
+  }
+  .about-page .shipping-mode p {
+    max-width: 34ch;
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-page .shipping-mode { transition: none; }
+}
