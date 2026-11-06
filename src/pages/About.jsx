@@ -182,10 +182,6 @@ export default function About() {
         <div className="wrap shipping-layout">
           <div className="shipping-heading">
             <p className="eyebrow reveal">Getting your products there</p>
-            <h2 className="reveal">
-              Flexible shipping.<br />
-              <span>Reliable delivery.</span>
-            </h2>
             <div className="shipping-route-mark reveal" aria-hidden="true">
               <span className="shipping-route-line" />
               <span className="shipping-route-dot" />
@@ -195,6 +191,10 @@ export default function About() {
           </div>
 
           <div className="shipping-content">
+            <h2 className="shipping-title reveal">
+              Flexible shipping.<br />
+              <span>Reliable delivery.</span>
+            </h2>
             <p className="shipping-intro reveal">
               At Sri Jothi Traders, we are committed to delivering your shipments
               worldwide through reliable and flexible logistics solutions. We
