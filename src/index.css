@@ -9569,3 +9569,131 @@ main,
     max-height: 220px !important;
   }
 }
+
+
+/* ============================================================
+   MOBILE HERO — "NEW MOBILE STRUCTURE" (paste at END of index.css)
+   Header + inset rounded image on green, flat dark panel below.
+   ============================================================ */
+@media screen and (max-width: 1000px) {
+
+  /* Green top area wraps header + image */
+  body.home-page-active .hero {
+    padding: 62px 0 0 !important;
+    background: #2a4538 !important;
+    overflow: hidden !important;
+  }
+
+  /* Solid header instead of transparent gradient */
+  body.home-page-active .nav {
+    height: 62px !important;
+    min-height: 62px !important;
+    padding: 0 16px !important;
+    background: #2a4538 !important;
+    border: 0 !important;
+  }
+
+  /* Inset rounded landscape image */
+  body.home-page-active .hero > .hero-slider {
+    width: calc(100% - 32px) !important;
+    height: clamp(150px, 40vw, 230px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 16px 16px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+
+  body.home-page-active .hero > .hero-slider .hero-slide-label {
+    font-size: 11px !important;
+    letter-spacing: .08em !important;
+  }
+
+  /* Flat dark panel, no overlap, full width */
+  body.home-page-active .hero > .hero-mobile-panel {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 22px 16px 26px !important;
+    border-radius: 0 !important;
+    background: #1b362a !important;
+    box-shadow: none !important;
+  }
+
+  /* Eyebrow: no dot, tan text */
+  body.home-page-active .hero > .hero-mobile-panel .live-dot { display: none !important; }
+  body.home-page-active .hero > .hero-mobile-panel .hero-eyebrow {
+    margin: 0 0 12px !important;
+    font-size: clamp(11px, 3.2vw, 13px) !important;
+    letter-spacing: .04em !important;
+    color: #e3bd83 !important;
+  }
+
+  /* Headline */
+  body.home-page-active .hero > .hero-mobile-panel h1 {
+    max-width: none !important;
+    font-size: clamp(27px, 8vw, 36px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.02em !important;
+  }
+
+  body.home-page-active .hero > .hero-mobile-panel .hero-intro {
+    max-width: none !important;
+    margin-top: 14px !important;
+    font-size: clamp(13.5px, 3.9vw, 16px) !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Two pill buttons side by side */
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions {
+    margin-top: 18px !important;
+    gap: 10px !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions .btn {
+    min-height: 44px !important;
+    font-size: clamp(11px, 3.2vw, 13px) !important;
+  }
+
+  /* Services: left-aligned, icon above label, no vertical dividers */
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services {
+    margin-top: 20px !important;
+    padding-top: 18px !important;
+    gap: 8px !important;
+    border-top: 1px solid rgba(251, 246, 236, .22) !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services .hero-service {
+    align-items: flex-start !important;
+    text-align: left !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    gap: 8px !important;
+    border-left: 0 !important;
+    font-size: clamp(11px, 3.3vw, 14px) !important;
+    line-height: 1.3 !important;
+    overflow-wrap: normal !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services .hero-service svg {
+    width: 24px !important;
+    height: 24px !important;
+    flex: 0 0 24px !important;
+  }
+}
+
+/* Very narrow phones: keep buttons side by side */
+@media screen and (max-width: 359px) {
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions .btn {
+    font-size: 10.5px !important;
+  }
+}
+
+/* Landscape phones: reset the fixed 220px image height */
+@media screen and (max-width: 1000px) and (orientation: landscape) {
+  body.home-page-active .hero > .hero-slider {
+    height: clamp(150px, 30vw, 230px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+}
