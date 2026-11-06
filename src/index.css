@@ -8035,3 +8035,10 @@ main,
     padding-top: clamp(38px, 8vw, 54px) !important;
   }
 }
+
+
+/* Hide the hero carousel dot counters on desktop and mobile. */
+.hero .hero-desktop-pagination,
+.hero .hero-mobile-panel .hero-pagination {
+  display: none !important;
+}
