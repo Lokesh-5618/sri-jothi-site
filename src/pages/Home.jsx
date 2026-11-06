@@ -299,7 +299,7 @@ export default function Home() {
     <>
       <section className="hero" aria-label="Sri Jothi Traders introduction">
         <div className="hero-slider" aria-roledescription="carousel" aria-label="Export imagery">
-          <div className="hero-slider-track" style={{ transform: `translate3d(-${activeHeroSlide * 100}%, 0, 0)` }}>
+          <div className="hero-slider-track">
             {HERO_SLIDES.map((slide, index) => (
               <div
                 className={`hero-slide${index === activeHeroSlide ? ' is-active' : ''}`}
