@@ -8042,3 +8042,463 @@ main,
 .hero .hero-mobile-panel .hero-pagination {
   display: none !important;
 }
+
+
+/* ============================================================
+   HERO COLOUR SCHEME — FOREST GREEN + WARM IVORY + GOLD
+   Improve contrast on the dark green placeholder background.
+   ============================================================ */
+
+.hero .hero-slide {
+  background: linear-gradient(
+    135deg,
+    #183f31 0%,
+    #214c3b 48%,
+    #102f25 100%
+  ) !important;
+}
+
+.hero .hero-slide::before {
+  /* Keep real images visible while adding a subtle brand-toned wash. */
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(18, 55, 41, .28) 0%,
+      rgba(18, 55, 41, .12) 52%,
+      rgba(8, 35, 26, .34) 100%
+    ),
+    var(--hero-image) !important;
+  background-color: transparent !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+.hero .hero-desktop-copy .hero-eyebrow {
+  color: #e2bd83 !important;
+}
+
+.hero .hero-desktop-copy .live-dot {
+  background: #e2bd83 !important;
+}
+
+.hero .hero-desktop-copy h1 {
+  color: #f7f2e8 !important;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, .12) !important;
+}
+
+.hero .hero-desktop-copy .hero-intro {
+  color: rgba(247, 242, 232, .88) !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .12) !important;
+}
+
+.hero .hero-desktop-copy .btn.dark {
+  color: #173f30 !important;
+  background: #f5eee1 !important;
+  border-color: #f5eee1 !important;
+}
+
+.hero .hero-desktop-copy .btn.light {
+  color: #fff8ec !important;
+  background: rgba(15, 48, 36, .2) !important;
+  border-color: rgba(255, 248, 236, .86) !important;
+}
+
+.hero .hero-desktop-copy .btn.dark:hover {
+  background: #e8d6b8 !important;
+  border-color: #e8d6b8 !important;
+}
+
+.hero .hero-desktop-copy .btn.light:hover {
+  color: #173f30 !important;
+  background: #f5eee1 !important;
+  border-color: #f5eee1 !important;
+}
+
+/* Keep the placeholder caption away from the headline and body copy. */
+@media (min-width: 1001px) {
+  .hero .hero-slide-label {
+    position: absolute !important;
+    right: 28px !important;
+    bottom: 94px !important;
+    left: auto !important;
+    z-index: 2 !important;
+    color: rgba(247, 242, 232, .62) !important;
+    font-size: 10px !important;
+    letter-spacing: .16em !important;
+    text-align: right !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  /* Mobile content panel retains the deep green brand surface. */
+  .hero .hero-mobile-panel {
+    background:
+      radial-gradient(circle at 0 0, rgba(226, 189, 131, .18), transparent 40%),
+      linear-gradient(145deg, #194735 0%, #0b3024 92%) !important;
+  }
+
+  .hero .hero-mobile-panel .hero-eyebrow {
+    color: #e8c58f !important;
+  }
+
+  .hero .hero-mobile-panel h1 {
+    color: #fbf6ec !important;
+  }
+
+  .hero .hero-mobile-panel .hero-intro {
+    color: rgba(251, 246, 236, .9) !important;
+  }
+
+  .hero .hero-mobile-panel .btn.dark {
+    color: #173f30 !important;
+    background: #f5eee1 !important;
+    border-color: #f5eee1 !important;
+  }
+
+  .hero .hero-mobile-panel .btn.light {
+    color: #fbf6ec !important;
+    border-color: rgba(251, 246, 236, .82) !important;
+  }
+
+  .hero .hero-slide-label {
+    display: none !important;
+  }
+}
+
+
+/* ============================================================
+   MOBILE HERO REFINEMENT — BETTER SCALE, SPACING & COMPOSITION
+   Specifically tuned for narrow phones (320px–430px).
+   ============================================================ */
+
+@media (max-width: 1000px) {
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100svh !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #103528 !important;
+  }
+
+  /* Header: make the logo and menu legible over the image. */
+  body.home-page-active .nav {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 300 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    padding: 0 16px !important;
+    background: linear-gradient(180deg, rgba(12, 34, 27, .38), transparent) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body.home-page-active .nav .logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    max-width: calc(100% - 54px) !important;
+    color: #fbf6ec !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: .09em !important;
+    overflow: visible !important;
+  }
+
+  body.home-page-active .nav .logo span {
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  body.home-page-active .nav .logo-mark {
+    display: block !important;
+    width: 29px !important;
+    height: 29px !important;
+    flex: 0 0 29px !important;
+    filter: brightness(0) invert(1) !important;
+  }
+
+  body.home-page-active .navlinks,
+  body.home-page-active .navcta {
+    display: none !important;
+  }
+
+  body.home-page-active .hamburger {
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255,255,255,.38) !important;
+    border-radius: 50% !important;
+    background: rgba(12, 44, 33, .28) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  body.home-page-active .hamburger span {
+    display: block !important;
+    width: 16px !important;
+    height: 1.5px !important;
+    border-radius: 2px !important;
+    background: #fffaf0 !important;
+  }
+
+  /* Image/placeholder: keep a deliberate visual area, not a huge blank slab. */
+  .hero > .hero-slider {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: 50svh !important;
+    min-height: 285px !important;
+    max-height: 390px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background:
+      radial-gradient(ellipse at 78% 24%, rgba(218, 190, 143, .18), transparent 36%),
+      radial-gradient(ellipse at 15% 82%, rgba(123, 151, 121, .2), transparent 42%),
+      linear-gradient(135deg, #89917f 0%, #526f60 48%, #173f30 100%) !important;
+  }
+
+  .hero .hero-slide {
+    background:
+      radial-gradient(ellipse at 78% 24%, rgba(218, 190, 143, .18), transparent 36%),
+      radial-gradient(ellipse at 15% 82%, rgba(123, 151, 121, .2), transparent 42%),
+      linear-gradient(135deg, #89917f 0%, #526f60 48%, #173f30 100%) !important;
+  }
+
+  .hero .hero-slide::before {
+    background-image:
+      linear-gradient(180deg, rgba(10, 35, 26, .06), rgba(10, 35, 26, .2)),
+      var(--hero-image) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  /* Show the placeholder caption in the visual area, away from the panel. */
+  .hero .hero-slide-label {
+    position: absolute !important;
+    top: 54% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    display: block !important;
+    width: max-content !important;
+    max-width: calc(100% - 32px) !important;
+    transform: translate(-50%, -50%) !important;
+    color: rgba(255, 250, 240, .72) !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+    letter-spacing: .16em !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  /* Main green panel fills the rest of the first mobile screen. */
+  .hero .hero-mobile-panel {
+    position: relative !important;
+    z-index: 5 !important;
+    display: flex !important;
+    flex: 1 0 auto !important;
+    flex-direction: column !important;
+    width: calc(100% - 22px) !important;
+    min-height: 0 !important;
+    margin: -24px auto 0 !important;
+    padding: 25px 20px 24px !important;
+    border-radius: 24px 24px 0 0 !important;
+    background:
+      radial-gradient(circle at 0 0, rgba(226, 189, 131, .19), transparent 42%),
+      linear-gradient(145deg, #194735 0%, #0b3024 92%) !important;
+    color: #fbf6ec !important;
+    box-shadow: 0 -12px 34px rgba(7, 31, 23, .12) !important;
+  }
+
+  .hero .hero-mobile-panel .hero-eyebrow {
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    margin: 0 0 11px !important;
+    color: #e8c58f !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    letter-spacing: .12em !important;
+  }
+
+  .hero .hero-mobile-panel .live-dot {
+    width: 6px !important;
+    height: 6px !important;
+    flex: 0 0 6px !important;
+    border-radius: 50% !important;
+    background: #e8c58f !important;
+  }
+
+  .hero .hero-mobile-panel h1 {
+    max-width: 11ch !important;
+    margin: 0 !important;
+    color: #fbf6ec !important;
+    font: 400 clamp(38px, 10vw, 48px)/.93 var(--serif) !important;
+    letter-spacing: -.045em !important;
+  }
+
+  .hero .hero-mobile-panel .hero-intro {
+    max-width: 46ch !important;
+    margin: 13px 0 0 !important;
+    color: rgba(251, 246, 236, .9) !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero .hero-mobile-panel .hero-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 9px !important;
+    width: 100% !important;
+    margin: 17px 0 0 !important;
+  }
+
+  .hero .hero-mobile-panel .hero-actions .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 45px !important;
+    padding: 0 7px !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+    font-weight: 650 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  .hero .hero-mobile-panel .btn.dark {
+    color: #173f30 !important;
+    background: #f5eee1 !important;
+    border: 1px solid #f5eee1 !important;
+  }
+
+  .hero .hero-mobile-panel .btn.light {
+    color: #fbf6ec !important;
+    background: transparent !important;
+    border: 1px solid rgba(251, 246, 236, .78) !important;
+  }
+
+  .hero .hero-mobile-services {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    margin: 17px 0 0 !important;
+    padding: 13px 0 0 !important;
+    border-top: 1px solid rgba(251, 246, 236, .2) !important;
+  }
+
+  .hero .hero-mobile-services .hero-service {
+    display: flex !important;
+    min-width: 0 !important;
+    min-height: 78px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+    padding: 5px 3px 0 !important;
+    color: rgba(251, 246, 236, .96) !important;
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+  }
+
+  .hero .hero-mobile-services .hero-service + .hero-service {
+    border-left: 1px solid rgba(251, 246, 236, .22) !important;
+  }
+
+  .hero .hero-mobile-services .hero-service svg {
+    display: block !important;
+    width: 25px !important;
+    height: 25px !important;
+    flex: 0 0 25px !important;
+  }
+
+  /* Dots are intentionally hidden per the approved design. */
+  .hero .hero-mobile-panel .hero-pagination,
+  .hero .hero-desktop-pagination {
+    display: none !important;
+  }
+}
+
+/* Extra-tight phones: prevent the CTAs and service labels from colliding. */
+@media (max-width: 340px) {
+  .hero > .hero-slider {
+    height: 48svh !important;
+    min-height: 260px !important;
+    max-height: 320px !important;
+  }
+
+  .hero .hero-mobile-panel {
+    width: calc(100% - 12px) !important;
+    margin-top: -20px !important;
+    padding: 22px 13px 22px !important;
+    border-radius: 20px 20px 0 0 !important;
+  }
+
+  .hero .hero-mobile-panel .hero-eyebrow {
+    font-size: 9px !important;
+    letter-spacing: .1em !important;
+  }
+
+  .hero .hero-mobile-panel h1 {
+    font-size: clamp(35px, 11vw, 40px) !important;
+  }
+
+  .hero .hero-mobile-panel .hero-intro {
+    margin-top: 11px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  .hero .hero-mobile-panel .hero-actions {
+    gap: 6px !important;
+    margin-top: 14px !important;
+  }
+
+  .hero .hero-mobile-panel .hero-actions .btn {
+    min-height: 42px !important;
+    padding-inline: 4px !important;
+    font-size: 9px !important;
+  }
+
+  .hero .hero-mobile-services {
+    margin-top: 14px !important;
+    padding-top: 11px !important;
+  }
+
+  .hero .hero-mobile-services .hero-service {
+    min-height: 70px !important;
+    gap: 6px !important;
+    font-size: 8px !important;
+  }
+
+  .hero .hero-mobile-services .hero-service svg {
+    width: 22px !important;
+    height: 22px !important;
+    flex-basis: 22px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-slide {
+    transition: none !important;
+  }
+}
