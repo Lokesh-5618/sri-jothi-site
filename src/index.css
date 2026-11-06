@@ -9767,6 +9767,9 @@ main,
   font-weight: 700;
   letter-spacing: .16em;
 }
+.about-page .shipping-route-worldwide {
+  color: var(--brown);
+}
 .about-page .shipping-content {
   min-width: 0;
 }
