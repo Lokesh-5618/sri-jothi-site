@@ -7397,137 +7397,184 @@ main,
 
 
 
+
+
 /* ============================================================
-   SRI JOTHI — APPROVED RESPONSIVE HERO
-   Desktop: landscape image with content footer beneath.
-   Mobile: image-first composition with overlapping green panel.
+   SRI JOTHI — FINAL HERO ALIGNMENT
+   Desktop: one landscape placeholder at a time, content footer below.
+   Mobile: header overlays image; green content panel overlaps image.
+   This block intentionally overrides older homepage hero rules.
    ============================================================ */
 
 .hero {
   position: relative !important;
   display: flex !important;
   flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
   width: 100% !important;
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 64px 0 0 !important;
   overflow: hidden !important;
-  background: var(--cream) !important;
   gap: 0 !important;
+  background: var(--cream) !important;
 }
 
 .hero > .hero-slider {
   position: relative !important;
-  display: block !important;
+  inset: auto !important;
   order: 1 !important;
+  display: block !important;
+  flex: 0 0 auto !important;
   width: 100% !important;
-  height: clamp(360px, 43vw, 650px) !important;
+  height: clamp(360px, 38vw, 560px) !important;
   min-height: 0 !important;
-  max-height: none !important;
+  max-height: 560px !important;
+  margin: 0 !important;
+  padding: 0 !important;
   overflow: hidden !important;
+  background: #667568 !important;
   isolation: isolate;
   z-index: 1 !important;
 }
 
-.hero-slider-track {
-  animation: none !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
+.hero .hero-slider-track {
+  position: relative !important;
+  display: block !important;
   width: 100% !important;
   height: 100% !important;
-  transition: transform .9s cubic-bezier(.22,.7,.2,1) !important;
-  will-change: transform;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 .hero .hero-slide {
-  position: relative !important;
-  display: block !important;
-  flex: 0 0 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex: none !important;
   width: 100% !important;
-  min-width: 100% !important;
+  min-width: 0 !important;
   height: 100% !important;
   min-height: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
   overflow: hidden !important;
   border: 0 !important;
-  background: linear-gradient(120deg, #8d927f, #244b3a) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: linear-gradient(115deg, #8d927f 0%, #657566 52%, #244b3a 100%) !important;
+  transition: opacity .75s ease, visibility .75s ease !important;
+}
+
+.hero .hero-slide:nth-child(even) {
+  background: linear-gradient(115deg, #8d927f 0%, #657566 52%, #244b3a 100%) !important;
+}
+
+.hero .hero-slide.is-active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1 !important;
 }
 
 .hero .hero-slide::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
   background-image:
-    linear-gradient(180deg, rgba(12,31,25,.04), rgba(12,31,25,.08)),
-    var(--hero-image);
-  background-size: cover;
-  background-position: center 55%;
-  transform: scale(1.015);
+    linear-gradient(180deg, rgba(12,31,25,.02), rgba(12,31,25,.12)),
+    var(--hero-image) !important;
+  background-size: cover !important;
+  background-position: center 55% !important;
+  transform: none !important;
 }
 
 .hero .hero-slide-label {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  color: rgba(244,240,231,.78) !important;
+  font: 700 12px/1.4 var(--sans) !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
 }
 
 .hero-footer {
-  position: relative;
-  z-index: 2;
-  order: 2;
-  width: 100%;
-  padding: 28px clamp(28px, 5vw, 82px) 0;
-  background: var(--green-deep);
-  color: var(--cream);
+  position: relative !important;
+  inset: auto !important;
+  z-index: 2 !important;
+  order: 2 !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 24px clamp(28px, 5vw, 82px) 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--green-deep) !important;
+  color: var(--cream) !important;
 }
 
 .hero-footer-main {
-  display: grid;
-  grid-template-columns: minmax(280px, .95fr) minmax(250px, 1.1fr) auto;
-  align-items: center;
-  gap: clamp(24px, 4vw, 64px);
-  max-width: 1600px;
-  margin: 0 auto;
+  display: grid !important;
+  grid-template-columns: minmax(280px, .95fr) minmax(250px, 1.1fr) auto !important;
+  align-items: center !important;
+  gap: clamp(22px, 3.5vw, 56px) !important;
+  width: 100% !important;
+  max-width: 1600px !important;
+  min-height: 122px !important;
+  margin: 0 auto !important;
 }
 
-.hero-footer-heading { min-width: 0; }
+.hero-footer-heading { min-width: 0 !important; }
 
 .hero-footer .hero-eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  margin: 0;
-  color: #d5b98c;
-  font-size: 11px;
-  letter-spacing: .15em;
-  line-height: 1.4;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  color: #d5b98c !important;
+  font-size: 11px !important;
+  letter-spacing: .15em !important;
+  line-height: 1.4 !important;
 }
 
 .hero-footer .live-dot {
-  width: 6px;
-  height: 6px;
-  flex: 0 0 6px;
-  border-radius: 50%;
-  background: #d5b98c;
+  width: 6px !important;
+  height: 6px !important;
+  flex: 0 0 6px !important;
+  border-radius: 50% !important;
+  background: #d5b98c !important;
 }
 
 .hero-footer h1 {
-  margin: 9px 0 0 !important;
+  display: block !important;
+  max-width: 12ch !important;
+  margin: 8px 0 0 !important;
   color: var(--cream) !important;
   font: 400 clamp(34px, 3.2vw, 52px)/.98 var(--serif) !important;
   letter-spacing: -.04em !important;
-  max-width: 12ch;
 }
 
 .hero-footer .hero-intro {
-  max-width: 560px;
+  max-width: 560px !important;
   margin: 0 !important;
-  color: rgba(244,240,231,.82) !important;
+  color: rgba(244,240,231,.84) !important;
   font-size: clamp(13px, 1vw, 15px) !important;
   line-height: 1.7 !important;
 }
@@ -7536,15 +7583,16 @@ main,
   display: flex !important;
   flex-wrap: nowrap !important;
   justify-content: flex-end !important;
-  align-items: center;
+  align-items: center !important;
   gap: 10px !important;
   margin: 0 !important;
 }
 
 .hero-footer .hero-actions .btn {
-  min-height: 48px !important;
-  padding: 0 21px !important;
-  white-space: nowrap;
+  flex: 0 0 auto !important;
+  min-height: 46px !important;
+  padding: 0 20px !important;
+  white-space: nowrap !important;
   font-size: 12px !important;
 }
 
@@ -7554,94 +7602,91 @@ main,
   border-color: var(--cream) !important;
 }
 
-.hero-footer .hero-actions .btn.dark:hover {
-  color: var(--green-deep) !important;
-  background: #fff !important;
-}
-
 .hero-footer .hero-actions .btn.light {
   color: var(--cream) !important;
   border-color: rgba(244,240,231,.72) !important;
 }
 
-.hero-footer .hero-actions .btn.light:hover {
-  color: var(--green-deep) !important;
-  background: var(--cream) !important;
-}
-
 .hero-services {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 1600px;
-  margin: 25px auto 0;
-  border-top: 1px solid rgba(244,240,231,.2);
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  max-width: 1600px !important;
+  margin: 12px auto 0 !important;
+  border-top: 1px solid rgba(244,240,231,.2) !important;
 }
 
 .hero-service {
-  min-width: 0;
-  min-height: 66px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  padding: 13px 18px;
-  color: rgba(244,240,231,.92);
-  font-size: 12px;
-  line-height: 1.4;
-  text-align: left;
+  display: flex !important;
+  min-width: 0 !important;
+  min-height: 62px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  gap: 12px !important;
+  padding: 10px 16px !important;
+  color: rgba(244,240,231,.92) !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  text-align: left !important;
 }
 
 .hero-service + .hero-service {
-  border-left: 1px solid rgba(244,240,231,.22);
+  border-left: 1px solid rgba(244,240,231,.22) !important;
 }
 
 .hero-service svg {
-  flex: 0 0 27px;
-  width: 27px;
-  height: 27px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.55;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  display: block !important;
+  flex: 0 0 27px !important;
+  width: 27px !important;
+  height: 27px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.55 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
 }
 
 .hero-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  min-height: 48px;
-  margin: 0 calc(clamp(28px, 5vw, 82px) * -1);
-  background: var(--cream);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  width: calc(100% + (2 * clamp(28px, 5vw, 82px))) !important;
+  min-height: 48px !important;
+  margin: 0 calc(clamp(28px, 5vw, 82px) * -1) !important;
+  padding: 0 !important;
+  background: var(--cream) !important;
 }
 
 .hero-pagination button {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(32,35,31,.2);
-  cursor: pointer;
-  transition: width .25s ease, background .25s ease, transform .25s ease;
+  display: block !important;
+  width: 9px !important;
+  height: 9px !important;
+  min-width: 9px !important;
+  min-height: 9px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(32,35,31,.2) !important;
+  cursor: pointer !important;
 }
 
 .hero-pagination button.is-active {
-  width: 10px;
-  height: 10px;
-  background: var(--green);
+  width: 10px !important;
+  height: 10px !important;
+  min-width: 10px !important;
+  min-height: 10px !important;
+  background: var(--green) !important;
 }
 
-.hero-pagination button:hover { transform: scale(1.15); }
-
-@media (min-width: 1001px) {
-  .hero { padding-top: 66px !important; }
-  .hero > .hero-slider { height: clamp(390px, 40vw, 620px) !important; }
-  .hero-footer-main { min-height: 116px; }
-}
-
+/* Tablet and mobile composition */
 @media (max-width: 1000px) {
+  .hero {
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
   body.home-page-active .nav {
     position: absolute !important;
     top: 0 !important;
@@ -7650,150 +7695,160 @@ main,
     height: 66px !important;
     min-height: 66px !important;
     background: transparent !important;
-    border-bottom: 0 !important;
+    border: 0 !important;
     box-shadow: none !important;
   }
 
   body.home-page-active .nav .logo { color: #fff !important; }
-  body.home-page-active .nav .logo-mark { filter: brightness(0) invert(1); }
+  body.home-page-active .nav .logo-mark { filter: brightness(0) invert(1) !important; }
   body.home-page-active .hamburger {
+    background: rgba(16,56,42,.22) !important;
     border-color: rgba(255,255,255,.55) !important;
-    background: rgba(16,56,42,.18) !important;
     backdrop-filter: blur(8px);
   }
   body.home-page-active .hamburger span { background: #fff !important; }
 
   .hero > .hero-slider {
-    height: clamp(360px, 58svh, 560px) !important;
-    min-height: 360px !important;
+    height: clamp(350px, 58svh, 520px) !important;
+    min-height: 350px !important;
+    max-height: 520px !important;
   }
 
-  .hero .hero-slide::before { background-position: center center; }
-
   .hero-footer {
-    width: calc(100% - 28px);
-    margin: -24px auto 0;
-    padding: 27px 24px 0;
-    border-radius: 28px 28px 0 0;
+    width: calc(100% - 28px) !important;
+    margin: -24px auto 0 !important;
+    padding: 26px 24px 0 !important;
+    border-radius: 26px 26px 0 0 !important;
     background:
       radial-gradient(circle at 0 0, rgba(169,139,104,.2), transparent 38%),
-      linear-gradient(145deg, #174635, #0b3024 85%);
+      linear-gradient(145deg, #174635, #0b3024 85%) !important;
   }
 
   .hero-footer-main {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 15px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 15px !important;
+    min-height: 0 !important;
   }
 
-  .hero-footer .hero-eyebrow { font-size: 10px; letter-spacing: .13em; }
+  .hero-footer .hero-eyebrow { font-size: 10px !important; letter-spacing: .13em !important; }
   .hero-footer h1 {
-    max-width: 11ch;
+    max-width: 11ch !important;
     margin-top: 10px !important;
     font-size: clamp(42px, 8.5vw, 60px) !important;
     line-height: .94 !important;
   }
 
   .hero-footer .hero-intro {
-    max-width: 48ch;
+    max-width: 48ch !important;
     font-size: 14px !important;
     line-height: 1.65 !important;
   }
 
   .hero-footer .hero-actions {
     display: grid !important;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
     margin-top: 4px !important;
   }
 
   .hero-footer .hero-actions .btn {
-    width: 100%;
+    width: 100% !important;
     min-height: 48px !important;
-    padding: 0 12px !important;
+    padding: 0 10px !important;
     font-size: 12px !important;
   }
 
   .hero-services {
-    margin-top: 23px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-top: 1px solid rgba(244,240,231,.23);
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    margin-top: 22px !important;
+    border-top: 1px solid rgba(244,240,231,.23) !important;
   }
 
   .hero-service {
-    min-height: 104px;
-    flex-direction: column;
-    justify-content: center;
-    gap: 9px;
-    padding: 15px 8px 10px;
-    font-size: 10px;
-    line-height: 1.4;
-    text-align: center;
+    min-height: 100px !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 13px 6px 9px !important;
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
   }
 
-  .hero-service + .hero-service { border-left: 1px solid rgba(244,240,231,.23); }
-  .hero-service svg { width: 27px; height: 27px; flex-basis: 27px; }
+  .hero-service + .hero-service { border-left: 1px solid rgba(244,240,231,.23) !important; }
 
   .hero-pagination {
-    min-height: 58px;
-    margin: 0 -24px;
-    background: transparent;
+    width: calc(100% + 48px) !important;
+    min-height: 56px !important;
+    margin: 0 -24px !important;
+    background: transparent !important;
   }
-  .hero-pagination button { background: rgba(244,240,231,.35); }
-  .hero-pagination button.is-active { background: var(--cream); }
+  .hero-pagination button { background: rgba(244,240,231,.35) !important; }
+  .hero-pagination button.is-active { background: var(--cream) !important; }
 }
 
 @media (max-width: 640px) {
   .hero > .hero-slider {
-    height: 59svh !important;
-    min-height: 340px !important;
-    max-height: 470px !important;
+    height: 56svh !important;
+    min-height: 330px !important;
+    max-height: 440px !important;
   }
 
   .hero-footer {
-    width: calc(100% - 22px);
-    margin-top: -25px;
-    padding: 25px 20px 0;
-    border-radius: 25px 25px 0 0;
+    width: calc(100% - 22px) !important;
+    margin-top: -24px !important;
+    padding: 24px 19px 0 !important;
+    border-radius: 24px 24px 0 0 !important;
   }
 
-  .hero-footer-main { gap: 14px; }
+  .hero-footer-main { gap: 14px !important; }
   .hero-footer h1 {
-    font-size: clamp(39px, 10.5vw, 54px) !important;
+    font-size: clamp(39px, 10.5vw, 52px) !important;
     line-height: .94 !important;
   }
   .hero-footer .hero-intro {
     font-size: 13px !important;
-    line-height: 1.62 !important;
+    line-height: 1.6 !important;
   }
-  .hero-footer .hero-actions { gap: 9px !important; }
+  .hero-footer .hero-actions { gap: 8px !important; }
   .hero-footer .hero-actions .btn {
     min-height: 46px !important;
+    padding-inline: 8px !important;
     font-size: 11px !important;
   }
-
-  .hero-services { margin-top: 20px; }
+  .hero-services { margin-top: 19px !important; }
   .hero-service {
-    min-height: 98px;
-    gap: 8px;
-    padding: 13px 5px 8px;
-    font-size: 9.5px;
+    min-height: 94px !important;
+    gap: 7px !important;
+    padding: 12px 4px 8px !important;
+    font-size: 9px !important;
   }
-  .hero-service svg { width: 25px; height: 25px; flex-basis: 25px; }
-  .hero-pagination { min-height: 54px; margin-inline: -20px; }
+  .hero-service svg {
+    width: 24px !important;
+    height: 24px !important;
+    flex-basis: 24px !important;
+  }
+  .hero-pagination {
+    width: calc(100% + 38px) !important;
+    min-height: 52px !important;
+    margin-inline: -19px !important;
+  }
 }
 
 @media (max-width: 380px) {
-  .hero > .hero-slider { height: 54svh !important; min-height: 315px !important; }
-  .hero-footer { padding-inline: 17px; }
-  .hero-footer h1 { font-size: 38px !important; }
-  .hero-footer .hero-actions { grid-template-columns: 1fr; }
-  .hero-footer .hero-actions .btn { min-height: 44px !important; }
-  .hero-service { font-size: 9px; }
-  .hero-pagination { margin-inline: -17px; }
+  .hero-footer { padding-inline: 16px !important; }
+  .hero-footer h1 { font-size: 37px !important; }
+  .hero-footer .hero-actions { grid-template-columns: 1fr !important; }
+  .hero-footer .hero-actions .btn { min-height: 43px !important; }
+  .hero-service { font-size: 8.5px !important; }
+  .hero-pagination {
+    width: calc(100% + 32px) !important;
+    margin-inline: -16px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-slider-track, .hero-pagination button { transition: none !important; }
+  .hero .hero-slide { transition: none !important; }
 }
