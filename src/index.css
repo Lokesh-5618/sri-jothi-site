@@ -7829,3 +7829,55 @@ main,
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
+
+
+/* ============================================================
+   DESKTOP HERO — FILL THE FIRST VIEWPORT
+   Keeps the navigation at the top, then stretches the hero image
+   and pagination to the bottom edge of the screen. Mobile keeps
+   its natural content height and scroll behaviour.
+   ============================================================ */
+@media (min-width: 1001px) {
+  .hero {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    padding: 76px 0 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero > .hero-slider {
+    box-sizing: border-box !important;
+    position: relative !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+  }
+
+  .hero-desktop-pagination {
+    box-sizing: border-box !important;
+    flex: 0 0 58px !important;
+    width: 100% !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    margin: 0 !important;
+  }
+
+  /* Do not let the following section peek into the first viewport. */
+  .hero + .intro {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
