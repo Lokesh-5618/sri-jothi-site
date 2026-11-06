@@ -9915,3 +9915,77 @@ main,
 @media (prefers-reduced-motion: reduce) {
   .about-page .shipping-mode { transition: none; }
 }
+
+
+/* ============================================================
+   ABOUT PAGE — SHIPPING SECTION ALIGNMENT REFINEMENT
+   Match the label-left / content-right structure used by Quality.
+   ============================================================ */
+.about-page .shipping-layout {
+  grid-template-columns: 200px minmax(0, 1fr);
+  column-gap: clamp(32px, 5vw, 72px);
+  row-gap: 0;
+  align-items: start;
+}
+.about-page .shipping-heading {
+  position: static;
+  grid-column: 1;
+  top: auto;
+  min-width: 0;
+  padding-top: 8px;
+}
+.about-page .shipping-heading .eyebrow {
+  margin: 0;
+}
+.about-page .shipping-content {
+  grid-column: 2;
+  min-width: 0;
+  max-width: 900px;
+}
+.about-page .shipping-title {
+  margin: 0 0 28px;
+  color: var(--green);
+  font: 400 clamp(34px, 4.4vw, 56px)/1 var(--serif);
+  letter-spacing: -.04em;
+}
+.about-page .shipping-title span { color: var(--brown); }
+.about-page .shipping-intro {
+  margin: 0;
+  max-width: 700px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.about-page .shipping-detail {
+  max-width: 700px;
+  margin-top: 22px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.about-page .shipping-modes {
+  margin-top: 38px;
+}
+
+@media (max-width: 900px) {
+  .about-page .shipping-layout {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+  }
+  .about-page .shipping-heading {
+    grid-column: 1;
+    padding-top: 0;
+  }
+  .about-page .shipping-content {
+    grid-column: 1;
+    max-width: none;
+  }
+  .about-page .shipping-route-mark { display: none; }
+}
+@media (max-width: 640px) {
+  .about-page .shipping-title {
+    margin-bottom: 22px;
+    font-size: clamp(32px, 8.5vw, 46px);
+  }
+  .about-page .shipping-intro { font-size: 15px; }
+  .about-page .shipping-detail { margin-top: 16px; }
+}
