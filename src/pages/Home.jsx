@@ -350,15 +350,15 @@ export default function Home() {
           <div className="hero-mobile-services" aria-label="Our export services">
             <div className="hero-service">
               <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13L16 3Z"/><path d="m4.5 9.7 11.5 6.5 11.5-6.5M16 16.2V29M10 6.3l12 6.6"/></svg>
-              <span>Trusted sourcing</span>
+              <span>Sourcing from trusted suppliers</span>
             </div>
             <div className="hero-service">
               <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8h17v15H3zM20 13h5l4 5v5h-9z"/><circle cx="9" cy="25" r="2.5"/><circle cx="24" cy="25" r="2.5"/></svg>
-              <span>Export preparation</span>
+              <span>Preparation &amp; export, end to end</span>
             </div>
             <div className="hero-service">
               <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M3 16h26M16 3c4 4 6 8.5 6 13s-2 9-6 13c-4-4-6-8.5-6-13s2-9 6-13Z"/></svg>
-              <span>Global delivery</span>
+              <span>Delivery to global buyers</span>
             </div>
           </div>
 
