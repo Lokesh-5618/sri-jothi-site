@@ -10024,3 +10024,196 @@ main,
     letter-spacing: .11em;
   }
 }
+
+
+/* ============================================================
+   MOBILE HERO — FULL-BLEED IMAGE + FROSTED GREEN PANEL
+   Matches the approved reference. Desktop untouched.
+   ============================================================ */
+@media screen and (max-width: 1000px) {
+
+  /* Hero fills the first screen: image on top, panel overlapping below */
+  body.home-page-active .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100svh !important;
+    padding: 0 !important;
+    background: #0b3024 !important;
+    overflow: hidden !important;
+  }
+
+  /* Full-bleed image, starts at the very top behind the header */
+  body.home-page-active .hero > .hero-slider {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: clamp(380px, 58svh, 560px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  /* soft top shade so the logo and menu stay readable */
+  body.home-page-active .hero > .hero-slider::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 140px;
+    background: linear-gradient(180deg, rgba(8, 28, 48, .45), transparent);
+    z-index: 3;
+    pointer-events: none;
+  }
+  body.home-page-active .hero > .hero-slider .hero-slide-label { display: none !important; }
+
+  /* Transparent header, plain 3-line menu icon */
+  body.home-page-active .nav {
+    background: transparent !important;
+    padding: 0 18px !important;
+  }
+  body.home-page-active .nav .logo {
+    font-size: 13px !important;
+    letter-spacing: .08em !important;
+    gap: 10px !important;
+  }
+  body.home-page-active .nav .logo-mark { width: 34px !important; height: 34px !important; flex-basis: 34px !important; }
+  body.home-page-active .nav .hamburger {
+    width: 40px !important;
+    height: 40px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    gap: 6px !important;
+  }
+  body.home-page-active .nav .hamburger span {
+    width: 24px !important;
+    height: 2px !important;
+  }
+  body.home-page-active .nav .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg) !important; }
+  body.home-page-active .nav .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg) !important; }
+
+  /* Frosted green panel with rounded top corners */
+  body.home-page-active .hero > .hero-mobile-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: -72px 0 0 !important;
+    padding: 26px 24px calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+    border-radius: 28px 28px 0 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, .22) !important;
+    background: linear-gradient(180deg,
+      rgba(23, 70, 53, .55) 0%,
+      rgba(14, 52, 38, .93) 38%,
+      #0b3024 100%) !important;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow: none !important;
+  }
+
+  /* Eyebrow: gold, no dot */
+  body.home-page-active .hero > .hero-mobile-panel .live-dot { display: none !important; }
+  body.home-page-active .hero > .hero-mobile-panel .hero-eyebrow {
+    margin: 0 0 10px !important;
+    font-size: clamp(10px, 3.1vw, 12px) !important;
+    letter-spacing: .16em !important;
+    color: #e3bd83 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Headline + intro */
+  body.home-page-active .hero > .hero-mobile-panel h1 {
+    max-width: none !important;
+    font-size: clamp(38px, 11.4vw, 52px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.035em !important;
+    color: #fbf6ec !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-intro {
+    max-width: none !important;
+    margin: 14px 0 0 !important;
+    font-size: clamp(13.5px, 3.9vw, 16px) !important;
+    line-height: 1.55 !important;
+    color: rgba(251, 246, 236, .95) !important;
+  }
+
+  /* Buttons */
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1.08fr !important;
+    gap: 12px !important;
+    margin: 20px 0 0 !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions .btn {
+    min-height: 46px !important;
+    font-size: clamp(13px, 3.8vw, 15px) !important;
+    font-weight: 600 !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .btn.dark {
+    background: #fbf3e5 !important;
+    border-color: #fbf3e5 !important;
+    color: #174635 !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .btn.light {
+    background: rgba(12, 48, 35, .35) !important;
+    border: 1.5px solid rgba(251, 243, 229, .9) !important;
+    color: #fbf6ec !important;
+  }
+
+  /* Services: icon above label, short vertical dividers */
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services {
+    margin: 22px 0 0 !important;
+    padding: 16px 0 0 !important;
+    gap: 0 !important;
+    border-top: 1px solid rgba(251, 246, 236, .25) !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services .hero-service {
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    min-height: 0 !important;
+    padding: 4px 8px !important;
+    gap: 9px !important;
+    border-left: 0 !important;
+    font-size: clamp(11px, 3.1vw, 12.5px) !important;
+    line-height: 1.35 !important;
+    overflow-wrap: normal !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services .hero-service + .hero-service {
+    background: linear-gradient(rgba(251, 246, 236, .3), rgba(251, 246, 236, .3)) left center / 1px 70% no-repeat !important;
+  }
+  body.home-page-active .hero > .hero-mobile-panel .hero-mobile-services .hero-service svg {
+    width: 28px !important;
+    height: 28px !important;
+    flex: 0 0 28px !important;
+    stroke-width: 1.4 !important;
+  }
+
+  /* Dots: visible again, pinned to the bottom of the panel */
+  body.home-page-active .hero .hero-mobile-panel .hero-pagination {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-height: 0 !important;
+    margin: auto 0 0 !important;
+    padding-top: 20px !important;
+  }
+  body.home-page-active .hero .hero-mobile-panel .hero-pagination button {
+    width: 9px !important;
+    height: 9px !important;
+    min-width: 9px !important;
+    min-height: 9px !important;
+    background: rgba(251, 246, 236, .35) !important;
+  }
+  body.home-page-active .hero .hero-mobile-panel .hero-pagination button.is-active {
+    background: #fbf3e5 !important;
+  }
+}
+
+/* Small phones: keep both buttons side by side */
+@media screen and (max-width: 359px) {
+  body.home-page-active .hero > .hero-mobile-panel .hero-actions {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
