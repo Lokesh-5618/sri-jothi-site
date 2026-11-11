@@ -10231,3 +10231,24 @@ main,
     display: none !important;
   }
 }
+
+
+/* ============================================================
+   MOBILE BRAND MARK — restore the original logo colours and
+   frame it as a small circular emblem on the dark hero header.
+   ============================================================ */
+@media screen and (max-width: 1000px) {
+  body.home-page-active .nav .logo-mark {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    height: 38px !important;
+    flex: 0 0 38px !important;
+    padding: 6px !important;
+    border-radius: 50% !important;
+    object-fit: contain !important;
+    background: #f4f0e7 !important;
+    border: 1px solid rgba(227, 189, 131, .85) !important;
+    filter: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .16) !important;
+  }
+}
