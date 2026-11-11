@@ -10219,14 +10219,15 @@ main,
 }
 
 
+
+
 /* ============================================================
-   MOBILE CTA CLEANUP — avoid back-to-back enquiry buttons.
-   Keep the main contact-section CTA; hide the repeated footer CTA.
-   Footer branding and social links remain visible.
+   MOBILE CTA FIX — hide the repeated footer conversation button.
+   Keep the main contact-section "Start an enquiry" CTA visible.
+   The actual redesigned footer uses .site-footer-contact.
    ============================================================ */
-@media screen and (max-width: 1000px) {
-  .footer-connect-section .footer-connect > .btn,
-  .footer-connect-section .footer-connect > a:not(.footer-socials a) {
+@media screen and (max-width: 600px) {
+  .site-footer .site-footer-contact {
     display: none !important;
   }
 }
