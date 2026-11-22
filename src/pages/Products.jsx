@@ -26,15 +26,15 @@ const products = [
     ],
   },
   {
-    num: '03',
-    title: 'Edible oils',
-    desc: 'Bulk and retail-ready cooking oils for grocery and food service.',
-    images: [
-      'https://placehold.co/800x800/dbe9d2/174635?text=Edible+Oils+1',
-      'https://placehold.co/800x800/e9dfd2/174635?text=Edible+Oils+2',
-      'https://placehold.co/800x800/c3dcba/174635?text=Edible+Oils+3',
-    ],
-  },
+  num: '03',
+  title: 'Edible Oils & Indian Ghee',
+  desc: 'A range of cooking oils and traditional Indian ghee, available in bulk and retail-ready packaging.',
+  images: [
+    'https://placehold.co/800x800/dbe9d2/174635?text=Edible+Oils+%26+Ghee+1',
+    'https://placehold.co/800x800/e9dfd2/174635?text=Edible+Oils+%26+Ghee+2',
+    'https://placehold.co/800x800/c3dcba/174635?text=Edible+Oils+%26+Ghee+3',
+  ],
+},
   {
     num: '04',
     title: 'Coconut products',
