@@ -10450,3 +10450,15 @@ body .section .wrap .home-section-head > .display {
   padding: 0 !important;
   text-align: left !important;
 }
+/* How it works: tighten number → heading spacing */
+.how-it-works .how-it-works-item .custom-story-num {
+  margin-bottom: 0;
+}
+
+.how-it-works .how-it-works-item h3 {
+  margin-top: 22px;
+}
+
+.how-it-works .how-it-works-item {
+  min-height: 200px;
+}
