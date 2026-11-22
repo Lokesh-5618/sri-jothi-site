@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Customization from './pages/Customization';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
+import Destinations from './pages/Destinations';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="customization" element={<Customization />} />
           <Route path="certifications" element={<Certifications />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="/destinations" element={<Destinations />} />
         </Route>
       </Routes>
     </Router>
