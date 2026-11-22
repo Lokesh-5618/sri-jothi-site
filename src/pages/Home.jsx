@@ -391,12 +391,11 @@ export default function Home() {
           <div className="home-section-head">
             <div className="eyebrow reveal">Who we are</div>
             <h2 className="display text-reveal reveal" data-stagger>
-              <span>Trusted Supplier Network.</span>{' '}
+              <span>More than a supplier.</span>{' '}
               <span>A route into India.</span>
             </h2>
           </div>
-          <p className="body-copy reveal">Sri Jothi Traders connects international wholesalers, distributors and private-label buyers with Indian products. We handle sourcing, customization, packaging and export preparation from one place.We work with carefully evaluated manufacturers and suppliers across Dindigul,Tamilnadu,India
-and throughout India to source quality products.</p>
+          <p className="body-copy reveal">Sri Jothi Traders connects international wholesalers, distributors and private-label buyers with Indian products. We handle sourcing, customization, packaging and export preparation from one place.</p>
           <Link className="btn light reveal" style={{ marginTop: '30px' }} to="/about">Our story &rarr;</Link>
         </div>
       </section>
