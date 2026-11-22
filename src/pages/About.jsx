@@ -102,7 +102,7 @@ export default function About() {
                 <span className="timeline-label">Built to deliver</span>
                 <h3>More than sourcing. Ready for your shelves.</h3>
                 <p>
-                  We operate from a 10,000 sq ft warehouse in Dindigul,
+                  We operate from a 20,000 sq ft warehouse in Dindigul,
                   offering product sourcing, private labelling, repacking and
                   destination-compliant packaging for international buyers.
                 </p>
@@ -132,7 +132,7 @@ export default function About() {
           <p className="eyebrow reveal">At a glance</p>
           <div className="facts-grid reveal-stagger">
             <div className="fact reveal"><b>2015</b><span>Founded in Dindigul, Tamil Nadu</span></div>
-            <div className="fact reveal"><b>10,000 sq ft</b><span>Warehouse and preparation facility</span></div>
+            <div className="fact reveal"><b>20,000 sq ft</b><span>Warehouse and preparation facility</span></div>
             <div className="fact reveal"><b>192</b><span>Countries served</span></div>
             <div className="fact reveal"><b>9</b><span>Certifications and registrations</span></div>
             <div className="fact reveal"><b>7</b><span>Product categories</span></div>
