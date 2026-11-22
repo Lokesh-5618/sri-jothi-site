@@ -10462,3 +10462,65 @@ body .section .wrap .home-section-head > .display {
 .how-it-works .how-it-works-item {
   min-height: 200px;
 }
+
+/* WHY SRI JOTHI — CARD ALIGNMENT FIX */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.why-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  height: 100%;
+  min-width: 0;
+  padding: 32px;
+}
+
+.why-item h3 {
+  width: 100%;
+  min-height: 2.8em;
+  margin: 0 0 14px;
+  text-align: left;
+  line-height: 1.12;
+}
+
+.why-item p {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  line-height: 1.65;
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+  .why-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .why-item h3 {
+    min-height: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .why-item {
+    padding: 26px;
+  }
+
+  .why-item h3 {
+    min-height: auto;
+  }
+}
