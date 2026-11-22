@@ -10716,3 +10716,27 @@ body .section .wrap .home-section-head > .display {
   .dest-cta { flex-direction: column; align-items: flex-start; padding: 22px; }
   .dest-cta .btn { width: 100%; }
 }
+/* ============================================================
+   ARROW ICON — SVG replacement for the "↗" character.
+   Append at the END of index.css.
+   ============================================================ */
+.arrow-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.site-mobile-menu-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.site-footer-contact .arrow-icon { width: 20px; height: 20px; }
+.float-enquire .arrow-icon { width: 13px; height: 13px; }
