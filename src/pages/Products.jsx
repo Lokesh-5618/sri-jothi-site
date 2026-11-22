@@ -56,15 +56,15 @@ const products = [
     ],
   },
   {
-    num: '06',
-    title: 'Kitchenware & machines',
-    desc: 'Traditional and modern Indian kitchenware and small equipment.',
-    images: [
-      'https://placehold.co/800x800/c3dcba/174635?text=Kitchenware+1',
-      'https://placehold.co/800x800/dbe9d2/174635?text=Kitchenware+2',
-      'https://placehold.co/800x800/e9dfd2/174635?text=Kitchenware+3',
-    ],
-  },
+  num: '06',
+  title: 'Kitchenware & Indian Hotel Appliances',
+  desc: 'HORECA supplies, including traditional and modern Indian kitchenware, commercial hotel appliances, and food service equipment.',
+  images: [
+    'https://placehold.co/800x800/c3dcba/174635?text=Kitchenware+1',
+    'https://placehold.co/800x800/dbe9d2/174635?text=Hotel+Appliances+2',
+    'https://placehold.co/800x800/e9dfd2/174635?text=HORECA+Supplies+3',
+  ],
+},
   {
     num: '07',
     title: 'Seasonal FMCG items',
