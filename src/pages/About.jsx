@@ -104,7 +104,7 @@ export default function About() {
                 <p>
                   We operate from a 20,000 sq ft warehouse in Dindigul,
                   offering product sourcing, private labelling, repacking and
-                  destination-compliant packaging for international buyers.
+                  destination-compliant packaging for international buyers with international grade packing according to specific country needs.
                 </p>
               </div>
             </article>
