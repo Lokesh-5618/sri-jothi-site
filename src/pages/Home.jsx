@@ -516,6 +516,9 @@ export default function Home() {
               ))}
             </div>
           </div>
+          <Link className="btn dark reveal" style={{ marginTop: '28px' }} to="/destinations">
+            View all destinations &rarr;
+          </Link>
         </div>
       </section>
 
