@@ -10409,3 +10409,44 @@ main,
     text-align: left;
   }
 }
+
+
+/* ==========================================================
+   HOMEPAGE SECTION HEADERS — FINAL LEFT-ALIGNMENT FIX
+   Eyebrow ("Who we are", "What we do"...) sits directly above
+   the heading, both on the container's left edge, in every
+   section. Overrides the older two-column (number | eyebrow)
+   rules, which left a stray column that pushed the eyebrow
+   to the right.
+   ========================================================== */
+body .section .wrap .home-section-head {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto !important;
+  column-gap: 0 !important;
+  justify-items: start !important;
+  align-items: start !important;
+  text-align: left !important;
+}
+
+body .section .wrap .home-section-head > .eyebrow {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  justify-self: start !important;
+  align-self: start !important;
+  margin: 0 0 14px !important;
+  padding: 0 !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+body .section .wrap .home-section-head > .display {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  justify-self: start !important;
+  align-self: start !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
