@@ -37,7 +37,7 @@ const CAPS = [
     title: 'Source',
     short: 'Find the right Indian products and trusted suppliers for your requirement.',
     icon: <><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></>,
-    more: 'We shortlist verified suppliers in Dindigul and across India, compare samples and pricing, and match you with the right producers for your volumes and quality standards.',
+    more: 'We shortlist verified suppliers in Dindigul, Tamil Nadu and across India, compare samples and pricing, and match you with the right producers for your volumes and quality standards.',
     link: '/products',
     linkLabel: 'Explore our products',
   },
