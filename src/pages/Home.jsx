@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useScrollReveal from './hooks/useScrollReveal';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 const RANGE_PRODUCTS = [
   { title: <>Grains<br />&amp; Staples</>, desc: 'Rice, wheat, sugar and everyday staples for wholesale and retail supply.' },
