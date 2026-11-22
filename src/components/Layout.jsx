@@ -9,6 +9,15 @@ const NAV_LINKS = [
   { path: '/certifications', label: 'Certifications' },
 ];
 
+// Drawn arrow: iOS turns the "↗" character into a blue emoji box, an SVG never changes.
+function ArrowIcon() {
+  return (
+    <svg className="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 17L17 7M17 7H7M17 7v10" />
+    </svg>
+  );
+}
+
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showFloatEnquire, setShowFloatEnquire] = useState(false);
@@ -151,14 +160,16 @@ export default function Layout() {
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span>{link.label}</span>
-                <span className="site-mobile-menu-arrow" aria-hidden="true">↗</span>
+                <span className="site-mobile-menu-arrow" aria-hidden="true">
+                  <ArrowIcon />
+                </span>
               </Link>
             ))}
           </nav>
 
           <Link className="site-mobile-menu-cta" to="/contact" onClick={closeMenu}>
             Start a conversation
-            <span aria-hidden="true">↗</span>
+            <ArrowIcon />
           </Link>
 
           <p className="site-mobile-menu-note">
@@ -174,7 +185,7 @@ export default function Layout() {
         aria-hidden={!showFloatEnquire || menuOpen}
         tabIndex={showFloatEnquire && !menuOpen ? 0 : -1}
       >
-        Contact us <span aria-hidden="true">↗</span>
+        Contact us <ArrowIcon />
       </Link>
 
       <main id="top">
@@ -196,7 +207,7 @@ export default function Layout() {
 
           <div className="site-footer-action-row">
             <Link className="site-footer-contact" to="/contact">
-              Start a conversation <span aria-hidden="true">↗</span>
+              Start a conversation <ArrowIcon />
             </Link>
 
             <div className="site-footer-certifications">
