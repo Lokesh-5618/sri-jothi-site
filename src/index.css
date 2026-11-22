@@ -10373,3 +10373,39 @@ main,
   }
 }
 
+
+/* ==========================================================
+   HOMEPAGE SECTION HEADINGS — LEFT ALIGNMENT
+   Align the eyebrow and main heading to the same left edge.
+   ========================================================== */
+
+.section-head > .eyebrow {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.section-head > .display {
+  width: min(100%, 820px);
+  margin: 0;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .section-head > .eyebrow {
+    text-align: left;
+    margin-bottom: 14px;
+  }
+
+  .section-head > .display {
+    margin: 0;
+    text-align: left;
+  }
+}
