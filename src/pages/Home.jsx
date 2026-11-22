@@ -341,7 +341,7 @@ export default function Home() {
         <div className="hero-mobile-panel">
           <div className="eyebrow hero-eyebrow"><span className="live-dot"></span>Indian export partner &middot; Est. 2015</div>
           <h1>Your gateway<br />to India.</h1>
-          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul to your market.</p>
+          <p className="hero-intro">We source, prepare and move Indian products for buyers worldwide &mdash; from trusted suppliers in Dindigul,Tamil Nadu,India to your market.</p>
           <div className="hero-actions">
             <Link className="btn dark" to="/contact">Contact us <span aria-hidden="true">↗</span></Link>
             <a className="btn light" href="#products">Explore products</a>
