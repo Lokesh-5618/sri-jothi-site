@@ -76,10 +76,22 @@ const REVIEWS = [
 const LOOPED_REVIEWS = [...REVIEWS, ...REVIEWS];
 
 const VALUE_POINTS = [
-  { title: 'Trusted suppliers', text: 'Verified producers in Dindigul and across India, checked before we work with them.' },
-  { title: 'Private label ready', text: 'Your brand, pack size and specs, handled from one place.' },
-  { title: 'Export-grade quality', text: 'Quality checks, packaging and documentation on every shipment.' },
-  { title: 'One point of contact', text: 'From first brief to final delivery, one team keeps you updated.' },
+  {
+    title: 'Trusted Supplier Network',
+    text: 'We work with carefully evaluated manufacturers and suppliers across Dindigul, Tamil Nadu, and throughout India to source quality products.',
+  },
+  {
+    title: 'Custom Branding & Private Labelling',
+    text: 'Your brand identity, packaging sizes, international-grade packaging and product specifications tailored to your business requirements.',
+  },
+  {
+    title: 'Quality Assurance & Export Compliance',
+    text: 'Product inspections, export-ready packaging and essential documentation coordinated for every shipment.',
+  },
+  {
+    title: 'Dedicated Export Support',
+    text: 'One dedicated team to coordinate your order from initial enquiry and sourcing to shipment and delivery updates.',
+  },
 ];
 
 export default function Home() {
