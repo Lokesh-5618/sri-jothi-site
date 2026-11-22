@@ -10252,3 +10252,73 @@ main,
     box-shadow: 0 2px 8px rgba(0, 0, 0, .16) !important;
   }
 }
+/* ============================================================
+   HOMEPAGE CLEAN TYPOGRAPHY — NUMBER-FREE TITLES
+   Scoped to homepage components only; shared styles for other
+   pages remain unchanged.
+   ============================================================ */
+.home-section-head > .section-number,
+.homepage .section-number,
+.homepage .cap-num,
+.homepage .why-num,
+.homepage .journey-stage {
+  display: none !important;
+}
+
+.home-section-head {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.home-section-head > .eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  margin: 0 0 12px;
+  text-align: left;
+}
+
+.home-section-head > .display {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  font-size: clamp(30px, 4vw, 54px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+
+.home-section-head > .display,
+.home-section-head > .display span,
+.homepage .cap h3,
+.homepage .why-item h3 {
+  font-weight: 700;
+}
+
+.homepage .cap h3 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.2;
+}
+
+.homepage .why-item h3 {
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.25;
+}
+
+@media (max-width: 768px) {
+  .home-section-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-section-head > .eyebrow {
+    grid-column: 1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .home-section-head > .display {
+    width: 100%;
+    margin-top: 0;
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.15;
+  }
+}
