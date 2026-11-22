@@ -10322,3 +10322,54 @@ main,
     line-height: 1.15;
   }
 }
+
+/* ============================================================
+   FINAL OVERRIDE — PRIVATE LABEL HEADING ALIGNMENT
+   Keeps the eyebrow centred while aligning the heading and
+   supporting content to the left edge of the section container.
+   ============================================================ */
+.statement .statement-inner,
+.statement-inner {
+  width: min(var(--max-w), calc(100% - 64px)) !important;
+  max-width: var(--max-w) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.statement .eyebrow {
+  align-self: center !important;
+  text-align: center !important;
+}
+
+.statement h2,
+.statement .home-section-head > .display {
+  align-self: flex-start !important;
+  justify-self: start !important;
+  width: 100% !important;
+  max-width: 900px !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+.statement p,
+.statement .body-copy,
+.statement .btn {
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+@media (max-width: 640px) {
+  .statement .statement-inner,
+  .statement-inner {
+    width: calc(100% - 36px) !important;
+  }
+}
+
