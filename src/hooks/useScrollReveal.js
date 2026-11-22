@@ -1,34 +1,31 @@
+
 import { useEffect } from 'react';
 
 export default function useScrollReveal() {
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealEls = document.querySelectorAll('.reveal, .text-reveal, .blur-reveal');
-    
-    if (reduceMotion) {
-      revealEls.forEach(el => el.classList.add('is-visible'));
-    } else {
-      document.querySelectorAll('[data-stagger]').forEach(group => {
-        [...group.children].forEach((el, i) => el.style.setProperty('--i', i));
+    const elements = document.querySelectorAll('.reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach((element) => {
+        element.classList.add('is-visible');
       });
-      document.querySelectorAll('.reveal-stagger').forEach(group => {
-        [...group.children].forEach((el, i) => el.style.setProperty('--i', i));
-      });
-      
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { 
-            e.target.classList.add('is-visible'); 
-            io.unobserve(e.target); 
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
           }
         });
-      }, { threshold: .14, rootMargin: '0px 0px -60px' });
-      
-      revealEls.forEach(el => io.observe(el));
-      
-      return () => {
-        io.disconnect();
-      };
-    }
+      },
+      { threshold: 0.12 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
   }, []);
 }
