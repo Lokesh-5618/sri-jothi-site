@@ -10740,3 +10740,39 @@ body .section .wrap .home-section-head > .display {
 
 .site-footer-contact .arrow-icon { width: 20px; height: 20px; }
 .float-enquire .arrow-icon { width: 13px; height: 13px; }
+/* Leadership portraits — append this block to the end of index.css */
+.about-page .leader-card-with-photo {
+  justify-content: flex-start;
+  padding-top: 26px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.about-page .leader-photo {
+  display: block;
+  width: min(100%, 220px);
+  aspect-ratio: 4 / 5;
+  height: auto;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 14px;
+  margin: 0 auto 22px;
+  background: #e8e8e8;
+}
+
+.about-page .leader-card-with-photo h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .about-page .leader-photo {
+    width: min(100%, 190px);
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .about-page .leader-photo {
+    width: min(100%, 220px);
+  }
+}
