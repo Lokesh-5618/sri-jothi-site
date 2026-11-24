@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 import HeroBgSlider from '../components/HeroBgSlider';
+import ceoImage from '../assets/ceo.jpg';
+import cloImage from '../assets/clo.jpg';
+import '../assets/leadership-image-styles.css';
 
 function CrownIcon() {
   return (
@@ -268,15 +271,25 @@ export default function About() {
             </article>
 
             <div className="leadership-supporting">
-              <article className="leader-card">
-                <div className="leader-icon"><BriefcaseIcon /></div>
+              <article className="leader-card leader-card-with-photo">
+                <img
+                  className="leader-photo"
+                  src={ceoImage}
+                  alt="Dr. Gowtham, Chief Executive Officer"
+                  loading="lazy"
+                />
                 <h3>Dr. Gowtham</h3>
                 <p className="leader-role">Chief Executive Officer</p>
                 <p className="leader-description">Business strategy, management and growth.</p>
               </article>
 
-              <article className="leader-card">
-                <div className="leader-icon"><ScaleIcon /></div>
+              <article className="leader-card leader-card-with-photo">
+                <img
+                  className="leader-photo"
+                  src={cloImage}
+                  alt="Mr. Nandha Kishore, Chief Legal Officer"
+                  loading="lazy"
+                />
                 <h3>Mr. Nandha Kishore</h3>
                 <p className="leader-role">Chief Legal Officer</p>
                 <p className="leader-description">Legal affairs, contracts and compliance.</p>
