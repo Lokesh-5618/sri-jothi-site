@@ -1,3 +1,80 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useScrollReveal from '../hooks/useScrollReveal';
+import HeroBgSlider from '../components/HeroBgSlider';
+
+function CrownIcon() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M5 13l10 8 9-14 9 14 10-8-5 25H10L5 13Z" />
+      <path d="M10 38h28" />
+    </svg>
+  );
+}
+
+
+export default function About() {
+  useScrollReveal();
+
+  return (
+    <div className="about-page">
+      {/* HERO */}
+      <section className="page-hero">
+        <HeroBgSlider />
+        <div className="wrap" data-stagger>
+          <p className="eyebrow reveal">About us</p>
+          <h1 className="text-reveal reveal">
+            <span>A decade of exporting Indian products, ready for your shelves.</span>
+          </h1>
+          <p className="reveal">
+            Sri Jothi Traders is a certified export company based in Dindigul,
+            Tamil Nadu, India. We source, customize and ship Indian grocery
+            products to buyers around the world.
+          </p>
+        </div>
+      </section>
+
+      {/* OUR STORY & JOURNEY */}
+      <section className="about-timeline">
+        <div className="wrap">
+          <div className="timeline-heading">
+            <p className="eyebrow reveal">Our story &amp; journey</p>
+            <h2 className="reveal">
+              Built on trust.<br />
+              <span>Growing through it.</span>
+            </h2>
+            <p className="timeline-intro reveal">
+              From our beginnings in Dindigul to serving grocery businesses
+              across international markets, every step has been shaped by
+              reliable partnerships and a commitment to quality.
+            </p>
+          </div>
+
+          <div className="timeline-track">
+            <article className="timeline-entry reveal">
+              <div className="timeline-marker" aria-hidden="true"><span>01</span></div>
+              <div className="timeline-year">2015</div>
+              <div className="timeline-content">
+                <span className="timeline-label">Where it began</span>
+                <h3>A small beginning. A clear purpose.</h3>
+                <p>
+                  Sri Jothi Traders was founded in Dindigul, Tamil Nadu, with a
+                  focus on connecting Indian products with international grocery buyers.
+                </p>
+              </div>
+            </article>
+
+            <article className="timeline-entry reveal">
+              <div className="timeline-marker" aria-hidden="true"><span>02</span></div>
+              <div className="timeline-year">Early years</div>
+              <div className="timeline-content">
+                <span className="timeline-label">Trust that travelled</span>
+                <h3>Growing through relationships.</h3>
+                <p>
+                  Our first buyers in the UK and Gulf recommended us to others
+                  and returned with repeat orders. Their trust became the
+                  foundation for our growth.
+                </p>
               </div>
             </article>
 
@@ -158,3 +235,74 @@
 
       {/* LEADERSHIP & GOVERNANCE */}
       <section className="leadership-section">
+        <div className="leadership-shell">
+          <header className="leadership-heading">
+            <p className="leadership-eyebrow">Our company</p>
+            <h2>Leadership &amp; Governance</h2>
+            <p>Leadership built on vision, responsibility<br className="desktop-break" /> and trust.</p>
+          </header>
+
+          <div className="leadership-cards">
+            <article className="leader-card leader-card-chair">
+              <div className="leader-icon leader-icon-gold"><CrownIcon /></div>
+              <h3>Mr. Sritharan</h3>
+              <p className="leader-role">Chairman &amp; Founder</p>
+              <p className="leader-description">Vision, strategic direction and overall leadership.</p>
+            </article>
+
+            <div className="leadership-supporting">
+              <article className="leader-card leader-card-with-photo">
+                <img
+                  className="leader-photo"
+                  src="/images/0004.jpg.jpeg"
+                  alt="Dr. Gowtham, Chief Executive Officer"
+                  loading="lazy"
+                />
+                <h3>Dr. Gowtham</h3>
+                <p className="leader-role">Chief Executive Officer</p>
+                <p className="leader-description">Business strategy, management and growth.</p>
+              </article>
+
+              <article className="leader-card leader-card-with-photo">
+                <img
+                  className="leader-photo"
+                  src="/images/0005.jpg.jpeg"
+                  alt="Mr. Nandha Kishore, Chief Legal Officer"
+                  loading="lazy"
+                />
+                <h3>Mr. Nandha Kishore</h3>
+                <p className="leader-role">Chief Legal Officer</p>
+                <p className="leader-description">Legal affairs, contracts and compliance.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHERE WE'RE HEADED */}
+      <section className="mission">
+        <div className="wrap">
+          <h2 className="reveal">Where we’re headed</h2>
+          <p className="reveal">
+            Our next goal is to extend the trust we’ve built with UK and Gulf
+            buyers to the USA, Canada and Australia, and around the world to
+            become the export partner Indian grocery businesses turn to first,
+            wherever they trade.
+          </p>
+        </div>
+      </section>
+
+      {/* CLOSING CTA */}
+      <section className="callout">
+        <div className="wrap">
+          <h2 className="reveal">Let’s build a trusted supply partnership.</h2>
+          <div className="cta-group reveal">
+            <Link to="/company-profile" className="btn on-dark">Download Company Profile</Link>
+            <Link to="/products" className="btn on-dark">Company Catalogue</Link>
+            <Link to="/contact" className="btn cta">Contact Us →</Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
