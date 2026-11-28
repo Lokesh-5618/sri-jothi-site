@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 import HeroBgSlider from '../components/HeroBgSlider';
+import CEOImage from '../assets/ceo.jpg';
+import CLOImage from '../assets/clo.jpg';
 
 function CrownIcon() {
   return (
@@ -254,7 +256,7 @@ export default function About() {
               <article className="leader-card leader-card-with-photo">
                 <img
                   className="leader-photo"
-                  src="/images/0004.jpg.jpeg"
+                  src={CEOImage}
                   alt="Dr. Gowtham, Chief Executive Officer"
                   loading="lazy"
                 />
@@ -266,7 +268,7 @@ export default function About() {
               <article className="leader-card leader-card-with-photo">
                 <img
                   className="leader-photo"
-                  src="/images/0005.jpg.jpeg"
+                  src={CLOImage}
                   alt="Mr. Nandha Kishore, Chief Legal Officer"
                   loading="lazy"
                 />
